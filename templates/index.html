@@ -9,486 +9,599 @@
     <meta name="keywords" content="Bootstrap, Landing page, Template, Registration, Landing">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="author" content="Grayrids">
-    <title>Chat Chinook</title>
+    <title>Maple Bear</title>
 
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'chinook/css/style.css' %}">
-    <link rel="stylesheet" href="{% static 'chinook/css/tailwindcss-colors.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/line-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/owl.carousel.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/owl.theme.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/nivo-lightbox.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/color-switcher.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/menu_sideslide.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/main.css' %}">    
+    <link rel="stylesheet" href="{% static 'assets_2/css/responsive.css' %}">
+    <link rel="icon" type="image/png" href="{% static 'assets_2/img/maple_bear.svg' %}">
   </head>
   
   <body>
-   <!-- start: Chat -->
-   <section class="chat-section">
-    <div class="chat-container">
-        <!-- start: Sidebar -->
-        <aside class="chat-sidebar">
-            <a href="#" class="chat-sidebar-logo">
-                <i class="ri-chat-1-fill"></i>
-            </a>
-            <ul class="chat-sidebar-menu">
-                <li class="active"><a href="#" data-title="Chats"><i class="ri-chat-3-line"></i></a></li>
-                <li><a href="#" data-title="Contacts"><i class="ri-contacts-line"></i></a></li>
-                <li><a href="#" data-title="Documents"><i class="ri-folder-line"></i></a></li>
-                <li><a href="#" data-title="Settings"><i class="ri-settings-line"></i></a></li>
-                <li class="chat-sidebar-profile">
-                    <button type="button" class="chat-sidebar-profile-toggle">
-                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8cGVvcGxlfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" alt="">
-                    </button>
-                    <ul class="chat-sidebar-profile-dropdown">
-                        <li><a href="#"><i class="ri-user-line"></i> Profile</a></li>
-                        <li><a href="#"><i class="ri-logout-box-line"></i> Logout</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </aside>
-        <!-- end: Sidebar -->
-        <!-- start: Content -->
-        <div class="chat-content">
-            <!-- start: Content side -->
-            <div class="content-sidebar">
-                <div class="content-sidebar-title">Chats</div>
-                <form action="" class="content-sidebar-form">
-                    <input type="search" class="content-sidebar-input" placeholder="Search...">
-                    <button type="submit" class="content-sidebar-submit"><i class="ri-search-line"></i></button>
-                </form>
-                <div class="content-messages">
-                    <ul class="content-messages-list">
-                        <li class="content-message-title"><span>Recently</span></li>
-                        <li>
-                            <a href="#" data-conversation="#conversation-1">
-                                <img class="content-message-image" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8cGVvcGxlfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" alt="">
-                                <span class="content-message-info">
-                                    <span class="content-message-name">Someone</span>
-                                    <span class="content-message-text">Lorem ipsum dolor sit amet consectetur.</span>
-                                </span>
-                                <span class="content-message-more">
-                                    <span class="content-message-unread">5</span>
-                                    <span class="content-message-time">12:30</span>
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" data-conversation="#conversation-2">
-                                <img class="content-message-image" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8cGVvcGxlfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" alt="">
-                                <span class="content-message-info">
-                                    <span class="content-message-name">Someone</span>
-                                    <span class="content-message-text">Lorem ipsum dolor sit amet consectetur.</span>
-                                </span>
-                                <span class="content-message-more">
-                                    <span class="content-message-time">12:30</span>
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img class="content-message-image" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8cGVvcGxlfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" alt="">
-                                <span class="content-message-info">
-                                    <span class="content-message-name">Someone</span>
-                                    <span class="content-message-text">Lorem ipsum dolor sit amet consectetur.</span>
-                                </span>
-                                <span class="content-message-more">
-                                    <span class="content-message-unread">5</span>
-                                    <span class="content-message-time">12:30</span>
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img class="content-message-image" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8cGVvcGxlfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" alt="">
-                                <span class="content-message-info">
-                                    <span class="content-message-name">Someone</span>
-                                    <span class="content-message-text">Lorem ipsum dolor sit amet consectetur.</span>
-                                </span>
-                                <span class="content-message-more">
-                                    <span class="content-message-time">12:30</span>
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img class="content-message-image" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8cGVvcGxlfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" alt="">
-                                <span class="content-message-info">
-                                    <span class="content-message-name">Someone</span>
-                                    <span class="content-message-text">Lorem ipsum dolor sit amet consectetur.</span>
-                                </span>
-                                <span class="content-message-more">
-                                    <span class="content-message-unread">5</span>
-                                    <span class="content-message-time">12:30</span>
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img class="content-message-image" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8cGVvcGxlfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" alt="">
-                                <span class="content-message-info">
-                                    <span class="content-message-name">Someone</span>
-                                    <span class="content-message-text">Lorem ipsum dolor sit amet consectetur.</span>
-                                </span>
-                                <span class="content-message-more">
-                                    <span class="content-message-time">12:30</span>
-                                </span>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul class="content-messages-list">
-                        <li class="content-message-title"><span>Recently</span></li>
-                        <li>
-                            <a href="#">
-                                <img class="content-message-image" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8cGVvcGxlfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" alt="">
-                                <span class="content-message-info">
-                                    <span class="content-message-name">Someone</span>
-                                    <span class="content-message-text">Lorem ipsum dolor sit amet consectetur.</span>
-                                </span>
-                                <span class="content-message-more">
-                                    <span class="content-message-unread">5</span>
-                                    <span class="content-message-time">12:30</span>
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img class="content-message-image" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8cGVvcGxlfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" alt="">
-                                <span class="content-message-info">
-                                    <span class="content-message-name">Someone</span>
-                                    <span class="content-message-text">Lorem ipsum dolor sit amet consectetur.</span>
-                                </span>
-                                <span class="content-message-more">
-                                    <span class="content-message-time">12:30</span>
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img class="content-message-image" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8cGVvcGxlfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" alt="">
-                                <span class="content-message-info">
-                                    <span class="content-message-name">Someone</span>
-                                    <span class="content-message-text">Lorem ipsum dolor sit amet consectetur.</span>
-                                </span>
-                                <span class="content-message-more">
-                                    <span class="content-message-unread">5</span>
-                                    <span class="content-message-time">12:30</span>
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img class="content-message-image" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8cGVvcGxlfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" alt="">
-                                <span class="content-message-info">
-                                    <span class="content-message-name">Someone</span>
-                                    <span class="content-message-text">Lorem ipsum dolor sit amet consectetur.</span>
-                                </span>
-                                <span class="content-message-more">
-                                    <span class="content-message-time">12:30</span>
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img class="content-message-image" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8cGVvcGxlfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" alt="">
-                                <span class="content-message-info">
-                                    <span class="content-message-name">Someone</span>
-                                    <span class="content-message-text">Lorem ipsum dolor sit amet consectetur.</span>
-                                </span>
-                                <span class="content-message-more">
-                                    <span class="content-message-unread">5</span>
-                                    <span class="content-message-time">12:30</span>
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img class="content-message-image" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8cGVvcGxlfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" alt="">
-                                <span class="content-message-info">
-                                    <span class="content-message-name">Someone</span>
-                                    <span class="content-message-text">Lorem ipsum dolor sit amet consectetur.</span>
-                                </span>
-                                <span class="content-message-more">
-                                    <span class="content-message-time">12:30</span>
-                                </span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <!-- end: Content side -->
-            <!-- start: Conversation -->
-            <div class="conversation conversation-default active">
-                <i class="ri-chat-3-line"></i>
-                <p>Select chat and view conversation!</p>
-            </div>
-            <div class="conversation" id="conversation-1">
-              <div class="conversation-top">
-                  <div class="conversation-user">
-                      <img class="conversation-user-image" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8cGVvcGxlfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" alt="">
-                      <div>
-                          <div class="conversation-user-name">ChatGPT</div>
-                          <div class="conversation-user-status online">online</div>
-                      </div>
-                  </div>
+    <!-- Header Section Start -->
+    <header id="slider-area">  
+      {% include 'navbar/navbar.html' %}
+
+
+
+
+
+
+
+
+
+      
+      <!-- Main Carousel Section -->
+      <div id="carousel-area">
+        <div id="carousel-slider" class="carousel slide carousel-fade" data-ride="carousel">
+          <ol class="carousel-indicators">
+            <li data-target="#carousel-slider" data-slide-to="0" class="active"></li>
+            <li data-target="#carousel-slider" data-slide-to="1"></li>
+            <li data-target="#carousel-slider" data-slide-to="2"></li>
+          </ol>
+          <div class="carousel-inner" role="listbox">
+            <div class="carousel-item active">
+              <img src="{% static 'assets_2/img/slider/bg-12.jpg' %}" alt="" style="max-height: 1050px; min-height: 1050px;">
+              <div class="carousel-caption text-left">
+                <h3 class="wow fadeInRight" data-wow-delay="0.2s">Maple Bear</h1>  
+                <h2 class="wow fadeInRight" data-wow-delay="0.4s">A Maior Rede De Escolas Bilíngues Do Mundo.</h2>
+                <h4 class="wow fadeInRight" data-wow-delay="0.6s">Presente Em Mais de 30 Países!</h4>
+                <a href="https://www.maplebear.com.br/pt/ensino-maple-bear/" class="btn btn-lg btn-common btn-effect wow fadeInRight" data-wow-delay="0.9s">Saiba mais</a>
+                <a href="https://www.maplebear.com.br/pt/por-que-maple-bear/" class="btn btn-lg btn-border wow fadeInRight" data-wow-delay="1.2s">Conheça a Maple Bear</a>
               </div>
-              <div class="conversation-main" id="chat-box">
-                  <ul class="conversation-wrapper">
-                      <div class="coversation-divider"><span>Today</span></div>
-                  </ul>
+            </div>
+            <div class="carousel-item">
+              <img src="{% static 'assets_2/img/slider/bg-9.jpg' %}" alt="" style="max-height: 1050px; min-height: 1050px;">
+              <div class="carousel-caption text-center">
+                <h2 class="wow bounceIn" data-wow-delay="0.6s">High School Maple Bear</h2> 
+                <h4 class="wow fadeInUp" data-wow-delay="0.9s">Aluno preparado para o mundo!</h4>
+                <a href="https://www.maplebear.com.br/pt/ensino-maple-bear/ensino-medio/" class="btn btn-lg btn-common btn-effect wow fadeInUp" data-wow-delay="1.2s">Saiba mais</a>
               </div>
-              <div class="conversation-form">
-                  <button type="button" class="conversation-form-button"><i class="ri-emotion-line"></i></button>
-                  <div class="conversation-form-group">
-                      <textarea id="message" class="conversation-form-input" rows="1" placeholder="Type here..." required></textarea>
-                  </div>
-                  <button type="submit" id="send-button" class="conversation-form-button conversation-form-submit"><i class="ri-send-plane-2-line"></i></button>
+            </div>
+            <div class="carousel-item">
+              <img src="{% static 'assets_2/img/slider/bg-8.jpg' %}" alt="" style="max-height: 1050px; min-height: 1050px;">
+              <div class="carousel-caption text-center">
+                <h3 class="wow fadeInDown" data-wow-delay="0.3s">Aprender Sempre!</h3>
+                <h2 class="wow fadeInRight" data-wow-delay="0.6s">Inglês por imersão a partir de 1 ano e meio completo.</h2> 
+                <a href="https://www.maplebear.com.br/pt/metodologia-canadense/" class="btn btn-lg btn-common btn-effect wow fadeInRight" data-wow-delay="0.9s">Saiba mais</a>
+                <a href="https://www.maplebear.com.br/pt/por-que-maple-bear/" class="btn btn-lg btn-border wow fadeInRight" data-wow-delay="1.2s">Conheça a Maple Bear</a>
+              </div>
+            </div>
+          </div>
+          <a class="carousel-control-prev" href="#carousel-slider" role="button" data-slide="prev">
+            <span class="carousel-control" aria-hidden="true"><i class="lni-chevron-left"></i></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#carousel-slider" role="button" data-slide="next">
+            <span class="carousel-control" aria-hidden="true"><i class="lni-chevron-right"></i></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+      </div>  
+
+    </header>
+    <!-- Header Section End --> 
+
+    {% comment %} <!-- Services Section Start -->
+    <section id="services" class="section">
+      <div class="container">
+        <div class="section-header">          
+          <h2 class="section-title">Nossos serviços</h2>
+          <span>Business Intelligence</span>
+          <p class="section-subtitle">Acompanhe em tempo real nossos desenvolvimentos!</p>
+        </div>
+        <div class="row">
+          <div class="col-lg-4 col-md-6 col-xs-12">
+            <div class="item-boxes services-item wow fadeInDown" data-wow-delay="0.2s">
+              <div class="icon color-1">
+                <i class="lni-pencil"></i>
+              </div>
+              <h4>Caixa de Sugestões</h4>
+              <p>Escreva aqui sugestões e trabalhos que gostariam que necessitam da nossa ajuda ou alguma ideia criativa de desenvovimento.</p>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 col-xs-12">
+            <div class="item-boxes services-item wow fadeInDown" data-wow-delay="0.4s">
+              <div class="icon color-2">
+                <i class="lni-cog"></i>
+              </div>
+              <h4>Manutenção de Desenvolvimento</h4>
+              <p>Acesso apenas para administradores, para manutenção de nossas ferramentas.</p>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 col-xs-12">
+            <div class="item-boxes services-item wow fadeInDown" data-wow-delay="0.6s">
+              <div class="icon color-3">
+                <i class="lni-stats-up"></i>
+              </div>
+              <h4>Dashboards</h4>
+              <p>De uma olhada em nossos indicadores desenvolvidos para otimizar, melhorar e organizar a empresa GO2B.</p>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 col-xs-12">
+            <div class="item-boxes services-item wow fadeInDown" data-wow-delay="0.8s">
+              <div class="icon color-4">
+                <i class="lni-layers"></i>
+              </div>
+              <h4>UX Desing</h4>
+              <p>Veja as vantagens de ter uma equipe de desenvolvedores na sua empresa, com capacitações em Business Intelligence e Programação.</p>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 col-xs-12">
+            <div class="item-boxes services-item wow fadeInDown" data-wow-delay="1s">
+              <div class="icon color-5">
+                <i class="lni-tab"></i>
+              </div>
+              <h4>Desenvolvimento Mobile</h4>
+              <p>Baixe nosso APP GO2B para acompanhento de nossas automações e densevolvimentos.</p>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 col-xs-12">
+            <div class="item-boxes services-item wow fadeInDown" data-wow-delay="1.2s">
+              <div class="icon color-6">
+                <i class="lni-briefcase"></i>
+              </div>
+              <h4>Marketing Digital</h4>
+              <p>Veja nossos materiais de marketing para divulgar para suas empresas, todas elas precisam de incadores, dasboards e automações em suas vidas.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Services Section End -->
+
+    <!-- Call to Action Start -->
+    <section class="call-action section">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-10">
+            <div class="cta-trial text-center">
+              <h3>Você está pronto para começar?</h3>
+              <p>Entra no link abaixo e veja todos os nossos projetos!!</p>
+              <a href="#" class="btn btn-common btn-effect">Vamos la!</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Call to Action End -->
+
+    <!-- Features Section Start -->
+    <section id="features" class="section">
+      <div class="container">
+        <div class="section-header">          
+          <h2 class="section-title">Porque nos escolher?</h2>
+          <span>?</span>
+          <p class="section-subtitle">A solução para a sua empresa para velocidade, organização e qualidade.</p>
+        </div>
+        <div class="row">
+          <!-- Start featured -->
+          <div class="col-lg-4 col-md-6 col-xs-12">
+            <div class="featured-box">
+              <div class="featured-icon">
+                <i class="lni-layout"></i>
+              </div>
+              <div class="featured-content">
+                <div class="icon-o"><i class="lni-layout"></i></div>
+                <h4>Designs Unicos!</h4>
+                <p>Desings inovadores, automatizados e com alta qualidade!.</p>
+              </div>
+            </div>
+          </div>
+          <!-- End featured -->
+          <!-- Start featured -->
+          <div class="col-lg-4 col-md-6 col-xs-12">
+            <div class="featured-box">
+              <div class="featured-icon">
+                <i class="lni-tab"></i>
+              </div>
+              <div class="featured-content">
+                <div class="icon-o"><i class="lni-tab"></i></div>
+                <h4>Full Responsive</h4>
+                <p>Todos os nossos trabalhos são completamente responsivos, acesse por qual aparelho e tenha uma experiencia incrivel!</p>
+              </div>
+            </div>
+          </div>
+          <!-- End featured -->
+          <!-- Start featured -->
+          <div class="col-lg-4 col-md-6 col-xs-12">
+            <div class="featured-box">
+              <div class="featured-icon">
+                <i class="lni-rocket"></i>
+              </div>
+              <div class="featured-content">
+                <div class="icon-o"><i class="lni-rocket"></i></div>
+                <h4>Rápido e Suave</h4>
+                <p>Velocidade e tranquilade em sua vida, chega de perder tempo com trabalhos manuais e burocraticos.</p>
+              </div>
+            </div>
+          </div>
+          <!-- End featured -->
+          <!-- Start featured -->
+          <div class="col-lg-4 col-md-6 col-xs-12">
+            <div class="featured-box">
+              <div class="featured-icon">
+                <i class="lni-database"></i>
+              </div>
+              <div class="featured-content">
+                <div class="icon-o"><i class="lni-database"></i></div>
+                <h4>Otimização de Banco de Dados</h4>
+                <p>Atuamos também em otimização e limpeza dos seus bancos de dados.</p>
+              </div>
+            </div>
+          </div>
+          <!-- End featured -->
+          <!-- Start featured -->
+          <div class="col-lg-4 col-md-6 col-xs-12">
+            <div class="featured-box">
+              <div class="featured-icon">
+                <i class="lni-leaf"></i>
+              </div>
+              <div class="featured-content">
+                <div class="icon-o"><i class="lni-leaf"></i></div>
+                <h4>Clean Code</h4>
+                <p>Nossos desenvolvedores escrevem seu codigo de maneira limpa e clara, que facilita a manutenção.</p>
+              </div>
+            </div>
+          </div>
+          <!-- End featured -->
+          <!-- Start featured -->
+          <div class="col-lg-4 col-md-6 col-xs-12">
+            <div class="featured-box">
+              <div class="featured-icon">
+                <i class="lni-pencil"></i>
+              </div>
+              <div class="featured-content">
+                <div class="icon-o"><i class="lni-pencil"></i></div>
+                <h4>Suporte 24/7</h4>
+                <p>Qualquer duvida entre em contato atraves do nosso Robo Ausbi, que ele pode atender e responder qualquer coisa!</p>
+              </div>
+            </div>
+          </div>
+          <!-- End featured -->
+        </div>
+      </div>
+    </section>
+    <!-- Features Section End -->    
+
+    <!-- Start Video promo Section -->
+    <section class="video-promo section">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 col-sm-12">
+              <div class="video-promo-content text-center">
+                <a href="https://www.youtube.com/embed/LSgBpbgTlhw" class="video-popup"><i class="lni-film-play"></i></a>
+                <h2 class="wow zoomIn" data-wow-duration="1000ms" data-wow-delay="100ms">Our Introductory Video</h2>
+                <p class="wow zoomIn" data-wow-duration="1000ms" data-wow-delay="100ms">Learn more about us, its only 30mins</p>
               </div>
           </div>
-            <div class="conversation" id="conversation-2">
-                <div class="conversation-top">
-                    <button type="button" class="conversation-back"><i class="ri-arrow-left-line"></i></button>
-                    <div class="conversation-user">
-                        <img class="conversation-user-image" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8cGVvcGxlfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" alt="">
-                        <div>
-                            <div class="conversation-user-name">Someone 1</div>
-                            <div class="conversation-user-status online">online</div>
-                        </div>
-                    </div>
-                    <div class="conversation-buttons">
-                        <button type="button"><i class="ri-phone-fill"></i></button>
-                        <button type="button"><i class="ri-vidicon-line"></i></button>
-                        <button type="button"><i class="ri-information-line"></i></button>
-                    </div>
-                </div>
-                <div class="conversation-main">
-                    <ul class="conversation-wrapper">
-                        <div class="coversation-divider"><span>Today</span></div>
-                        <li class="conversation-item me">
-                            <div class="conversation-item-side">
-                                <img class="conversation-item-image" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8cGVvcGxlfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" alt="">
-                            </div>
-                            <div class="conversation-item-content">
-                                <div class="conversation-item-wrapper">
-                                    <div class="conversation-item-box">
-                                        <div class="conversation-item-text">
-                                            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet natus repudiandae quisquam sequi nobis suscipit consequatur rerum alias odio repellat!</p>
-                                            <div class="conversation-item-time">12:30</div>
-                                        </div>
-                                        <div class="conversation-item-dropdown">
-                                            <button type="button" class="conversation-item-dropdown-toggle"><i class="ri-more-2-line"></i></button>
-                                            <ul class="conversation-item-dropdown-list">
-                                                <li><a href="#"><i class="ri-share-forward-line"></i> Forward</a></li>
-                                                <li><a href="#"><i class="ri-delete-bin-line"></i> Delete</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="conversation-item-wrapper">
-                                    <div class="conversation-item-box">
-                                        <div class="conversation-item-text">
-                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque, tenetur!</p>
-                                            <div class="conversation-item-time">12:30</div>
-                                        </div>
-                                        <div class="conversation-item-dropdown">
-                                            <button type="button" class="conversation-item-dropdown-toggle"><i class="ri-more-2-line"></i></button>
-                                            <ul class="conversation-item-dropdown-list">
-                                                <li><a href="#"><i class="ri-share-forward-line"></i> Forward</a></li>
-                                                <li><a href="#"><i class="ri-delete-bin-line"></i> Delete</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="conversation-item">
-                            <div class="conversation-item-side">
-                                <img class="conversation-item-image" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8cGVvcGxlfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" alt="">
-                            </div>
-                            <div class="conversation-item-content">
-                                <div class="conversation-item-wrapper">
-                                    <div class="conversation-item-box">
-                                        <div class="conversation-item-text">
-                                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
-                                            <div class="conversation-item-time">12:30</div>
-                                        </div>
-                                        <div class="conversation-item-dropdown">
-                                            <button type="button" class="conversation-item-dropdown-toggle"><i class="ri-more-2-line"></i></button>
-                                            <ul class="conversation-item-dropdown-list">
-                                                <li><a href="#"><i class="ri-share-forward-line"></i> Forward</a></li>
-                                                <li><a href="#"><i class="ri-delete-bin-line"></i> Delete</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="conversation-item-wrapper">
-                                    <div class="conversation-item-box">
-                                        <div class="conversation-item-text">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque eos ab in?</p>
-                                            <div class="conversation-item-time">12:30</div>
-                                        </div>
-                                        <div class="conversation-item-dropdown">
-                                            <button type="button" class="conversation-item-dropdown-toggle"><i class="ri-more-2-line"></i></button>
-                                            <ul class="conversation-item-dropdown-list">
-                                                <li><a href="#"><i class="ri-share-forward-line"></i> Forward</a></li>
-                                                <li><a href="#"><i class="ri-delete-bin-line"></i> Delete</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="conversation-item-wrapper">
-                                    <div class="conversation-item-box">
-                                        <div class="conversation-item-text">
-                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint, debitis. Iste natus est aliquam ipsum doloremque fugiat, quidem eos autem? Dolor quisquam laboriosam enim cum laborum suscipit perferendis adipisci praesentium.</p>
-                                            <div class="conversation-item-time">12:30</div>
-                                        </div>
-                                        <div class="conversation-item-dropdown">
-                                            <button type="button" class="conversation-item-dropdown-toggle"><i class="ri-more-2-line"></i></button>
-                                            <ul class="conversation-item-dropdown-list">
-                                                <li><a href="#"><i class="ri-share-forward-line"></i> Forward</a></li>
-                                                <li><a href="#"><i class="ri-delete-bin-line"></i> Delete</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="conversation-item me">
-                            <div class="conversation-item-side">
-                                <img class="conversation-item-image" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8cGVvcGxlfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" alt="">
-                            </div>
-                            <div class="conversation-item-content">
-                                <div class="conversation-item-wrapper">
-                                    <div class="conversation-item-box">
-                                        <div class="conversation-item-text">
-                                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas, eos, magni temporibus, placeat consectetur nobis incidunt dicta a culpa vel esse. Facilis fugiat possimus eveniet accusamus dignissimos pariatur inventore animi rem vero, eligendi obcaecati fugit quaerat? Officia ex quod eaque maxime ipsam, tempore error laboriosam laborum, magnam ipsum doloremque quas.</p>
-                                            <div class="conversation-item-time">12:30</div>
-                                        </div>
-                                        <div class="conversation-item-dropdown">
-                                            <button type="button" class="conversation-item-dropdown-toggle"><i class="ri-more-2-line"></i></button>
-                                            <ul class="conversation-item-dropdown-list">
-                                                <li><a href="#"><i class="ri-share-forward-line"></i> Forward</a></li>
-                                                <li><a href="#"><i class="ri-delete-bin-line"></i> Delete</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="conversation-item-wrapper">
-                                    <div class="conversation-item-box">
-                                        <div class="conversation-item-text">
-                                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Temporibus debitis odio maiores perferendis ipsa repudiandae amet blanditiis quod. Ullam, dolorum.</p>
-                                            <div class="conversation-item-time">12:30</div>
-                                        </div>
-                                        <div class="conversation-item-dropdown">
-                                            <button type="button" class="conversation-item-dropdown-toggle"><i class="ri-more-2-line"></i></button>
-                                            <ul class="conversation-item-dropdown-list">
-                                                <li><a href="#"><i class="ri-share-forward-line"></i> Forward</a></li>
-                                                <li><a href="#"><i class="ri-delete-bin-line"></i> Delete</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="conversation-item-wrapper">
-                                    <div class="conversation-item-box">
-                                        <div class="conversation-item-text">
-                                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusantium blanditiis ea, voluptatum, eveniet at harum minima maxime enim aut non, iure expedita excepturi tempore nostrum quasi natus voluptas dolore ducimus!</p>
-                                            <div class="conversation-item-time">12:30</div>
-                                        </div>
-                                        <div class="conversation-item-dropdown">
-                                            <button type="button" class="conversation-item-dropdown-toggle"><i class="ri-more-2-line"></i></button>
-                                            <ul class="conversation-item-dropdown-list">
-                                                <li><a href="#"><i class="ri-share-forward-line"></i> Forward</a></li>
-                                                <li><a href="#"><i class="ri-delete-bin-line"></i> Delete</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="conversation-form">
-                    <button type="button" class="conversation-form-button"><i class="ri-emotion-line"></i></button>
-                    <div class="conversation-form-group">
-                        <textarea class="conversation-form-input" rows="1" placeholder="Type here..."></textarea>
-                        <button type="button" class="conversation-form-record"><i class="ri-mic-line"></i></button>
-                    </div>
-                    <button type="button" class="conversation-form-button conversation-form-submit"><i class="ri-send-plane-2-line"></i></button>
-                </div>
-            </div>
-            <!-- end: Conversation -->
         </div>
-        <!-- end: Content -->
-    </div>
-</section>
-<!-- end: Chat -->
+      </div>
+    </section>
+    <!-- End Video Promo Section -->
 
+    <!-- Portfolio Section -->
+    <section id="portfolios" class="section">
+      <!-- Container Starts -->
+      <div class="container">
+        <div class="section-header">          
+          <h2 class="section-title">Nossos Trabalhos</h2>
+          <span>Works</span>
+        </div>
+        <div class="row">          
+          <div class="col-md-12">
+            <!-- Portfolio Controller/Buttons -->
+            <div class="controls text-center">
+              <a class="filter active btn btn-common btn-effect" data-filter="all">
+                Todos 
+              </a>
+              <a class="filter btn btn-common btn-effect" data-filter=".design">
+                Design 
+              </a>
+              <a class="filter btn btn-common btn-effect" data-filter=".development">
+                Desenvolvimento
+              </a>
+              <a class="filter btn btn-common btn-effect" data-filter=".print">
+                Dashboards 
+              </a>
+            </div>
+            <!-- Portfolio Controller/Buttons Ends-->
+          </div>
+        </div>
+
+        <!-- Portfolio Recent Projects -->
+        <div id="portfolio" class="row">
+          <div class="col-lg-4 col-md-6 col-xs-12 mix development print">
+            <div class="portfolio-item">
+              <div class="shot-item">
+                <img src="{% static 'assets_2/img/portfolio/img-1.jpg' %}" alt="" />  
+                <div class="single-content">
+                  <div class="fancy-table">
+                    <div class="table-cell">
+                      <div class="zoom-icon">
+                        <a class="lightbox" href="{% static 'assets_2/img/portfolio/img-1.jpg' %}"><i class="lni-zoom-in item-icon"></i></a>
+                      </div>
+                      <a href="#">Ver Projetos</a>
+                    </div>
+                  </div>
+                </div>
+              </div>               
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 col-xs-12 mix design print">
+            <div class="portfolio-item">
+              <div class="shot-item">
+                <img src="{% static 'assets_2/img/portfolio/img-2.jpg' %}" alt="" /> 
+                <div class="single-content">
+                  <div class="fancy-table">
+                    <div class="table-cell">
+                      <div class="zoom-icon">
+                        <a class="lightbox" href="{% static 'assets_2/img/portfolio/img-2.jpg' %}"><i class="lni-zoom-in item-icon"></i></a>
+                      </div>
+                      <a href="#">View Project</a>
+                    </div>
+                  </div>
+                </div>
+              </div>               
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 col-xs-12 mix development">
+            <div class="portfolio-item">
+              <div class="shot-item">
+                <img src="{% static 'assets_2/img/portfolio/img-3.jpg' %}" alt="" />  
+                <div class="single-content">
+                  <div class="fancy-table">
+                    <div class="table-cell">
+                      <div class="zoom-icon">
+                        <a class="lightbox" href="{% static 'assets_2/img/portfolio/img-3.jpg' %}"><i class="lni-zoom-in item-icon"></i></a>
+                      </div>
+                      <a href="#">View Project</a>
+                    </div>
+                  </div>
+                </div>
+              </div>               
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 col-xs-12 mix development design">
+            <div class="portfolio-item">
+              <div class="shot-item">
+                <img src="{% static 'assets_2/img/portfolio/img-4.jpg' %}" alt="" /> 
+                <div class="single-content">
+                  <div class="fancy-table">
+                    <div class="table-cell">
+                      <div class="zoom-icon">
+                        <a class="lightbox" href="{% static 'assets_2/img/portfolio/img-4.jpg' %}"><i class="lni-zoom-in item-icon"></i></a>
+                      </div>
+                      <a href="#">View Project</a>
+                    </div>
+                  </div>
+                </div>
+              </div>               
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 col-xs-12 mix development">
+            <div class="portfolio-item">
+              <div class="shot-item">
+                <img src="{% static 'assets_2/img/portfolio/img-5.jpg' %}" alt="" />  
+                <div class="single-content">
+                  <div class="fancy-table">
+                    <div class="table-cell">
+                      <div class="zoom-icon">
+                        <a class="lightbox" href="{% static 'assets_2/img/portfolio/img-5.jpg' %}"><i class="lni-zoom-in item-icon"></i></a>
+                      </div>
+                      <a href="#">View Project</a>
+                    </div>
+                  </div>
+                </div>
+              </div>               
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 col-xs-12 mix print design">
+            <div class="portfolio-item">
+              <div class="shot-item">
+                <img src="{% static 'assets_2/img/portfolio/img-6.jpg' %}" alt="" />  
+                <div class="single-content">
+                  <div class="fancy-table">
+                    <div class="table-cell">
+                      <div class="zoom-icon">
+                        <a class="lightbox" href="{% static 'assets_2/img/portfolio/img-6.jpg' %}"><i class="lni-zoom-in item-icon"></i></a>
+                      </div>
+                      <a href="#">View Project</a>
+                    </div>
+                  </div>
+                </div>
+              </div>               
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Container Ends -->
+    </section>
+    <!-- Portfolio Section Ends --> 
+
+    <!-- Counter Section Start -->
+    <div class="counters section bg-defult">
+      <div class="container">
+        <div class="row"> 
+          <div class="col-sm-6 col-md-6 col-lg-3">
+            <div class="facts-item"> 
+              <div class="icon">
+                <i class="lni-rocket"></i>
+              </div>                
+              <div class="fact-count">
+                <h3><span class="counter">120</span>%</h3>
+                <h4>Velocidade</h4>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-6 col-lg-3">
+            <div class="facts-item">
+              <div class="icon">
+                <i class="lni-coffee-cup"></i>
+              </div>                
+              <div class="fact-count">
+                <h3><span class="counter">731</span></h3>
+                <h4>Copos de Cafe</h4>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-6 col-lg-3">
+            <div class="facts-item">
+              <div class="icon">
+                <i class="lni-user"></i>
+              </div>                
+              <div class="fact-count">
+                <h3><span class="counter">8657</span>+</h3>
+                <h4>Clientes Ativos</h4>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-6 col-lg-3">
+            <div class="facts-item">
+              <div class="icon">
+                <i class="lni-heart"></i>
+              </div>                
+              <div class="fact-count">
+                <h3><span class="counter">2389</span></h3>
+                <h4>liked the job</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Counter Section End -->
+
+    <!-- Team section Start -->
+    <section id="team" class="section">
+      <div class="container">
+        <div class="section-header">          
+          <h2 class="section-title">Our Team</h2>
+          <span>Team</span>
+          <p class="section-subtitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos debitis.</p>
+        </div>
+        <div class="row">
+          <div class="col-lg-3 col-md-6 col-xs-12">
+            <div class="single-team">
+              <img src="{% static 'assets_2/img/team/team1.png' %}" alt="">
+              <div class="team-details">
+                <div class="team-inner">
+                  <h4 class="team-title">Jhon Doe</h4>
+                  <p>Chief Technical Officer</p>
+                  <ul class="social-list">
+                    <li class="facebook"><a href="#"><i class="lni-facebook-filled"></i></a></li>
+                    <li class="twitter"><a href="#"><i class="lni-twitter-filled"></i></a></li>
+                    <li class="google-plus"><a href="#"><i class="lni-google-plus"></i></a></li>
+                    <li class="linkedin"><a href="#"><i class="lni-linkedin-fill"></i></a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-xs-12">
+            <div class="single-team">
+              <img src="{% static 'assets_2/img/team/team2.png' %}" alt="">
+              <div class="team-details">
+                <div class="team-inner">
+                  <h4 class="team-title">Luke Chesser</h4>
+                  <p>Marketing Executive</p>
+                  <ul class="social-list">
+                    <li class="facebook"><a href="#"><i class="lni-facebook-filled"></i></a></li>
+                    <li class="twitter"><a href="#"><i class="lni-twitter-filled"></i></a></li>
+                    <li class="google-plus"><a href="#"><i class="lni-google-plus"></i></a></li>
+                    <li class="linkedin"><a href="#"><i class="lni-linkedin-fill"></i></a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-xs-12">
+            <div class="single-team">
+              <img src="{% static 'assets_2/img/team/team3.png' %}" alt="">
+              <div class="team-details">
+                <div class="team-inner">                  
+                  <h4 class="team-title">David Givens</h4>
+                  <p>Business Manager</p>
+                  <ul class="social-list">
+                    <li class="facebook"><a href="#"><i class="lni-facebook-filled"></i></a></li>
+                    <li class="twitter"><a href="#"><i class="lni-twitter-filled"></i></a></li>
+                    <li class="google-plus"><a href="#"><i class="lni-google-plus"></i></a></li>
+                    <li class="linkedin"><a href="#"><i class="lni-linkedin-fill"></i></a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-xs-12">
+            <div class="single-team">
+              <img src="{% static 'assets_2/img/team/team4.png' %}" alt="">
+              <div class="team-details">
+                <div class="team-inner">
+                  <h4 class="team-title">Annie Spratt</h4>
+                  <p>Graphic Designer</p>
+                  <ul class="social-list">
+                    <li class="facebook"><a href="#"><i class="lni-facebook-filled"></i></a></li>
+                    <li class="twitter"><a href="#"><i class="lni-twitter-filled"></i></a></li>
+                    <li class="google-plus"><a href="#"><i class="lni-google-plus"></i></a></li>
+                    <li class="linkedin"><a href="#"><i class="lni-linkedin-fill"></i></a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Team section End --> {% endcomment %}
+    
+
+
+    </footer>
+    <!-- Footer Section End --> 
+
+    <!-- Go To Top Link -->
+    <a href="#" class="back-to-top">
+      <i class="lni-arrow-up"></i>
+    </a>
+
+    <div id="loader">
+      <div class="spinner">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+      </div>
+    </div>    
 
     <!-- jQuery first, then Tether, then Bootstrap JS. -->
-    <script>
-      const form = document.getElementById('conversation-1');
-      const messageInput = document.getElementById('message');
-      const chatBox = document.getElementById('chat-box');
-      const sendButton = document.getElementById('send-button');
-
-      sendButton.addEventListener('click', async () => {
-          const message = messageInput.value;
-          if (message.trim() === "") return;
-
-          // Add user message to chat
-          chatBox.innerHTML += `
-              <li class="conversation-item me">
-                  <div class="conversation-item-side">
-                      <img class="conversation-item-image" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8cGVvcGxlfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" alt="">
-                  </div>
-                  <div class="conversation-item-content">
-                      <div class="conversation-item-box">
-                          <div class="conversation-item-text">
-                              <p>${message}</p>
-                              <div class="conversation-item-time">${new Date().toLocaleTimeString()}</div>
-                          </div>
-                      </div>
-                  </div>
-              </li>
-          `;
-
-          messageInput.value = '';
-
-          // Send message to server
-          const response = await fetch("{% url 'chat' %}", {
-              method: 'POST',
-              headers: {
-                  'Content-Type': 'application/json',
-                  'X-CSRFToken': '{{ csrf_token }}'
-              },
-              body: JSON.stringify({ message: message })
-          });
-          const data = await response.json();
-
-          // Add ChatGPT response to chat
-          chatBox.innerHTML += `
-              <li class="conversation-item">
-                  <div class="conversation-item-side">
-                      <img class="conversation-item-image" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8cGVvcGxlfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" alt="">
-                  </div>
-                  <div class="conversation-item-content">
-                      <div class="conversation-item-box">
-                          <div class="conversation-item-text">
-                              <p>${data.response}</p>
-                              <div class="conversation-item-time">${new Date().toLocaleTimeString()}</div>
-                          </div>
-                      </div>
-                  </div>
-              </li>
-          `;
-
-          // Scroll to the bottom of the chat
-          chatBox.scrollTop = chatBox.scrollHeight;
-      });
-
-      messageInput.addEventListener('keypress', (e) => {
-          if (e.key === 'Enter' && !e.shiftKey) {
-              e.preventDefault();
-              sendButton.click();
-          }
-      });
-  </script>
-    <script src="{% static 'chinook/js/script.js' %}"></script>
+    <script src="{% static 'assets_2/js/jquery-min.js' %}"></script>
+    <script src="{% static 'assets_2/js/popper.min.js' %}"></script>
+    <script src="{% static 'assets_2/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets_2/js/classie.js' %}"></script>
+    <script src="{% static 'assets_2/js/color-switcher.js' %}"></script>
+    <script src="{% static 'assets_2/js/jquery.mixitup.js' %}"></script>
+    <script src="{% static 'assets_2/js/nivo-lightbox.js' %}"></script>
+    <script src="{% static 'assets_2/js/owl.carousel.js' %}"></script>    
+    <script src="{% static 'assets_2/js/jquery.stellar.min.js' %}"></script>    
+    <script src="{% static 'assets_2/js/jquery.nav.js' %}"></script>    
+    <script src="{% static 'assets_2/js/scrolling-nav.js' %}"></script>    
+    <script src="{% static 'assets_2/js/jquery.easing.min.js' %}"></script>     
+    <script src="{% static 'assets_2/js/wow.js' %}"></script> 
+    <script src="{% static 'assets_2/js/jquery.vide.js' %}"></script>
+    <script src="{% static 'assets_2/js/jquery.counterup.min.js' %}"></script>    
+    <script src="{% static 'assets_2/js/jquery.magnific-popup.min.js' %}"></script>    
+    <script src="{% static 'assets_2/js/waypoints.min.js' %}"></script>    
+    <script src="{% static 'assets_2/js/form-validator.min.js' %}"></script>
+    <script src="{% static 'assets_2/js/contact-form-script.js' %}"></script>   
+    <script src="{% static 'assets_2/js/main.js' %}"></script>
     <script>
       window.STATIC_URL = "{% static '' %}";
     </script>

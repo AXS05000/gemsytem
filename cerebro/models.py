@@ -16,7 +16,7 @@ class Conhecimento(models.Model):
     # Prompt de informação dos seus conhecimentos, como python, django e programação backend.
 
     def __str__(self):
-        return f"{self.conhecimento_geral}"
+        return f"{self.colaborador}"
 
 
 class Consulta_De_Conhecimento(models.Model):
@@ -31,7 +31,7 @@ class Consulta_De_Conhecimento(models.Model):
     # Informações como arquivos .py dos sistema já desenvolvidos para servir de consulta para ele replicar.
 
     def __str__(self):
-        return f"{self.consulta_conhecimento}"
+        return f"{self.colaborador}"
 
 
 class Experiencia(models.Model):
@@ -46,7 +46,7 @@ class Experiencia(models.Model):
     # Prompt para definir cargo Ex: Analista de Dados Senior
 
     def __str__(self):
-        return f"{self.experiencia}"
+        return f"{self.colaborador}"
 
 
 class Aprendizado(models.Model):
@@ -61,7 +61,7 @@ class Aprendizado(models.Model):
     # Aprendizados ensinados pelo QA e Supervisor.
 
     def __str__(self):
-        return f"{self.aprendizado}"
+        return f"{self.colaborador}"
 
 
 #############################PERSONALIDADE E DEMANDAS###################################
@@ -79,7 +79,7 @@ class Personalidade(models.Model):
     # Prompt para definir a personalidade do colaborador.
 
     def __str__(self):
-        return f"{self.personalidade}"
+        return f"{self.colaborador}"
 
 
 class Atuais_Demandas(models.Model):
@@ -105,7 +105,9 @@ class Atuais_Demandas(models.Model):
     )
 
     def __str__(self):
-        return f"{self.atuais_demandas} - {self.get_status_display()}"
+        return (
+            f"{self.colaborador} - {self.atuais_demandas} - {self.get_status_display()}"
+        )
 
 
 class Mesa_de_trabalho(models.Model):
@@ -140,7 +142,7 @@ class Sugestoes(models.Model):
     # Sugestões de Melhoria onde ele da sugestões do que quer melhorar.
 
     def __str__(self):
-        return f"{self.sugestoes}"
+        return f"{self.colaborador}"
 
 
 class Custo(models.Model):
