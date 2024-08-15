@@ -101,6 +101,22 @@ class Atuais_Demandas(models.Model):
     def processar_tarefa(self):
         colaborador = self.colaborador
 
+        # Recuperar conhecimentos e experiências do colaborador
+        conhecimentos = Conhecimento.objects.filter(
+            colaborador=colaborador
+        ).values_list("conhecimento_geral", flat=True)
+        experiencias = Experiencia.objects.filter(colaborador=colaborador).values_list(
+            "experiencia", flat=True
+        )
+
+        # Montar o contexto adicional
+        contexto_conhecimento = " ".join(conhecimentos)
+        contexto_experiencia = " ".join(experiencias)
+        contexto_adicional = (
+            f"Além dos seus conhecimentos em Django, você tem esses conhecimentos: {contexto_conhecimento}. "
+            f"Você também possui essa experiência profissional: {contexto_experiencia}. "
+        )
+
         # Usando a API da OpenAI para processar a tarefa com o modelo gpt-4-turbo
         response = openai.ChatCompletion.create(
             api_key=colaborador.api_key,
@@ -113,6 +129,7 @@ class Atuais_Demandas(models.Model):
                         "Responda exclusivamente com o código necessário para os arquivos do app Django especificados. "
                         "Inclua apenas código Python relacionado a models.py, forms.py, views.py, urls.py, admin.py, e utils.py."
                         "Não inclua introduções, textos paralelos, orientações de importações, resumos, explicações ou notas, apenas o código puro dos arquivos em python."
+                        f"{contexto_adicional}"
                     ),
                 },
                 {"role": "user", "content": self.atuais_demandas},
@@ -126,6 +143,35 @@ class Atuais_Demandas(models.Model):
         mesa = Mesa_de_trabalho.objects.create(
             colaborador=colaborador,
             mesa=resultado,
+        )
+
+        # Gerar sugestões de melhorias baseadas no resultado da tarefa
+        sugestao_response = openai.ChatCompletion.create(
+            api_key=colaborador.api_key,
+            model="gpt-4-turbo",
+            messages=[
+                {
+                    "role": "system",
+                    "content": (
+                        "Você é um colaborador da GS especializado em desenvolvimento Django. "
+                        "Baseado nos seus conhecimentos, experiências e no código abaixo, forneça sugestões de melhorias."
+                        f"{contexto_adicional}"
+                    ),
+                },
+                {
+                    "role": "user",
+                    "content": f"Analise o seguinte código e forneça sugestões de melhorias:\n{resultado}",
+                },
+            ],
+            max_tokens=500,
+        )
+
+        sugestao = sugestao_response["choices"][0]["message"]["content"]
+
+        # Salvando as sugestões na tabela Sugestoes
+        Sugestoes.objects.create(
+            colaborador=colaborador,
+            sugestoes=sugestao,
         )
 
         # Atualiza o status da demanda
