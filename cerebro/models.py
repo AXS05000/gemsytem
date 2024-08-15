@@ -109,10 +109,10 @@ class Atuais_Demandas(models.Model):
                 {
                     "role": "system",
                     "content": (
-                        "Você é um assistente de IA especializado em desenvolvimento Django. "
-                        "Seu trabalho é criar apenas o código necessário para os arquivos de um aplicativo Django. "
-                        "Crie exclusivamente dentro do app e foque em models.py, forms.py, views.py, urls.py, admin.py, e outros arquivos dentro do app, sem criar templates ou alterar arquivos fora do app. "
-                        "Não forneça comandos de terminal ou instruções para criar o projeto, concentre-se apenas no código dentro do app."
+                        "Você é um colaborador da GS especializado em desenvolvimento Django."
+                        "Responda exclusivamente com o código necessário para os arquivos do app Django especificados. "
+                        "Inclua apenas código Python relacionado a models.py, forms.py, views.py, urls.py, admin.py, e utils.py."
+                        "Não inclua introduções, textos paralelos, orientações de importações, resumos, explicações ou notas, apenas o código puro dos arquivos em python."
                     ),
                 },
                 {"role": "user", "content": self.atuais_demandas},
