@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atribuir Tarefa</title>
+</head>
+<body>
+    <h1>Atribuir Tarefa</h1>
+    <form method="POST" action="{% url 'atribuir_tarefa' %}">
+        {% csrf_token %}
+        <label for="tarefa">Tarefa:</label><br>
+        <textarea id="tarefa" name="tarefa" rows="4" cols="50"></textarea><br><br>
+
+        <label for="colaboradores">Selecione os Colaboradores:</label><br>
+        {% for colaborador in colaboradores %}
+            <input type="checkbox" name="colaboradores" value="{{ colaborador.id }}">
+            {{ colaborador.nome_do_colaborador }} - {{ colaborador.cargo }}<br>
+        {% endfor %}
+
+        <br>
+        <button type="submit">Atribuir Tarefa</button>
+    </form>
+</body>
+</html>

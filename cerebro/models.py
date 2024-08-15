@@ -1,5 +1,6 @@
 from django.db import models
 from colaboradores.models import Colaboradores
+import openai
 
 #############################CONHECIMENTO###################################
 
@@ -83,11 +84,6 @@ class Personalidade(models.Model):
 
 
 class Atuais_Demandas(models.Model):
-    STATUS_CHOICES = [
-        ("P", "Pendente"),
-        ("F", "Finalizada"),
-    ]
-
     colaborador = models.ForeignKey(
         Colaboradores,
         on_delete=models.CASCADE,
@@ -95,14 +91,48 @@ class Atuais_Demandas(models.Model):
         verbose_name="Atuais Demandas do Colaborador",
     )
     atuais_demandas = models.TextField(blank=True, null=True)
-    # Tarefas dadas pelo Supervisor
-
     status = models.CharField(
         max_length=1,
-        choices=STATUS_CHOICES,
+        choices=[("P", "Pendente"), ("F", "Finalizada")],
         default="P",
         verbose_name="Status da Tarefa",
     )
+
+    def processar_tarefa(self):
+        colaborador = self.colaborador
+
+        # Usando a API da OpenAI para processar a tarefa com o modelo gpt-4-turbo
+        response = openai.ChatCompletion.create(
+            api_key=colaborador.api_key,
+            model="gpt-4-turbo",
+            messages=[
+                {
+                    "role": "system",
+                    "content": (
+                        "Você é um assistente de IA especializado em desenvolvimento Django. "
+                        "Seu trabalho é criar apenas o código necessário para os arquivos de um aplicativo Django. "
+                        "Crie exclusivamente dentro do app e foque em models.py, forms.py, views.py, urls.py, admin.py, e outros arquivos dentro do app, sem criar templates ou alterar arquivos fora do app. "
+                        "Não forneça comandos de terminal ou instruções para criar o projeto, concentre-se apenas no código dentro do app."
+                    ),
+                },
+                {"role": "user", "content": self.atuais_demandas},
+            ],
+            max_tokens=1000,
+        )
+
+        resultado = response["choices"][0]["message"]["content"]
+
+        # Salvando todo o resultado na coluna 'mesa'
+        mesa = Mesa_de_trabalho.objects.create(
+            colaborador=colaborador,
+            mesa=resultado,
+        )
+
+        # Atualiza o status da demanda
+        self.status = "F"
+        self.save()
+
+        return mesa
 
     def __str__(self):
         return (
@@ -117,13 +147,7 @@ class Mesa_de_trabalho(models.Model):
         related_name="mesas_de_trabalho_colaborador",
         verbose_name="Mesas de Trabalho do Colaborador",
     )
-    utils = models.TextField(blank=True, null=True)
-    views = models.TextField(blank=True, null=True)
-    urls = models.TextField(blank=True, null=True)
-    forms = models.TextField(blank=True, null=True)
-    admin = models.TextField(blank=True, null=True)
-    views = models.TextField(blank=True, null=True)
-    models = models.TextField(blank=True, null=True)
+    mesa = models.TextField(blank=True, null=True)
 
     # Local onde será entregue seus trabalhos
     def __str__(self):
