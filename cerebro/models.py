@@ -101,20 +101,25 @@ class Atuais_Demandas(models.Model):
     def processar_tarefa(self):
         colaborador = self.colaborador
 
-        # Recuperar conhecimentos e experiências do colaborador
+        # Recuperar conhecimentos, experiências e aprendizados do colaborador
         conhecimentos = Conhecimento.objects.filter(
             colaborador=colaborador
         ).values_list("conhecimento_geral", flat=True)
         experiencias = Experiencia.objects.filter(colaborador=colaborador).values_list(
             "experiencia", flat=True
         )
+        aprendizados = Aprendizado.objects.filter(colaborador=colaborador).values_list(
+            "aprendizado", flat=True
+        )
 
         # Montar o contexto adicional
         contexto_conhecimento = " ".join(conhecimentos)
         contexto_experiencia = " ".join(experiencias)
+        contexto_aprendizado = " ".join(aprendizados)
         contexto_adicional = (
             f"Além dos seus conhecimentos em Django, você tem esses conhecimentos: {contexto_conhecimento}. "
             f"Você também possui essa experiência profissional: {contexto_experiencia}. "
+            f"Neste contexto, o seu chefe deu as seguintes observações que devem ser seguidas: {contexto_aprendizado}."
         )
 
         # Usando a API da OpenAI para processar a tarefa com o modelo gpt-4-turbo
@@ -128,6 +133,7 @@ class Atuais_Demandas(models.Model):
                         "Você é um colaborador da GS especializado em desenvolvimento Django."
                         "Responda exclusivamente com o código necessário para os arquivos do app Django especificados. "
                         "Inclua apenas código Python relacionado a models.py, forms.py, views.py, urls.py, admin.py, e utils.py."
+                        "Não inclua templates html."
                         "Não inclua introduções, textos paralelos, orientações de importações, resumos, explicações ou notas, apenas o código puro dos arquivos em python."
                         f"{contexto_adicional}"
                     ),
@@ -145,6 +151,13 @@ class Atuais_Demandas(models.Model):
             mesa=resultado,
         )
 
+        # Calcular e registrar o custo em tokens
+        tokens_usados = response["usage"]["total_tokens"]
+        Custo.objects.create(
+            colaborador=colaborador,
+            tokens=tokens_usados,
+        )
+
         # Gerar sugestões de melhorias baseadas no resultado da tarefa
         sugestao_response = openai.ChatCompletion.create(
             api_key=colaborador.api_key,
@@ -154,7 +167,7 @@ class Atuais_Demandas(models.Model):
                     "role": "system",
                     "content": (
                         "Você é um colaborador da GS especializado em desenvolvimento Django. "
-                        "Baseado nos seus conhecimentos, experiências e no código abaixo, forneça sugestões de melhorias."
+                        "Baseado nos seus conhecimentos, experiências, aprendizados e no código abaixo, forneça sugestões de melhorias."
                         f"{contexto_adicional}"
                     ),
                 },
@@ -227,4 +240,4 @@ class Custo(models.Model):
     # Quantidade de Tokens usados por cada tarefa.
 
     def __str__(self):
-        return f"{self.tokens}"
+        return f"{self.colaborador} - {self.tokens}"
