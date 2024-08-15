@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+
+
+
+
+h1 {
+  font-size: 45;
+  margin: 1rem;
+  color: #fff;
+
+}
+
+.year {
+  font-size: 200px;
+  z-index: -1;
+  opacity: 0.2;
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.countdown {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px; /* Ajuste o espaço entre os elementos conforme necessário */
+    padding-bottom: 4rem;
+}
+
+.countdown {
+
+  color: #fff;
+
+}
+
+.time {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 15px;
+  color: #fff;
+}
+
+
+
+@media (max-width: 500px) {
+  h1 {
+    font-size: 45px;
+  }
+
+  .time {
+    margin: 5px;
+  }
+
+
+
+  .time small {
+    font-size: 10px;
+  }
+}

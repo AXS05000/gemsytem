@@ -1,0 +1,687 @@
+{% load filters %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="keywords" content="Bootstrap, Landing page, Template, Registration, Landing">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="Grayrids">
+    <title>Maple Bear</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'assets_2/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/line-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/owl.carousel.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/owl.theme.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/nivo-lightbox.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/color-switcher.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/menu_sideslide.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/main.css' %}"> 
+    <link rel="stylesheet" href="{% static 'css/formulario.css' %}">    
+    <link rel="stylesheet" href="{% static 'assets_2/css/responsive.css' %}">
+    <link rel="icon" type="image/png" href="{% static 'assets_2/img/maple_bear.svg' %}">
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  </head>
+  
+  <body>
+    <!-- Header Section Start -->
+    <header id="slider-area">  
+      <nav class="navbar navbar-expand-md fixed-top scrolling-navbar bg-white">
+        <div class="container">
+          {% if user.is_anonymous %}
+          <a class="navbar-brand" href="{% url 'index' %}"><img  src="{% static 'assets_2/img/maple_bear.svg' %}" alt="" style="max-height: 40px;">  Maple Bear</a>
+          {% else %}  
+          <a class="navbar-brand" href="{% url 'index' %}"><img  src="{% static 'assets_2/img/maple_bear.svg' %}" alt="" style="max-height: 40px;">  Maple Bear</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="lni-menu"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto w-100 justify-content-end">
+              <li class="nav-item">
+                <a class="nav-link page-scroll" href="{% url 'index' %}">Home</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link page-scroll nav-link-ded dropdown-toggle" id="dropdownContratos" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Contratos</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="min-width: 200px;">
+                  <a class="nav-link" href="{% url 'busca_candidato' %}">Buscar Candidatos</a>
+                  <a class="nav-link" href="{% url 'form_candidato' %}">Formulário PCF</a>
+                  <a class="nav-link" href="{% url 'upload_template' %}">Importar Modelo de Contrato</a>
+                </div>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link page-scroll nav-link-ded dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Escolas</a>
+                <div class="dropdown-menu" style="min-width: 200px;">
+                  <a class="nav-link" href="{% url 'busca_escolas' %}">Buscar Escolas</a>
+                  <a class="nav-link" href="{% url 'form_fdmp' %}">Formulário FDMP</a>
+                </div>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link page-scroll" href="{% url 'logout' %}">Sair</a>
+              </li>
+              {% endif %}  
+
+            </ul>              
+          </div>
+        </div>
+      </nav>
+
+
+    </header>
+    <!-- Header Section End --> 
+
+
+    <div class="navbar-brand-ajuste">
+      <div id="textoEbotaoAceito">
+        <section id="politica" class="section">
+      
+          <div class="container">
+    
+            
+    
+            <div class="row">
+              <div class="text-center">
+                <div class="section-header">   
+          
+                  <h2 class="section-title" style="margin-top: 30px;">POLÍTCA FDMP - 03/04/2024:</h2>
+                  <span>MAPLE BEAR</span>
+                </div>
+                <br><br>
+                <br><br><h7 class="wow fadeInRight">INTRODUÇÃO</h7>
+                <br><br>
+                <p class="ajuste_largura justificado">É compromisso contratual de todos os owners Maple Bear o recolhimento de 2% da Receita Bruta da escola para o FDMP (Fundo de Desenvolvimento de Material Promocional).
+                  O objetivo deste documento é formalizar a política para apuração, pagamento e aplicação dos recursos captados pelo fundo.
+                  Como propósito fundamental, fica estabelecido que o FDMP tem como objetivo fomentar o crescimento, a consolidação e a busca da sustentabilidade da rede Maple Bear no Brasil.
+                  
+                </p>
+                <br><br><br><br>
+                <h7 class="wow fadeInRight">1 - MÉTODO DE APURAÇÃO</h7>
+                <br><br><br>
+                <p class="ajuste_largura justificado">Dado que a cada ano letivo o panorama de matrículas de nossas escolas consolida-se, com boa previsibilidade, a partir do mês de março, este será o mês definido para base de apuração dos valores a serem recolhidos pelas escolas ao longo dos 12 meses subsequentes. Desta forma, o ciclo estabelecido para pagamento dos valores devidos ao FDMP terá recálculo, pelo Escritório Central, no mês de Abril de cada ano e início do período de pagamento no mês de Maio estendendo-se até o mês de Abril do ano seguinte.
+                </p>
+                <br><br>
+                <p class="ajuste_largura justificado">A cada novo ciclo, o novo valor será disponibilizado para as escolas ao longo do mês de Abril, previamente ao início do recolhimento, de forma que, caso sejam identificadas pelas escolas distorções significativas, estas possam ser endereçadas pelo Escritório Central a partir de solicitação do owner, mediante envio de documento oficial comprobatório do faturamento real da escola. O erro somente poderá ser corrigido frente a comprovação documental, sem a qual, deverá ser aplicado a apuração previamente realizada. É de suma importância que este processo seja concluído até fim de abril, pois, uma vez decorrido o mês, não será mais possível correções.
+                </p>
+                <br><br>
+                <p class="ajuste_largura justificado">O valor a ser recolhido mensalmente pela escola será determinado com base na receita bruta anual estimada, e dividido em 12 parcelas iguais e fixas, seguindo-se a fórmula descrita no item 1A, abaixo.
+                </p>
+                <br><br>
+                <p class="ajuste_largura justificado">O pagamento será realizado pelas escolas Maple Bear por meio da quitação de boletos bancários emitidos pelo escritório central da Maple Bear Brasil com vencimento no dia 15 de cada mês.
+                </p>
+                <br><br>
+                <p class="ajuste_largura justificado">Para efeito dos processos financeiros e contábeis, a Maple Bear Brasil emitirá, mensalmente, as Notas Fiscais dos valores devidos.
+                </p>
+    
+                <br><br>
+                <p class="ajuste_largura justificado">O  não  compartilhamento das informações necessárias, permitirá que a Central arbitre  mediante dados internos  tanto quantidade de alunos quanto valor de mensalidade por série.
+                </p>
+    
+    
+    
+                <br><br><br><br>
+                <h7 class="wow fadeInRight">1A - FÓRMULA E VARIÁVEIS DE CÁLCULO PARA APURAÇÃO</h7>
+                <br><br>
+                <p class="ajuste_largura">Para apuração dos valores, será aplicada a seguinte fórmula:
+                </p>
+                <br><br>
+                <h6 class="wow fadeInRight"><span class="text-red-maple">Valor FDMP = (((Número de Alunos¹ * Anuidade  Regular²) – Percentual de Ajuste³) * 2%)/12</span></h6>
+                <br><br>
+                <h7 class="wow fadeInRight">DESCRIÇÃO DAS VARIÁVEIS:</h7>
+                <br><br><br>
+                <h6 class="wow fadeInRight"><span class="text-red-maple">Número de Alunos</span></h6>
+                <br><br>
+                <p class="ajuste_largura justificado">O número de alunos considerado para efeito de recolhimento do FDMP será obtido até o dia 15 de abril. Este levantamento deve excluir alunos bolsistas, acompanhado do devido material comprobatório.
+                </p>
+                <br><br>
+                <h6 class="wow fadeInRight"><span class="text-red-maple">Anuidade Regular</span></h6>
+                <br><br>
+                <p class="ajuste_largura justificado">Tabela de preços por série do ano vigente deverá ser compartilhada pela escola. O valor considerado será referente ao período normal da escola, excluindo-se pagamentos adicionais como Período Integral, Cursos Extracurriculares e eventuais Receitas Adicionais como transporte, alimentação e venda de uniformes. Se a Tabela detalhada de preços por série do ano vigente não for compartilhada, a Central usará como parâmetro, para o ano de 2024, o valor de R$ 3.500, referente ao valor de uma mensalidade.
+                </p>
+                <br><br>
+                <h6 class="wow fadeInRight"><span class="text-red-maple">Percentual de Ajuste</span></h6>
+                <br><br>
+                <p class="ajuste_largura justificado">Fica estabelecido por liberalidade, e como forma de apoio ao caixa da escola frente à eventual inadimplência por parte das famílias, que será aplicado sobre o montante a ser recolhido pelas escolas um percentual padrão redutor para toda a rede, neste ato acordado em 2,5%.
+                </p>
+                <br><br>
+                <h7 class="wow fadeInRight">1B - PREMISSAS E EXCEÇÕES</h7>
+                <br><br>
+                <p class="ajuste_largura justificado">1 - O não compartilhamento das informações solicitadas, permitirá que a Central arbitre quantidades e valores, mediante dados internos, bem como valor do SLM vigente.
+                </p>
+                <p class="ajuste_largura justificado">2 - Bolsistas - os contratos bolsistas precisarão ser compartilhados.
+                </p>
+                <p class="ajuste_largura justificado">3 - Eventuais discordancias de valores, deverão ser apontados até 15 de Abril. Decorrido este prazo, não será mais possivel ajustes.
+                </p>
+                <br><br><br><br>
+                <h7>2 - USO DOS RECURSOS DO FUNDO DE <br>DESENVOLVIMENTO DE MATERIAL PROMOCIONAL</h7>
+                <br><br><br>
+                <p class="ajuste_largura justificado">Pertence à Maple Bear Brasil a prerrogativa de uso dos recursos contidos no Fundo de Desenvolvimento de Material Promocional, desde que direcionados à promoção institucional ou comercial da Maple Bear junto aos públicos internos e externos da rede, bem como
+                  focados no crescimento orgânico e na ampliação da presença e da marca em todo o território de brasileiro.
+                </p>
+                <br>
+                <p class="ajuste_largura justificado">São também legitimamente alocadas no Fundo de Desenvolvimento de Material Promocional  despesas decorrentes:
+                </p>
+                <br>
+                <p class="ajuste_largura justificado">a) Da remuneração de colaboradores internos e empresas parceiras, contratados para consecução de atividades de marketing, eventos, comunicação e inteligência de mercado.
+                </p>
+    
+                <p class="ajuste_largura justificado">b) Da quitação de impostos incidentes sobre o Fundo de Desenvolvimento de Material Promocional, bem como encargos de colaboradores.
+                </p>
+    
+                <p class="ajuste_largura justificado">c) Do pagamento de custos diretos relacionados ao recebimento e gestão dos recursos do Fundo de Desenvolvimento de Material Promocional.
+                </p>
+    
+                <p class="ajuste_largura justificado">d) Do enfrentamento de eventuais crises, ameaças internas ou concorrenciais ou situações de exceção, locais ou nacionais, que venham a representar ameaça aos interesses ou à sustentabilidade da marca e da rede, a critério do Escritório Central.
+                </p>
+    
+                
+                <br><br><br><br>
+    
+                <h7>3 - ADVISORY COUNCIL</h7>
+                <br><br><br>
+                <p class="ajuste_largura justificado">Para efeito de transparência e participação das escolas Maple Bear na gestão e aplicação dos recursos recolhidos ao Fundo de Desenvolvimento de Material
+                  Promocional, será constituído pela Maple Bear Brasil, o MAC (Marketing Advisory Council).
+                  
+                </p>
+                <br>
+                <p class="ajuste_largura justificado">Fica definido o MAC como um conselho consultivo, presidido pela Maple Bear Brasil e composto por representantes das escolas Maple Bear em todo o país.
+                  O papel, as prerrogativas e as funções do MAC, bem como sua dinâmica de funcionamento, sua composição, periodicidade e método de eleição, são determinados em regimento específico aqui denominado “MAC Bylaws”.
+                  
+                </p>
+    
+    
+              </div> 
+    
+              
+    
+            </div>
+          </div>
+        </section>
+        
+        
+        
+        <div class="navbar-brand-ajuste">
+          <button class="btn btn-lg btn-common btn-effect" id="btnAceito"  style="margin-top: 20px;margin-bottom: 80px;" target="_blank">
+            Eu aceito os termos de política do FDMP
+          </button>
+        </div>   
+
+      </div>
+
+    </div>   
+    
+
+  
+  <div id="formContainer" style="display: none;">
+    <div class="wow fadeInRight" data-wow-delay="1.5s">
+    <section id="titulo" class="section">
+      <div class="section-header" style="margin-top: 30px;">   
+        <br>
+        <h2 class="section-title">PESQUISA FDMP 2024/2025:</h2>
+        <span>MAPLE BEAR</span>
+      </div>
+      
+    </section>
+    <br>
+   
+    <div class="text-center">
+      <h11 class="wow fadeInDown text-red-maple" data-wow-delay="0.3s">INFORMAÇÕES GERAIS!</h11><br>
+      <h11 class="wow fadeInDown text-red-maple" data-wow-delay="0.3s">LEIA E RESPONDA COM ATENÇÃO AS QUESTÕES ABAIXO.</h11><br>
+      <h11 class="wow fadeInDown text-red-maple" data-wow-delay="0.3s">RESPOSTA ÚNICA POR UNIDADE!</h11><br><br>
+      <h6 class="wow fadeInRight" data-wow-delay="0.8s">Por favor, preencha abaixo o número de <span class="text-red-maple">alunos</span> e valor médio da <span class="text-red-maple">mensalidade</span> por Série Escolar.</h6>
+      <br><br><h7 class="wow fadeInRight" data-wow-delay="1.4s">NÚMERO DE ALUNOS</h7>
+      <h6 class="wow fadeInRight" data-wow-delay="1.9s">Preencher campo com número <span class="text-red-maple">total de alunos.</span>
+        </h6>
+        <br><h10 class="wow fadeInRight" data-wow-delay="1.4s">BOLSISTAS:</h10>
+        <h6 class="wow fadeInRight" data-wow-delay="1.9s">Não esqueça de <span class="text-red-maple">excluir os bolsistas integrais</span>. <br>Caso sua escola não ofereça essa série, deixe o valor como "0".</h6>
+
+      <br><br><h7 class="wow fadeInRight" data-wow-delay="2.4s">MENSALIDADE MÉDIA</h7>
+      <h6 class="wow fadeInRight" data-wow-delay="2.9s">Preencher campo com valor médio da mensalidade praticado na série escolar, excluindo custos adicionais como materiais, transporte, alimentação e outros, se houverem.
+        <span class="text-red-maple">Valor Médio</span> pode contemplar os descontos oferecidos pela escola, como familiar, bolsas parciais.</h6>
+
+      
+    </div> 
+    
+   </section>
+    
+    <div class="form-container form-center container d-flex justify-content-center align-items-center">
+      
+    <!-- Features Section Start -->
+    <section id="admissao" class="section">
+      
+      <div class="container">
+
+        
+
+        <div class="row">
+          
+
+          <form action="#" method="POST" class="form-horizontal container" autocomplete="off"
+            enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-header">
+                {% if messages %}
+                    {% for message in messages %}
+                    {% if message.tags == 'success' %}
+                        <div class="position-fixed bottom-1 end-1 z-index-2">
+                            <div class="toast fade show p-2 bg-white" role="alert" aria-live="assertive" id="successToast" aria-atomic="true">
+                                <div class="toast-header border-0">
+                                    <i class="material-icons text-success me-2">check</i>
+                                    <span class="me-auto font-weight-bold">Notificação do sistema</span>
+                                    <small class="text-body">1 seg atrás</small>
+                                    <i class="fas fa-times text-md ms-3 cursor-pointer" data-bs-dismiss="toast" aria-label="Close"></i>
+                                </div>
+                                    <hr class="horizontal dark m-0">
+                                <div class="toast-body">
+                                        {{ message }}<br>
+                                </div>
+                            </div>
+                        </div>
+                    {% elif message.tags == 'error' %}
+                        <div class="alert alert-danger alert-dismissible text-white" role="alert">
+                            <span class="text-sm">{{ message }}</span>
+                            <button type="button" class="btn-close text-lg py-3 opacity-10 cursor-pointer" data-bs-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    {% elif message.tags == 'warning' %}
+                        
+                        <div class="alert alert-info2 alert-dismissible text-white" role="alert">
+                            <span class="text-sm">{{ message }}</span>
+                            <button type="button" class="btn-close text-lg py-3 opacity-10 cursor-pointer" data-bs-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    {% else %}
+                      <li>{{ message }}</li>
+                    {% endif %}
+                    {% endfor %}
+                {% endif %}
+                <div class="input-group container">
+                    <div class="input-box ">
+                        <div class="select">
+                            <div id="camposAdicionais" class="select produto-quantidade">
+                              <div class="form-contratos">
+                                  <div class="comp-nota-1">Nome:</div>
+                                  <div class="comp-nota-1">{{ form.nome }}</div>
+                              </div>
+                              <div class="tipo-de-faturamento">
+                                  <div class="tipo-de-faturamento-1">CPF:</div>
+                                  <div class="tipo-de-faturamento-1">{{ form.cpf|addattrs:"id=cpf" }}</div>
+                              </div>
+                              <div class="tipo-de-faturamento">
+                                <div class="tipo-de-faturamento-1">Cargo:</div>
+                                <div class="tipo-de-faturamento-1">{{ form.cargo }}</div>
+                              </div>  
+                              <div class="tipo-de-faturamento">
+                                <div class="tipo-de-faturamento-1">UF:</div>
+                                <div class="tipo-de-faturamento-1">{{ form.uf }}</div>
+                              </div>
+                              <div class="tipo-de-faturamento">
+                                <div class="tipo-de-faturamento-1">Cidade:</div>
+                                <div class="tipo-de-faturamento-1">{{ form.cidade }}</div>
+                              </div>      
+                              <div class="tipo-de-faturamento">
+                                <div class="tipo-de-faturamento-1 espacamento-formulario">Bear Care - Quantidade de Alunos:</div>
+                                <div class="tipo-de-faturamento-1">{{ form.bear_care_qtd }}</div>
+                            </div>
+                            <div class="tipo-de-faturamento">
+                                <div class="tipo-de-faturamento-1 espacamento-formulario">Bear Care - Valor Médio da Mensalidade:</div>
+                                <div class="tipo-de-faturamento-1">{{ form.bear_care_vm }}</div>
+                            </div>
+                            <div class="tipo-de-faturamento">
+                              <div class="tipo-de-faturamento-1 espacamento-formulario">Toddler - Quantidade de Alunos:</div>
+                              <div class="tipo-de-faturamento-1">{{ form.toddler_qtd }}</div>
+                            </div>
+                            <div class="tipo-de-faturamento">
+                                <div class="tipo-de-faturamento-1 espacamento-formulario">Toddler - Valor Médio da Mensalidade:</div>
+                                <div class="tipo-de-faturamento-1">{{ form.toddler_vm }}</div>
+                            </div>
+                            <div class="tipo-de-faturamento">
+                              <div class="tipo-de-faturamento-1 espacamento-formulario">Nursery - Quantidade de Alunos:</div>
+                              <div class="tipo-de-faturamento-1">{{ form.nursery_qtd }}</div>
+                            </div>
+                            <div class="tipo-de-faturamento">
+                              <div class="tipo-de-faturamento-1 espacamento-formulario">Nursery - Valor Médio da Mensalidade:</div>
+                              <div class="tipo-de-faturamento-1">{{ form.nursery_vm }}</div>
+                            </div>
+                            <div class="tipo-de-faturamento">
+                              <div class="tipo-de-faturamento-1 espacamento-formulario">Junior Kindergarten - Quantidade de Alunos:</div>
+                              <div class="tipo-de-faturamento-1">{{ form.junior_kindergarten_qtd }}</div>
+                            </div>
+                            <div class="tipo-de-faturamento">
+                              <div class="tipo-de-faturamento-1 espacamento-formulario">Junior Kindergarten - Valor Médio da Mensalidade:</div>
+                              <div class="tipo-de-faturamento-1">{{ form.junior_kindergarten_vm }}</div>
+                            </div>
+                            <div class="tipo-de-faturamento">
+                              <div class="tipo-de-faturamento-1 espacamento-formulario">Senior Kindergarten - Quantidade de Alunos:</div>
+                              <div class="tipo-de-faturamento-1">{{ form.senior_kindergarten_qtd }}</div>
+                            </div>
+                            <div class="tipo-de-faturamento">
+                              <div class="tipo-de-faturamento-1 espacamento-formulario">Senior Kindergarten - Valor Médio da Mensalidade:</div>
+                              <div class="tipo-de-faturamento-1">{{ form.senior_kindergarten_vm }}</div>
+                            </div>
+                            <div class="tipo-de-faturamento">
+                              <div class="tipo-de-faturamento-1 espacamento-formulario">Year 1 - Quantidade de Alunos:</div>
+                              <div class="tipo-de-faturamento-1">{{ form.year_1_qtd }}</div>
+                            </div>
+                            <div class="tipo-de-faturamento">
+                              <div class="tipo-de-faturamento-1 espacamento-formulario">Year 1 - Valor Médio da Mensalidade:</div>
+                              <div class="tipo-de-faturamento-1">{{ form.year_1_vm }}</div>
+                            </div>
+                            <div class="tipo-de-faturamento">
+                              <div class="tipo-de-faturamento-1 espacamento-formulario">Year 2 - Quantidade de Alunos:</div>
+                              <div class="tipo-de-faturamento-1">{{ form.year_2_qtd }}</div>
+                            </div>
+                            <div class="tipo-de-faturamento">
+                              <div class="tipo-de-faturamento-1 espacamento-formulario">Year 2 - Valor Médio da Mensalidade:</div>
+                              <div class="tipo-de-faturamento-1">{{ form.year_2_vm }}</div>
+                            </div>
+                            <div class="tipo-de-faturamento">
+                              <div class="tipo-de-faturamento-1 espacamento-formulario">Year 3 - Quantidade de Alunos:</div>
+                              <div class="tipo-de-faturamento-1">{{ form.year_3_qtd }}</div>
+                            </div>
+                            <div class="tipo-de-faturamento">
+                              <div class="tipo-de-faturamento-1 espacamento-formulario">Year 3 - Valor Médio da Mensalidade:</div>
+                              <div class="tipo-de-faturamento-1">{{ form.year_3_vm }}</div>
+                            </div>
+                            <div class="tipo-de-faturamento">
+                              <div class="tipo-de-faturamento-1 espacamento-formulario">Year 4 - Quantidade de Alunos:</div>
+                              <div class="tipo-de-faturamento-1">{{ form.year_4_qtd }}</div>
+                            </div>
+                            <div class="tipo-de-faturamento">
+                              <div class="tipo-de-faturamento-1 espacamento-formulario">Year 4 - Valor Médio da Mensalidade:</div>
+                              <div class="tipo-de-faturamento-1">{{ form.year_4_vm }}</div>
+                            </div>
+                            <div class="tipo-de-faturamento">
+                              <div class="tipo-de-faturamento-1 espacamento-formulario">Year 5 - Quantidade de Alunos:</div>
+                              <div class="tipo-de-faturamento-1">{{ form.year_5_qtd }}</div>
+                            </div>
+                            <div class="tipo-de-faturamento">
+                              <div class="tipo-de-faturamento-1 espacamento-formulario">Year 5 - Valor Médio da Mensalidade:</div>
+                              <div class="tipo-de-faturamento-1">{{ form.year_5_vm }}</div>
+                            </div>
+                            <div class="tipo-de-faturamento">
+                              <div class="tipo-de-faturamento-1 espacamento-formulario">Year 6 - Quantidade de Alunos:</div>
+                              <div class="tipo-de-faturamento-1">{{ form.year_6_qtd }}</div>
+                            </div>
+                            <div class="tipo-de-faturamento">
+                              <div class="tipo-de-faturamento-1 espacamento-formulario">Year 6 - Valor Médio da Mensalidade:</div>
+                              <div class="tipo-de-faturamento-1">{{ form.year_6_vm }}</div>
+                            </div>
+                            <div class="tipo-de-faturamento">
+                              <div class="tipo-de-faturamento-1 espacamento-formulario">Year 7 - Quantidade de Alunos:</div>
+                              <div class="tipo-de-faturamento-1">{{ form.year_7_qtd }}</div>
+                            </div>
+                            <div class="tipo-de-faturamento">
+                              <div class="tipo-de-faturamento-1 espacamento-formulario">Year 7 - Valor Médio da Mensalidade:</div>
+                              <div class="tipo-de-faturamento-1">{{ form.year_7_vm }}</div>
+                            </div>
+                            <div class="tipo-de-faturamento">
+                              <div class="tipo-de-faturamento-1 espacamento-formulario">Year 8 - Quantidade de Alunos:</div>
+                              <div class="tipo-de-faturamento-1">{{ form.year_8_qtd }}</div>
+                            </div>
+                            <div class="tipo-de-faturamento">
+                              <div class="tipo-de-faturamento-1 espacamento-formulario">Year 8 - Valor Médio da Mensalidade:</div>
+                              <div class="tipo-de-faturamento-1">{{ form.year_8_vm }}</div>
+                            </div>
+                            <div class="tipo-de-faturamento">
+                              <div class="tipo-de-faturamento-1 espacamento-formulario">Year 9 - Quantidade de Alunos:</div>
+                              <div class="tipo-de-faturamento-1">{{ form.year_9_qtd }}</div>
+                            </div>
+                            <div class="tipo-de-faturamento">
+                              <div class="tipo-de-faturamento-1 espacamento-formulario">Year 9 - Valor Médio da Mensalidade:</div>
+                              <div class="tipo-de-faturamento-1">{{ form.year_9_vm }}</div>
+                            </div>
+                            <div class="tipo-de-faturamento">
+                              <div class="tipo-de-faturamento-1 espacamento-formulario">Year 10 - Quantidade de Alunos:</div>
+                              <div class="tipo-de-faturamento-1">{{ form.year_10_qtd }}</div>
+                            </div>
+                            <div class="tipo-de-faturamento">
+                              <div class="tipo-de-faturamento-1 espacamento-formulario">Year 10 - Valor Médio da Mensalidade:</div>
+                              <div class="tipo-de-faturamento-1">{{ form.year_10_vm }}</div>
+                            </div>
+                            <div class="tipo-de-faturamento">
+                              <div class="tipo-de-faturamento-1 espacamento-formulario">Year 11 - Quantidade de Alunos:</div>
+                              <div class="tipo-de-faturamento-1">{{ form.year_11_qtd }}</div>
+                            </div>
+                            <div class="tipo-de-faturamento">
+                              <div class="tipo-de-faturamento-1 espacamento-formulario">Year 11 - Valor Médio da Mensalidade:</div>
+                              <div class="tipo-de-faturamento-1">{{ form.year_11_vm }}</div>
+                            </div>
+                            <div class="tipo-de-faturamento">
+                              <div class="tipo-de-faturamento-1 espacamento-formulario">Year 12 - Quantidade de Alunos:</div>
+                              <div class="tipo-de-faturamento-1">{{ form.year_12_qtd }}</div>
+                            </div>
+                            <div class="tipo-de-faturamento">
+                              <div class="tipo-de-faturamento-1 espacamento-formulario">Year 12 - Valor Médio da Mensalidade:</div>
+                              <div class="tipo-de-faturamento-1">{{ form.year_12_vm }}</div>
+                            </div>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="login-button">
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </div>
+                <br><br><h7 class="navbar-brand-ajuste">ATENÇÃO</h7>
+                <p class="ajuste-fonte">Caso tenha muitas duvidas para responder o formulario, entre em contato pelo link abaixo.</p>
+                <br><div class="navbar-brand-ajuste"><a href="https://wa.me/5511997762326/" class="btn btn-lg btn-common btn-effect" target="_blank"><i class="fa fa-whatsapp text-white text-lg ajuste-icon"></i>Clique Aqui</a></div>
+                
+                
+
+
+            </div>
+          </form>
+
+
+        </div>
+
+      </div>
+      
+    </section>
+
+    </div>
+    </div>
+  </div>
+
+    <!-- Features Section End -->   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+    </footer>
+    <!-- Footer Section End --> 
+
+    <!-- Go To Top Link -->
+    <a href="#" class="back-to-top">
+      <i class="lni-arrow-up"></i>
+    </a>
+
+    <div id="loader">
+      <div class="spinner">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+      </div>
+    </div>    
+
+    <!-- jQuery first, then Tether, then Bootstrap JS. -->
+    <script src="{% static 'assets_2/js/jquery-min.js' %}"></script>
+    <script src="{% static 'assets_2/js/popper.min.js' %}"></script>
+    <script src="{% static 'assets_2/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets_2/js/classie.js' %}"></script>
+    <script src="{% static 'assets_2/js/color-switcher.js' %}"></script>
+    <script src="{% static 'assets_2/js/jquery.mixitup.js' %}"></script>
+    <script src="{% static 'assets_2/js/nivo-lightbox.js' %}"></script>
+    <script src="{% static 'assets_2/js/owl.carousel.js' %}"></script>    
+    <script src="{% static 'assets_2/js/jquery.stellar.min.js' %}"></script>    
+    <script src="{% static 'assets_2/js/jquery.nav.js' %}"></script>    
+    <script src="{% static 'assets_2/js/scrolling-nav.js' %}"></script>    
+    <script src="{% static 'assets_2/js/jquery.easing.min.js' %}"></script>     
+    <script src="{% static 'assets_2/js/wow.js' %}"></script> 
+    <script src="{% static 'assets_2/js/jquery.vide.js' %}"></script>
+    <script src="{% static 'assets_2/js/jquery.counterup.min.js' %}"></script>    
+    <script src="{% static 'assets_2/js/jquery.magnific-popup.min.js' %}"></script>    
+    <script src="{% static 'assets_2/js/waypoints.min.js' %}"></script>    
+    <script src="{% static 'assets_2/js/form-validator.min.js' %}"></script>
+    <script src="{% static 'assets_2/js/contact-form-script.js' %}"></script>   
+    <script src="{% static 'assets_2/js/main.js' %}"></script>
+    <script>
+      window.STATIC_URL = "{% static '' %}";
+    </script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('btnAceito').addEventListener('click', function() {
+          var formContainer = document.getElementById('formContainer');
+          var textoEbotaoAceito = document.getElementById('textoEbotaoAceito');
+        
+          // Esconde o texto e o botão "ACEITO"
+          textoEbotaoAceito.style.display = 'none';
+          
+          // Mostra o formulário
+          formContainer.style.display = 'block';
+    
+          // Rola a página para o topo
+          window.scrollTo({top: 0, behavior: 'smooth'});
+        });
+      });
+    </script>
+    <script>
+      function formatar(mascara, documento) {
+        var i = 0;
+        var valor = documento.value.replace(/\D/g, '');
+        var formatado = '';
+      
+        for (var m = 0; m < mascara.length; m++) {
+          if (mascara[m] === '#') {
+            if (valor[i] !== undefined) {
+              formatado += valor[i++];
+            }
+          } else {
+            formatado += mascara[m];
+          }
+        }
+      
+        documento.value = formatado;
+      }
+    
+      document.getElementById('cpf').addEventListener('input', function() {
+        var cpf = this.value.replace(/\D/g, '');
+        var mascara = '###.###.###-##';
+    
+        if (cpf.length <= 3) {
+          mascara = '###';
+        } else if (cpf.length <= 6) {
+          mascara = '###.###';
+        } else if (cpf.length <= 9) {
+          mascara = '###.###.###';
+        }
+    
+        formatar(mascara, this);
+      });
+   
+      document.getElementById('cep').addEventListener('input', function() {
+        var cep = this.value.replace(/\D/g, '');
+        var mascara = '#####-###';
+    
+        if (cep.length <= 5) {
+          mascara = '#####';
+        } else if (cep.length > 5) {
+          mascara = '#####-###';
+        }
+    
+        formatar(mascara, this);
+      });
+    
+      document.getElementById('cpf').addEventListener('keydown', function(event) {
+        if (event.keyCode === 8) { // Tecla "Backspace"
+          event.preventDefault();
+          var value = this.value.replace(/\D/g, ''); // Remove todos os caracteres não numéricos
+          this.value = value.substring(0, value.length - 1); // Remove o último caractere
+    
+          var cpf = this.value.replace(/\D/g, '');
+          var mascara = '###.###.###-##';
+    
+          if (cpf.length <= 3) {
+            mascara = '###';
+          } else if (cpf.length <= 6) {
+            mascara = '###.###';
+          } else if (cpf.length <= 9) {
+            mascara = '###.###.###';
+          }
+    
+          formatar(mascara, this);
+        }
+      });
+       
+      document.getElementById('cep').addEventListener('keydown', function(event) {
+        if (event.keyCode === 8) { // Tecla "Backspace"
+          event.preventDefault();
+          var value = this.value.replace(/\D/g, ''); // Remove todos os caracteres não numéricos
+          this.value = value.substring(0, value.length - 1); // Remove o último caractere
+    
+          var cep = this.value.replace(/\D/g, '');
+          var mascara = '#####-###';
+    
+          if (cep.length <= 5) {
+            mascara = '#####';
+          } else if (cep.length > 5) {
+            mascara = '#####-###';
+          }
+    
+          formatar(mascara, this);
+        }
+      });
+    </script>
+    <script>
+      // Função para fechar alertas automaticamente após 7 segundos
+      function closeAlertsAutomatically() {
+        const alerts = document.querySelectorAll('.alert-dismissible');
+        alerts.forEach(function(alert) {
+          // Define um timeout para fechar o alerta após 7 segundos (7000ms)
+          setTimeout(function() {
+            $(alert).alert('close');
+          }, 12000);
+        });
+      }
+      
+      // Fecha o alerta quando o botão de fechar é clicado
+      function enableCloseButton() {
+        const closeButtons = document.querySelectorAll('.alert-dismissible .btn-close');
+        closeButtons.forEach(function(button) {
+          button.addEventListener('click', function() {
+            $(this.parentElement).alert('close');
+          });
+        });
+      }
+      
+      // Chamada das funções quando a janela carrega
+      window.onload = function() {
+        closeAlertsAutomatically();
+        enableCloseButton();
+      };
+      </script>
+    
+  </body>
+</html>

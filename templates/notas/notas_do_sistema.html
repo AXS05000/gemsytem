@@ -1,0 +1,432 @@
+{% load notas_filters %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="keywords" content="Bootstrap, Landing page, Template, Registration, Landing">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="Grayrids">
+    <title>GO2B BI</title>
+
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'assets_2/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/line-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/owl.carousel.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/owl.theme.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/nivo-lightbox.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/color-switcher.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/menu_sideslide.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/main.css' %}"> 
+    <link rel="stylesheet" href="{% static 'css/formulario.css' %}">    
+    <link rel="stylesheet" href="{% static 'assets_2/css/responsive.css' %}">
+    <link rel="icon" type="image/png" href="{% static 'assets/img/go2b-bi.png' %}">
+    <link id="pagestyle" href="{% static 'css/busca.css' %}" rel="stylesheet" />
+    <link id="pagestyle" href="{% static 'css/paginacao.css' %}" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'css/formulario.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">  
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5+z0I5t9z5lFf5r5l5u5z5F5w5f5Oj04meM1a7xj" crossorigin="anonymous">    
+  </head>
+  
+  <body>
+    <!-- Header Section Start -->
+    <header id="slider-area">  
+      <nav class="navbar navbar-expand-md fixed-top scrolling-navbar bg-white">
+        <div class="container">  
+          <a class="navbar-brand" href="{% url 'index' %}"><img class="brand-logo" src="{% static 'assets/img/go2b-bi.png' %}" alt="" style="max-height: 25px;">  GO2B-BI</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="lni-menu"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto w-100 justify-content-end">
+              {% if user.is_superuser %}
+              <li class="nav-item">
+                <a class="nav-link page-scroll" href="{% url 'index' %}">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link page-scroll" href="#services">Serviços</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link page-scroll" href="#portfolios">Trabalhos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link page-scroll" href="#team">Equipe</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link page-scroll nav-link-ded dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Notas</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="nav-link" href="{% url 'gerar-csv' %}">Notas Fiscais</a>
+                  <a class="nav-link" href="{% url 'notasficais' %}">Notas Portal</a>
+                  <a class="nav-link" href="{% url 'notafiscal' %}">Emitir OS</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="nav-link" href="{% url 'cnpj' %}">Cadastrar CNPJ</a>
+                  <a class="nav-link" href="{% url 'form_valor_hora' %}">Cadastrar Valor Hora</a>
+                  <a class="nav-link" href="{% url 'importar_basecnpj' %}">Importar CNPJ</a>
+                  <a class="nav-link" href="{% url 'importar_notas_' %}">Importar Notas</a>
+              </div>
+              </li>                             
+              <li class="nav-item dropdown">
+                <a class="nav-link page-scroll nav-link-ded dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admissão</a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="nav-link" href="{% url 'admissao' %}">Form Admissão</a>
+                      <a class="nav-link" href="{% url 'search_collaborator' %}">Painel RH</a>
+                      <div class="dropdown-divider"></div>
+                      {% comment %} <a class="dropdown-item" href="#">Tes</a> {% endcomment %}
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link nav-link-ded dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Importações</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="nav-link" href="{% url 'upload_template' %}">Importar Word</a>
+                    <a class="nav-link" href="{% url 'upload_excel' %}">Importar Mala</a>
+                    <a class="nav-link" href="{% url 'upload_excel_folha' %}">Importar Folha</a>
+                    <a class="nav-link" href="{% url 'upload_excel_beneficio' %}">Importar Beneficio</a>
+                    <a class="nav-link" href="{% url 'importar_basecnpj' %}">Importar CNPJ Notas</a>
+                    <a class="nav-link" href="{% url 'importar_notas_' %}">Importar Notas</a>
+                    {% comment %} <div class="dropdown-divider"></div> {% endcomment %}
+                    {% comment %} <a class="dropdown-item" href="#">Tes</a> {% endcomment %}
+                </div>
+              </li>
+              {% else %}
+              <li class="nav-item">
+                <a class="nav-link page-scroll" href="{% url 'index' %}">Home</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link page-scroll nav-link-ded dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Notas</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="nav-link" href="{% url 'gerar-csv' %}">Notas Fiscais</a>
+                  <a class="nav-link" href="{% url 'notasficais' %}">Notas Portal</a>
+                  <a class="nav-link" href="{% url 'notafiscal' %}">Emitir OS</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="nav-link" href="{% url 'cnpj' %}">Cadastrar CNPJ</a>
+                  <a class="nav-link" href="{% url 'form_valor_hora' %}">Cadastrar Valor Hora</a>
+                  <a class="nav-link" href="{% url 'importar_basecnpj' %}">Importar CNPJ</a>
+                  <a class="nav-link" href="{% url 'importar_notas_' %}">Importar Notas</a>
+              </div>
+              </li> 
+              {% endif %} 
+              {% if user.is_anonymous %}
+              {% else %}
+              <li class="nav-item">
+                <a class="nav-link page-scroll" href="{% url 'logout' %}">Sair</a>
+              </li>
+              {% endif %}  
+
+            </ul>              
+          </div>
+        </div>
+      </nav> 
+
+
+    </header>
+    <!-- Header Section End --> 
+
+
+      
+    <!-- Features Section Start -->
+    <section id="nota_emissao" class="section">
+      <div class="container">
+        <div class="section-header">          
+          <h2 class="section-title">BUSQUE AS NOTAS:</h2>
+          <span>FISCAIS</span>
+        </div>
+        <div class="row">
+          <div class="row text-center py-2 mt-3">
+            <div class="col-4 mx-auto">
+                <div class="input-group input-group-dynamic mb-4" >
+                    <span class="input-group-text"><i class="fas fa-search" aria-hidden="true"></i></span>
+                    <form method="GET" action="{% url 'gerar-csv' %}" class="w-100" >
+                        <input id="search-input" class="form-control custom-input" type="text" name="q" placeholder="Buscar Nota">
+                        <input class="form-control" type="submit" placeholder="Buscar" style="display: none;">
+                    </form>
+                </div>
+            </div>
+          </div>
+
+
+
+          
+          <form method="post" action="{% url 'generate-csv' %}">
+            {% csrf_token %}
+              <table class="table">
+                <thead>
+                <tr>
+                  <th scope="col" style="min-width: 110px;" class="align-middle text-center">
+                    <input type="checkbox" id="select-all">
+                    Selecionar
+                  </th>
+                  <th scope="col" style="min-width: 100px;" class="align-middle text-center">ID da nota</th>
+                  <th scope="col" class="align-middle text-center">Numero da Nota</th>
+                  <th scope="col" class="align-middle text-center">Total a faturar</th>
+                  <th scope="col" class="align-middle text-center">Nome do cliente</th>
+                  <th scope="col" class="align-middle text-center">Unidade</th>
+                  <th scope="col" class="align-middle text-center">Data de Criação</th>
+                  <th scope="col" class="align-middle text-center">Editar</th>
+                </tr>
+                </thead>
+                {% for nota in page_obj %}
+                <tr>
+                  <td><input type="checkbox" name="notas"  value="{{ nota.id }}"></td>
+                  <td><a data-toggle="modal" class="align-middle text-center" data-target="#modal{{ nota.id }}" style="cursor: pointer; display: block; text-align: center;">{{ nota.id }}</a>
+                  
+                    <!-- Modal -->
+                    <div class="modal fade" id="modal{{ nota.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h9 class="modal-title" id="exampleModalLabel">DESCRIÇÃO DA NOTA {{ nota.id }}</h9>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <!-- Aqui usamos o filtro linebreaksbr para converter o "|" em quebras de linha -->
+                            {{ nota.descricao|replace_pipe|safe }}
+
+
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary btn-info" data-dismiss="modal">Fechar</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  
+                  </td>
+                  <td>
+                    {% if nota.link_nfe %}
+                    <a href="{{ nota.link_nfe }}" target="_blank">{{ nota.numero_nota_fiscal }}</a>
+                    {% else %}
+                    {{ nota.numero_nota_fiscal }}
+                    {% endif %}
+                  </td>
+                  <td><p>R$ {{ nota.total_a_faturar|floatformat:2 }}</p></td>
+                  <td><p class="align-middle text-center">{{ nota.cnpj_da_nota.nome_cliente }}</p></td>
+                  <td><p>{{ nota.cnpj_da_nota.unidade }}</p></td>
+                  <td><p class="align-middle text-center">{{ nota.data_de_criacao|date:"d/m/Y" }}</p></td>
+                  <td><a type="button" class="btn btn-secondary btn-info" href="{% url 'editar_nota' nota.id %}">Editar Nota</a></td>
+                </tr>
+                {% endfor %}
+              </table>
+              <div class="login-button">
+                <button type="submit" class="button_svg">
+                  <svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 512 512"><style>svg{fill:#ffffff}</style><path d="M0 64C0 28.7 28.7 0 64 0H224V128c0 17.7 14.3 32 32 32H384V304H176c-35.3 0-64 28.7-64 64V512H64c-35.3 0-64-28.7-64-64V64zm384 64H256V0L384 128zM200 352h16c22.1 0 40 17.9 40 40v8c0 8.8-7.2 16-16 16s-16-7.2-16-16v-8c0-4.4-3.6-8-8-8H200c-4.4 0-8 3.6-8 8v80c0 4.4 3.6 8 8 8h16c4.4 0 8-3.6 8-8v-8c0-8.8 7.2-16 16-16s16 7.2 16 16v8c0 22.1-17.9 40-40 40H200c-22.1 0-40-17.9-40-40V392c0-22.1 17.9-40 40-40zm133.1 0H368c8.8 0 16 7.2 16 16s-7.2 16-16 16H333.1c-7.2 0-13.1 5.9-13.1 13.1c0 5.2 3 9.9 7.8 12l37.4 16.6c16.3 7.2 26.8 23.4 26.8 41.2c0 24.9-20.2 45.1-45.1 45.1H304c-8.8 0-16-7.2-16-16s7.2-16 16-16h42.9c7.2 0 13.1-5.9 13.1-13.1c0-5.2-3-9.9-7.8-12l-37.4-16.6c-16.3-7.2-26.8-23.4-26.8-41.2c0-24.9 20.2-45.1 45.1-45.1zm98.9 0c8.8 0 16 7.2 16 16v31.6c0 23 5.5 45.6 16 66c10.5-20.3 16-42.9 16-66V368c0-8.8 7.2-16 16-16s16 7.2 16 16v31.6c0 34.7-10.3 68.7-29.6 97.6l-5.1 7.7c-3 4.5-8 7.1-13.3 7.1s-10.3-2.7-13.3-7.1l-5.1-7.7c-19.3-28.9-29.6-62.9-29.6-97.6V368c0-8.8 7.2-16 16-16z"/></svg>
+                </button>
+
+
+          </form>
+
+                  <form method="post" action="{% url 'export_notas_excel' %}">
+                    {% csrf_token %}
+                    <!-- Aqui você pode colocar inputs do tipo hidden se precisar passar algum dado para a view -->
+                    <button type="submit" class="button_svg">
+                      <svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 384 512"><style>svg{fill:#ffffff}</style><path d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zM256 0V128H384L256 0zM155.7 250.2L192 302.1l36.3-51.9c7.6-10.9 22.6-13.5 33.4-5.9s13.5 22.6 5.9 33.4L221.3 344l46.4 66.2c7.6 10.9 5 25.8-5.9 33.4s-25.8 5-33.4-5.9L192 385.8l-36.3 51.9c-7.6 10.9-22.6 13.5-33.4 5.9s-13.5-22.6-5.9-33.4L162.7 344l-46.4-66.2c-7.6-10.9-5-25.8 5.9-33.4s25.8-5 33.4 5.9z"/></svg>
+                    </button>
+                  </form>
+              </div>
+
+
+        <!-- Início da Paginação -->
+        <div class="row text-center py-2">
+          <div class="col-4 mx-auto">
+              <ul class="pagination pagination-primary m-4">
+                  <!-- Se tem página anterior -->
+                  {% if page_obj.object_list|length > 0 %}
+                  {% if page_obj.has_previous %}
+                      <li class="page-item">
+                          <a class="page-link" href="?page=1&q={{ q }}&order_by={{ order_by }}" aria-label="Previous">
+                              <span aria-hidden="true"><i class="fa fa-angle-double-left" aria-hidden="true"></i></span>
+                          </a>
+                      </li>
+                  {% endif %}
+                  <!-- Loop para exibir os números das páginas -->
+                  {% for i in page_range %}
+                      {% if page_obj.number == i %}
+                          <li class="page-item active">
+                              <a class="page-link active-link" href="#">{{ i }}</a>
+                          </li>
+                      {% else %}
+                          <li class="page-item">
+                              <a class="page-link" href="?page={{ i }}&q={{ q }}&order_by={{ order_by }}">{{ i }}</a>
+                          </li>
+                      {% endif %}
+                  {% endfor %}
+                  <!-- Se tem próxima página -->
+                  {% if page_obj.has_next %}
+                      <li class="page-item">
+                          <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}&q={{ q }}&order_by={{ order_by }}" aria-label="Next">
+                              <span aria-hidden="true"><i class="fa fa-angle-double-right" aria-hidden="true"></i></span>
+                          </a>
+                      </li>
+                  {% endif %}
+                  {% endif %}
+              </ul>
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
+    </div>
+    <!-- Features Section End -->   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+      <!-- Copyright Start  -->
+      <div id="copyright">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">             
+              <div class="float-right">  
+                <ul class="nav nav-inline">
+                  <li class="nav-item">
+                    <a class="nav-link active" href="#">About Prime</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">TOS</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Return Policy</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">FAQ</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Contact</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Copyright End -->
+
+    </footer>
+    <!-- Footer Section End --> 
+
+    <!-- Go To Top Link -->
+    <a href="#" class="back-to-top">
+      <i class="lni-arrow-up"></i>
+    </a>
+
+    <div id="loader">
+      <div class="spinner">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+      </div>
+    </div>    
+
+    <!-- jQuery first, then Tether, then Bootstrap JS. -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+      $(document).ready(function(){
+          // Quando o checkbox "select-all" é clicado
+          $('#select-all').click(function(event) {   
+              // Iterar sobre cada checkbox na tabela
+              if(this.checked) {
+                  // Se "select-all" está marcado, marcar todos os checkboxes
+                  $(':checkbox').each(function() {
+                      this.checked = true;                        
+                  });
+              } else {
+                  // Se "select-all" está desmarcado, desmarcar todos os checkboxes
+                  $(':checkbox').each(function() {
+                      this.checked = false;                       
+                  });
+              }
+          });
+      });
+    </script>
+      
+    <script>
+        $(document).ready(function () {
+            $('#id_cliente_gi').change(function () {
+                let cliente_gi_id = $(this).val();
+                $.get('/api/departamentos/?cliente_gi_id=' + cliente_gi_id, function (data) {
+                    let select = $('#id_departamento');
+                    select.empty();
+                    select.append('<option value="" selected>---------</option>'); // Adicionado aqui
+                    $.each(data, function (index, value) {
+                        select.append('<option value="' + value.id + '">' + value.nome_departamento + '</option>');
+                    });
+                });
+                $.get('/api/bases/?cliente_gi_id=' + cliente_gi_id, function (data) {
+                    let select = $('#id_cargo');
+                    select.empty();
+                    select.append('<option value="" selected>---------</option>'); // Adicionado aqui
+                    $.each(data, function (index, value) {
+                        select.append('<option value="' + value.id + '">' + value.cargo + '</option>');
+                    });
+                });
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#id_departamento').change(function() {
+                var departamento_id = $(this).val();
+                $.getJSON('/api/turnos/?departamento_id=' + departamento_id, function(data) {
+                    var select = $('#id_turno');
+                    select.empty();
+                    select.append('<option value="" selected>---------</option>'); // Adicionado aqui
+                    $.each(data, function(index, value) {
+                        select.append('<option value="' + value.id + '">' + value.nome + '</option>');
+                    });
+                });
+            });
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-K8OLp8MHh/+G5I6Ll5P5xX0v7U0v5MI97KM2urFpR1zj6u4z5F4w5f5Oj04meM1a" crossorigin="anonymous"></script>
+    <script src="{% static 'assets_2/js/jquery-min.js' %}"></script>
+    <script src="{% static 'assets_2/js/popper.min.js' %}"></script>
+    <script src="{% static 'assets_2/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets_2/js/classie.js' %}"></script>
+    <script src="{% static 'assets_2/js/color-switcher.js' %}"></script>
+    <script src="{% static 'assets_2/js/jquery.mixitup.js' %}"></script>
+    <script src="{% static 'assets_2/js/nivo-lightbox.js' %}"></script>
+    <script src="{% static 'assets_2/js/owl.carousel.js' %}"></script>    
+    <script src="{% static 'assets_2/js/jquery.stellar.min.js' %}"></script>    
+    <script src="{% static 'assets_2/js/jquery.nav.js' %}"></script>    
+    <script src="{% static 'assets_2/js/scrolling-nav.js' %}"></script>    
+    <script src="{% static 'assets_2/js/jquery.easing.min.js' %}"></script>     
+    <script src="{% static 'assets_2/js/wow.js' %}"></script> 
+    <script src="{% static 'assets_2/js/jquery.vide.js' %}"></script>
+    <script src="{% static 'assets_2/js/jquery.counterup.min.js' %}"></script>    
+    <script src="{% static 'assets_2/js/jquery.magnific-popup.min.js' %}"></script>    
+    <script src="{% static 'assets_2/js/waypoints.min.js' %}"></script>    
+    <script src="{% static 'assets_2/js/form-validator.min.js' %}"></script>
+    <script src="{% static 'assets_2/js/contact-form-script.js' %}"></script>   
+    <script src="{% static 'assets_2/js/main.js' %}"></script>
+    <script>
+      window.STATIC_URL = "{% static '' %}";
+    </script>
+    <script>
+      document.getElementById('search-input').addEventListener('focus', function() {
+          this.style.border = 'none';
+      });
+      document.getElementById('search-input').addEventListener('blur', function() {
+          this.style.border = '';  // Restaure a borda quando o elemento perde o foco
+      });
+      </script>
+  </body>
+</html>

@@ -1,0 +1,376 @@
+{% load filters %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="keywords" content="Bootstrap, Landing page, Template, Registration, Landing">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="Grayrids">
+    <title>Maple Bear</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'assets_2/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/line-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/owl.carousel.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/owl.theme.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/nivo-lightbox.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/color-switcher.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/menu_sideslide.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/main.css' %}"> 
+    <link rel="stylesheet" href="{% static 'css/formulario.css' %}">    
+    <link rel="stylesheet" href="{% static 'assets_2/css/responsive.css' %}">
+    <link rel="icon" type="image/png" href="{% static 'assets_2/img/maple_bear.svg' %}">
+  </head>
+  
+  <body>
+    <!-- Header Section Start -->
+    <header id="slider-area">  
+      <nav class="navbar navbar-expand-md fixed-top scrolling-navbar bg-white">
+        <div class="container">  
+          <a class="navbar-brand" href="{% url 'index' %}"><img  src="{% static 'assets_2/img/maple_bear.svg' %}" alt="" style="max-height: 40px;">  Maple Bear</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="lni-menu"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto w-100 justify-content-end">
+              <li class="nav-item">
+                <a class="nav-link page-scroll" href="{% url 'index' %}">Home</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link page-scroll nav-link-ded dropdown-toggle" id="dropdownContratos" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Contratos</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="min-width: 200px;">
+                  <a class="nav-link" href="{% url 'busca_candidato' %}">Buscar Candidatos</a>
+                  <a class="nav-link" href="{% url 'form_candidato' %}">Formulário PCF</a>
+                  <a class="nav-link" href="{% url 'upload_template' %}">Importar Modelo de Contrato</a>
+                </div>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link page-scroll nav-link-ded dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Escolas</a>
+                <div class="dropdown-menu" style="min-width: 200px;">
+                  <a class="nav-link" href="{% url 'busca_escolas' %}">Buscar Escolas</a>
+                  <a class="nav-link" href="{% url 'form_fdmp' %}">Formulário FDMP</a>
+                </div>
+              </li>
+              {% if user.is_anonymous %}
+              {% else %}
+              <li class="nav-item">
+                <a class="nav-link page-scroll" href="{% url 'logout' %}">Sair</a>
+              </li>
+              {% endif %}  
+
+            </ul>              
+          </div>
+        </div>
+      </nav>
+
+
+    </header>
+    <!-- Header Section End --> 
+    <div class="form-container form-center container d-flex justify-content-center align-items-center">
+      
+    <!-- Features Section Start -->
+    <section id="politica" class="section">
+      
+      <div class="container">
+
+        
+
+        <div class="row">
+          <div class="text-center">
+            <div class="section-header">   
+      
+              <h2 class="section-title">POLÍTCA FDMP - 03/04/2024:</h2>
+              <span>MAPLE BEAR</span>
+            </div>
+            <br><br>
+            <br><br><h7 class="wow fadeInRight">INTRODUÇÃO</h7>
+            <br><br>
+            <p class="ajuste_largura justificado">É compromisso contratual de todos os owners Maple Bear o recolhimento de 2% da Receita Bruta da escola para o FDMP (Fundo de Desenvolvimento de Material Promocional).
+              O objetivo deste documento é formalizar a política para apuração, pagamento e aplicação dos recursos captados pelo fundo.
+              Como propósito fundamental, fica estabelecido que o FDMP tem como objetivo fomentar o crescimento, a consolidação e a busca da sustentabilidade da rede Maple Bear no Brasil.
+              
+            </p>
+            <br><br><br><br>
+            <h7 class="wow fadeInRight">1 - MÉTODO DE APURAÇÃO</h7>
+            <br><br><br>
+            <p class="ajuste_largura justificado">Dado que a cada ano letivo o panorama de matrículas de nossas escolas consolida-se, com boa previsibilidade, a partir do mês de março, este será o mês definido para base de apuração dos valores a serem recolhidos pelas escolas ao longo dos 12 meses subsequentes. Desta forma, o ciclo estabelecido para pagamento dos valores devidos ao FDMP terá recálculo, pelo Escritório Central, no mês de Abril de cada ano e início do período de pagamento no mês de Maio estendendo-se até o mês de Abril do ano seguinte.
+            </p>
+            <br><br>
+            <p class="ajuste_largura justificado">A cada novo ciclo, o novo valor será disponibilizado para as escolas ao longo do mês de Abril, previamente ao início do recolhimento, de forma que, caso sejam identificadas pelas escolas distorções significativas, estas possam ser endereçadas pelo Escritório Central a partir de solicitação do owner, mediante envio de documento oficial comprobatório do faturamento real da escola. O erro somente poderá ser corrigido frente a comprovação documental, sem a qual, deverá ser aplicado a apuração previamente realizada. É de suma importância que este processo seja concluído até fim de abril, pois, uma vez decorrido o mês, não será mais possível correções.
+            </p>
+            <br><br>
+            <p class="ajuste_largura justificado">O valor a ser recolhido mensalmente pela escola será determinado com base na receita bruta anual estimada, e dividido em 12 parcelas iguais e fixas, seguindo-se a fórmula descrita no item 1A, abaixo.
+            </p>
+            <br><br>
+            <p class="ajuste_largura justificado">O pagamento será realizado pelas escolas Maple Bear por meio da quitação de boletos bancários emitidos pelo escritório central da Maple Bear Brasil com vencimento no dia 15 de cada mês.
+            </p>
+            <br><br>
+            <p class="ajuste_largura justificado">Para efeito dos processos financeiros e contábeis, a Maple Bear Brasil emitirá, mensalmente, as Notas Fiscais dos valores devidos.
+            </p>
+
+            <br><br>
+            <p class="ajuste_largura justificado">O  não  compartilhamento das informações necessárias, permitirá que a Central arbitre  mediante dados internos  tanto quantidade de alunos quanto valor de mensalidade por série.
+            </p>
+
+
+
+            <br><br><br><br>
+            <h7 class="wow fadeInRight">1A - FÓRMULA E VARIÁVEIS DE CÁLCULO PARA APURAÇÃO</h7>
+            <br><br>
+            <p class="ajuste_largura">Para apuração dos valores, será aplicada a seguinte fórmula:
+            </p>
+            <br><br>
+            <h6 class="wow fadeInRight"><span class="text-red-maple">Valor FDMP = (((Número de Alunos¹ * Anuidade  Regular²) – Percentual de Ajuste³) * 2%)/12</span></h6>
+            <br><br>
+            <h7 class="wow fadeInRight">DESCRIÇÃO DAS VARIÁVEIS:</h7>
+            <br><br><br>
+            <h6 class="wow fadeInRight"><span class="text-red-maple">Número de Alunos</span></h6>
+            <br><br>
+            <p class="ajuste_largura justificado">O número de alunos considerado para efeito de recolhimento do FDMP será obtido até o dia 15 de abril. Este levantamento deve excluir alunos bolsistas, acompanhado do devido material comprobatório.
+            </p>
+            <br><br>
+            <h6 class="wow fadeInRight"><span class="text-red-maple">Anuidade Regular</span></h6>
+            <br><br>
+            <p class="ajuste_largura justificado">Tabela de preços por série do ano vigente deverá ser compartilhada pela escola. O valor considerado será referente ao período normal da escola, excluindo-se pagamentos adicionais como Período Integral, Cursos Extracurriculares e eventuais Receitas Adicionais como transporte, alimentação e venda de uniformes. Se a Tabela detalhada de preços por série do ano vigente não for compartilhada, a Central usará como parâmetro, para o ano de 2024, o valor de R$ 3.500, referente ao valor de uma mensalidade.
+            </p>
+            <br><br>
+            <h6 class="wow fadeInRight"><span class="text-red-maple">Percentual de Ajuste</span></h6>
+            <br><br>
+            <p class="ajuste_largura justificado">Fica estabelecido por liberalidade, e como forma de apoio ao caixa da escola frente à eventual inadimplência por parte das famílias, que será aplicado sobre o montante a ser recolhido pelas escolas um percentual padrão redutor para toda a rede, neste ato acordado em 2,5%.
+            </p>
+            <br><br>
+            <h7 class="wow fadeInRight">1B - PREMISSAS E EXCEÇÕES</h7>
+            <br><br>
+            <p class="ajuste_largura justificado">1 - O não compartilhamento das informações solicitadas, permitirá que a Central arbitre quantidades e valores, mediante dados internos, bem como valor do SLM vigente.
+            </p>
+            <p class="ajuste_largura justificado">2 - Bolsistas - os contratos bolsistas precisarão ser compartilhados.
+            </p>
+            <p class="ajuste_largura justificado">3 - Eventuais discordancias de valores, deverão ser apontados até 15 de Abril. Decorrido este prazo, não será mais possivel ajustes.
+            </p>
+            <br><br><br><br>
+            <h7>2 - USO DOS RECURSOS DO FUNDO DE <br>DESENVOLVIMENTO DE MATERIAL PROMOCIONAL</h7>
+            <br><br><br>
+            <p class="ajuste_largura justificado">Pertence à Maple Bear Brasil a prerrogativa de uso dos recursos contidos no Fundo de Desenvolvimento de Material Promocional, desde que direcionados à promoção institucional ou comercial da Maple Bear junto aos públicos internos e externos da rede, bem como
+              focados no crescimento orgânico e na ampliação da presença e da marca em todo o território de brasileiro.
+            </p>
+            <br>
+            <p class="ajuste_largura justificado">São também legitimamente alocadas no Fundo de Desenvolvimento de Material Promocional  despesas decorrentes:
+            </p>
+            <br>
+            <p class="ajuste_largura justificado">a) Da remuneração de colaboradores internos e empresas parceiras, contratados para consecução de atividades de marketing, eventos, comunicação e inteligência de mercado.
+            </p>
+
+            <p class="ajuste_largura justificado">b) Da quitação de impostos incidentes sobre o Fundo de Desenvolvimento de Material Promocional, bem como encargos de colaboradores.
+            </p>
+
+            <p class="ajuste_largura justificado">c) Do pagamento de custos diretos relacionados ao recebimento e gestão dos recursos do Fundo de Desenvolvimento de Material Promocional.
+            </p>
+
+            <p class="ajuste_largura justificado">d) Do enfrentamento de eventuais crises, ameaças internas ou concorrenciais ou situações de exceção, locais ou nacionais, que venham a representar ameaça aos interesses ou à sustentabilidade da marca e da rede, a critério do Escritório Central.
+            </p>
+
+            
+            <br><br><br><br>
+
+            <h7>3 - ADVISORY COUNCIL</h7>
+            <br><br><br>
+            <p class="ajuste_largura justificado">Para efeito de transparência e participação das escolas Maple Bear na gestão e aplicação dos recursos recolhidos ao Fundo de Desenvolvimento de Material
+              Promocional, será constituído pela Maple Bear Brasil, o MAC (Marketing Advisory Council).
+              
+            </p>
+            <br>
+            <p class="ajuste_largura justificado">Fica definido o MAC como um conselho consultivo, presidido pela Maple Bear Brasil e composto por representantes das escolas Maple Bear em todo o país.
+              O papel, as prerrogativas e as funções do MAC, bem como sua dinâmica de funcionamento, sua composição, periodicidade e método de eleição, são determinados em regimento específico aqui denominado “MAC Bylaws”.
+              
+            </p>
+
+
+          </div> 
+
+          
+
+        </div>
+      </div>
+    </section>
+    </div>
+    <!-- Features Section End -->   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+    </footer>
+    <!-- Footer Section End --> 
+
+    <!-- Go To Top Link -->
+    <a href="#" class="back-to-top">
+      <i class="lni-arrow-up"></i>
+    </a>
+
+    <div id="loader">
+      <div class="spinner">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+      </div>
+    </div>    
+
+    <!-- jQuery first, then Tether, then Bootstrap JS. -->
+    <script src="{% static 'assets_2/js/jquery-min.js' %}"></script>
+    <script src="{% static 'assets_2/js/popper.min.js' %}"></script>
+    <script src="{% static 'assets_2/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets_2/js/classie.js' %}"></script>
+    <script src="{% static 'assets_2/js/color-switcher.js' %}"></script>
+    <script src="{% static 'assets_2/js/jquery.mixitup.js' %}"></script>
+    <script src="{% static 'assets_2/js/nivo-lightbox.js' %}"></script>
+    <script src="{% static 'assets_2/js/owl.carousel.js' %}"></script>    
+    <script src="{% static 'assets_2/js/jquery.stellar.min.js' %}"></script>    
+    <script src="{% static 'assets_2/js/jquery.nav.js' %}"></script>    
+    <script src="{% static 'assets_2/js/scrolling-nav.js' %}"></script>    
+    <script src="{% static 'assets_2/js/jquery.easing.min.js' %}"></script>     
+    <script src="{% static 'assets_2/js/wow.js' %}"></script> 
+    <script src="{% static 'assets_2/js/jquery.vide.js' %}"></script>
+    <script src="{% static 'assets_2/js/jquery.counterup.min.js' %}"></script>    
+    <script src="{% static 'assets_2/js/jquery.magnific-popup.min.js' %}"></script>    
+    <script src="{% static 'assets_2/js/waypoints.min.js' %}"></script>    
+    <script src="{% static 'assets_2/js/form-validator.min.js' %}"></script>
+    <script src="{% static 'assets_2/js/contact-form-script.js' %}"></script>   
+    <script src="{% static 'assets_2/js/main.js' %}"></script>
+    <script>
+      window.STATIC_URL = "{% static '' %}";
+    </script>
+    <script>
+      function formatar(mascara, documento) {
+        var i = 0;
+        var valor = documento.value.replace(/\D/g, '');
+        var formatado = '';
+      
+        for (var m = 0; m < mascara.length; m++) {
+          if (mascara[m] === '#') {
+            if (valor[i] !== undefined) {
+              formatado += valor[i++];
+            }
+          } else {
+            formatado += mascara[m];
+          }
+        }
+      
+        documento.value = formatado;
+      }
+    
+      document.getElementById('cpf').addEventListener('input', function() {
+        var cpf = this.value.replace(/\D/g, '');
+        var mascara = '###.###.###-##';
+    
+        if (cpf.length <= 3) {
+          mascara = '###';
+        } else if (cpf.length <= 6) {
+          mascara = '###.###';
+        } else if (cpf.length <= 9) {
+          mascara = '###.###.###';
+        }
+    
+        formatar(mascara, this);
+      });
+   
+      document.getElementById('cep').addEventListener('input', function() {
+        var cep = this.value.replace(/\D/g, '');
+        var mascara = '#####-###';
+    
+        if (cep.length <= 5) {
+          mascara = '#####';
+        } else if (cep.length > 5) {
+          mascara = '#####-###';
+        }
+    
+        formatar(mascara, this);
+      });
+    
+      document.getElementById('cpf').addEventListener('keydown', function(event) {
+        if (event.keyCode === 8) { // Tecla "Backspace"
+          event.preventDefault();
+          var value = this.value.replace(/\D/g, ''); // Remove todos os caracteres não numéricos
+          this.value = value.substring(0, value.length - 1); // Remove o último caractere
+    
+          var cpf = this.value.replace(/\D/g, '');
+          var mascara = '###.###.###-##';
+    
+          if (cpf.length <= 3) {
+            mascara = '###';
+          } else if (cpf.length <= 6) {
+            mascara = '###.###';
+          } else if (cpf.length <= 9) {
+            mascara = '###.###.###';
+          }
+    
+          formatar(mascara, this);
+        }
+      });
+       
+      document.getElementById('cep').addEventListener('keydown', function(event) {
+        if (event.keyCode === 8) { // Tecla "Backspace"
+          event.preventDefault();
+          var value = this.value.replace(/\D/g, ''); // Remove todos os caracteres não numéricos
+          this.value = value.substring(0, value.length - 1); // Remove o último caractere
+    
+          var cep = this.value.replace(/\D/g, '');
+          var mascara = '#####-###';
+    
+          if (cep.length <= 5) {
+            mascara = '#####';
+          } else if (cep.length > 5) {
+            mascara = '#####-###';
+          }
+    
+          formatar(mascara, this);
+        }
+      });
+    </script>
+    <script>
+      // Função para fechar alertas automaticamente após 7 segundos
+      function closeAlertsAutomatically() {
+        const alerts = document.querySelectorAll('.alert-dismissible');
+        alerts.forEach(function(alert) {
+          // Define um timeout para fechar o alerta após 7 segundos (7000ms)
+          setTimeout(function() {
+            $(alert).alert('close');
+          }, 7000);
+        });
+      }
+      
+      // Fecha o alerta quando o botão de fechar é clicado
+      function enableCloseButton() {
+        const closeButtons = document.querySelectorAll('.alert-dismissible .btn-close');
+        closeButtons.forEach(function(button) {
+          button.addEventListener('click', function() {
+            $(this.parentElement).alert('close');
+          });
+        });
+      }
+      
+      // Chamada das funções quando a janela carrega
+      window.onload = function() {
+        closeAlertsAutomatically();
+        enableCloseButton();
+      };
+      </script>
+    
+  </body>
+</html>

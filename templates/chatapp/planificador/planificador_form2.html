@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planificador</title>
+</head>
+<body>
+    <h2>{% if form.instance.pk %}Editar Dados do Planificador{% else %}Criar Dados do Planificador{% endif %}</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">{% if form.instance.pk %}Atualizar{% else %}Criar{% endif %}</button>
+    </form>
+</body>
+</html>

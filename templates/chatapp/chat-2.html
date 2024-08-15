@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat with ChatGPT</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <h1>Chat with ChatGPT</h1>
+    <div id="chat-box"></div>
+    <form id="chat-form">
+        {% csrf_token %}
+        <input type="text" id="message" name="message" placeholder="Type your message here..." required>
+        <button type="submit">Send</button>
+    </form>
+    <script>
+        const form = document.getElementById('chat-form');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const messageInput = document.getElementById('message');
+            const message = messageInput.value;
+
+            const response = await fetch("{% url 'chat' %}", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                body: JSON.stringify({ message: message })
+            });
+            const data = await response.json();
+
+            const chatBox = document.getElementById('chat-box');
+            chatBox.innerHTML += `<p><strong>User:</strong> ${message}</p>`;
+            chatBox.innerHTML += `<p><strong>ChatGPT:</strong> ${data.response}</p>`;
+
+            messageInput.value = '';
+        });
+    </script>
+</body>
+</html>

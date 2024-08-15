@@ -1,0 +1,596 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="keywords" content="Bootstrap, Landing page, Template, Registration, Landing">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="Grayrids">
+    <title>Maple Bear</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'assets_2/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/line-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/owl.carousel.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/owl.theme.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/nivo-lightbox.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/color-switcher.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/menu_sideslide.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/responsive.css' %}"> 
+    <link rel="stylesheet" href="{% static 'css/formulario_nps.css' %}">
+    <link rel="stylesheet" href="{% static 'css/nps.css' %}">     
+    <link rel="icon" type="image/png" href="{% static 'assets_2/img/maple_bear.svg' %}">
+
+    <style>
+      .btn-round {
+        border-radius: 30px;
+        padding: 10px 20px;
+    }
+    
+    .button-content {
+        display: flex;
+        align-items: center;
+    }
+    
+    button {
+        margin-top: 1rem;
+    }
+    
+    .button-content i {
+        margin-right: 5px;
+    }
+    
+    .tipo-de-faturamento {
+        margin-bottom: 20px;
+    }
+    
+    .file-name {
+        margin-left: 10px;
+        font-style: italic;
+        color: #fff;
+    }
+    
+    .form-horizontal {
+        max-width: 100%;
+        margin: 0 auto;
+        text-align: center;
+    }
+    
+    .tipo-de-faturamento-1 {
+        display: inline-block;
+    }
+  </style>
+</head>
+
+<body>
+    <!-- Header Section Start -->
+    <header id="slider-area">  
+        <nav class="navbar navbar-expand-md fixed-top scrolling-navbar bg-white">
+            <div class="container">  
+                <a class="navbar-brand" href="{% url 'index' %}">
+                    <img src="{% static 'assets_2/img/maple_bear.svg' %}" alt="" style="max-height: 40px;"> Maple Bear
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="lni-menu"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav mr-auto w-100 justify-content-end">
+                        <li class="nav-item">
+                            <a class="nav-link page-scroll" href="#slider-area">Home</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link page-scroll nav-link-ded dropdown-toggle" id="dropdownContratos" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Glex</a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="min-width: 200px;">
+                                <a class="nav-link" href="{% url 'home_glex' %}">Home Glex</a>
+                                <a class="nav-link" href="{% url 'table_forms_glex' %}">Formulários</a>
+                            </div>
+                        </li>
+                        
+                        <li class="nav-item dropdown">
+                            <a class="nav-link page-scroll nav-link-ded dropdown-toggle" id="dropdownContratos" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Contratos</a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="min-width: 200px;">
+                                <a class="nav-link" href="#">Buscar Candidatos</a>
+                                <a class="nav-link" href="#">Formulário PCF</a>
+                                <a class="nav-link" href="#">Importar Modelo de Contrato</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link page-scroll nav-link-ded dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Escolas</a>
+                            <div class="dropdown-menu" style="min-width: 200px;">
+                                <a class="nav-link" href="#">Buscar Escolas</a>
+                                <a class="nav-link" href="#">Formulário FDMP</a>
+                            </div>
+                        </li>
+                        {% if user.is_anonymous %}
+                        {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link page-scroll" href="#">Sair</a>
+                        </li>
+                        {% endif %}  
+                    </ul>              
+                </div>
+            </div>
+        </nav> 
+    </header>
+    <!-- Fim da Nav -->
+
+    <section id="admissao" class="section">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2 class="section-title" style="padding-top: 2rem;">ADMINISTRATIVO:</h2>
+                <span style="padding-top: 2rem;">GLEX</span>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="form">
+                        <form action="{% url 'administrativo_form_edit' %}" method="POST" class="form-horizontal text-center" autocomplete="off" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="form-header">
+                                {% if messages %}
+                                    {% for message in messages %}
+                                        {% if message.tags == 'success' %}
+                                            <div class="alert alert-success alert-dismissible text-white" role="alert">
+                                                <span class="text-sm">{{ message }}</span>
+                                                <button type="button" class="btn-close text-lg py-3 opacity-10 cursor-pointer" data-bs-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                        {% elif message.tags == 'error' %}
+                                            <div class="alert alert-danger alert-dismissible text-white" role="alert">
+                                                <span class="text-sm">{{ message }}</span>
+                                                <button type="button" class="btn-close text-lg py-3 opacity-10 cursor-pointer" data-bs-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                        {% elif message.tags == 'warning' %}
+                                            <div class="alert alert-info2 alert-dismissible text-white" role="alert">
+                                                <span class="text-sm">{{ message }}</span>
+                                                <button type="button" class="btn-close text-lg py-3 opacity-10 cursor-pointer" data-bs-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                        {% else %}
+                                            <li>{{ message }}</li>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                                <div class="input-group" style="padding-top: 4rem">
+                                    <div class="input-box-nps">
+                                        <div class="select">
+                                            <div>
+                                                <!-- Liderança e Equipe Comercial -->
+                                                <div class="tipo-de-faturamento mb-4 text-center">
+                                                    <div class="tipo-de-faturamento-1">Possui uma liderança e uma equipe comercial na unidade?<br></div>
+                                                    <br>
+                                                    <div class="tipo-de-faturamento-1">
+                                                        <input type="file" id="file-upload-1" name="lideranca_equipe" style="display: none;">
+                                                        {% if form.instance.lideranca_equipe %}
+                                                            <button type="button" class="file-name btn btn-success btn-round" id="file-name-1" onclick="document.getElementById('file-upload-1').click();">
+                                                                <span class="button-content">
+                                                                    <i class="material-icons">check</i>
+                                                                    {{ form.instance.lideranca_equipe.name }}
+                                                                </span>
+                                                                <div class="ripple-container"></div>
+                                                            </button>
+                                                        {% else %}
+                                                            <button type="button" class="btn btn-danger btn-round" onclick="document.getElementById('file-upload-1').click();" id="btn-upload-1">
+                                                                <span class="button-content">
+                                                                    <i class="material-icons">file_upload</i>
+                                                                    Escolher Arquivo
+                                                                </span>
+                                                            </button>
+                                                            <button class="file-name btn btn-success btn-round" id="file-name-1" style="display: none;">
+                                                                <span class="button-content">
+                                                                    <i class="material-icons">check</i>
+                                                                    Nenhum arquivo escolhido
+                                                                </span>
+                                                                <div class="ripple-container"></div>
+                                                            </button>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+
+                                                <!-- Reuniões Comerciais -->
+                                                <div class="tipo-de-faturamento mb-4 text-center">
+                                                    <div class="tipo-de-faturamento-1">Cumpriu calendário de reuniões comerciais com a equipe?</div>
+                                                    <br>
+                                                    <div class="tipo-de-faturamento-1">
+                                                        <input type="file" id="file-upload-2" name="reunioes_comerciais" style="display: none;">
+                                                        {% if form.instance.reunioes_comerciais %}
+                                                            <button type="button" class="file-name btn btn-success btn-round" id="file-name-2" onclick="document.getElementById('file-upload-2').click();">
+                                                                <span class="button-content">
+                                                                    <i class="material-icons">check</i>
+                                                                    {{ form.instance.reunioes_comerciais.name }}
+                                                                </span>
+                                                                <div class="ripple-container"></div>
+                                                            </button>
+                                                        {% else %}
+                                                            <button type="button" class="btn btn-danger btn-round" onclick="document.getElementById('file-upload-2').click();" id="btn-upload-2">
+                                                                <span class="button-content">
+                                                                    <i class="material-icons">file_upload</i>
+                                                                    Escolher Arquivo
+                                                                </span>
+                                                            </button>
+                                                            <button class="file-name btn btn-success btn-round" id="file-name-2" style="display: none;">
+                                                                <span class="button-content">
+                                                                    <i class="material-icons">check</i>
+                                                                    Nenhum arquivo escolhido
+                                                                </span>
+                                                                <div class="ripple-container"></div>
+                                                            </button>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+
+                                                <!-- Uniformes e Crachás -->
+                                                <div class="tipo-de-faturamento mb-4 text-center">
+                                                    <div class="tipo-de-faturamento-1">Os uniformes e crachás de identificação são padronizados e todos os funcionários utilizam diariamente?</div>
+                                                    <br>
+                                                    <div class="tipo-de-faturamento-1">
+                                                        <input type="file" id="file-upload-3" name="uniformes_crachas" style="display: none;">
+                                                        {% if form.instance.uniformes_crachas %}
+                                                            <button type="button" class="file-name btn btn-success btn-round" id="file-name-3" onclick="document.getElementById('file-upload-3').click();">
+                                                                <span class="button-content">
+                                                                    <i class="material-icons">check</i>
+                                                                    {{ form.instance.uniformes_crachas.name }}
+                                                                </span>
+                                                                <div class="ripple-container"></div>
+                                                            </button>
+                                                        {% else %}
+                                                            <button type="button" class="btn btn-danger btn-round" onclick="document.getElementById('file-upload-3').click();" id="btn-upload-3">
+                                                                <span class="button-content">
+                                                                    <i class="material-icons">file_upload</i>
+                                                                    Escolher Arquivo
+                                                                </span>
+                                                            </button>
+                                                            <button class="file-name btn btn-success btn-round" id="file-name-3" style="display: none;">
+                                                                <span class="button-content">
+                                                                    <i class="material-icons">check</i>
+                                                                    Nenhum arquivo escolhido
+                                                                </span>
+                                                                <div class="ripple-container"></div>
+                                                            </button>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+
+                                                <!-- Pagamento de Boletos -->
+                                                <div class="tipo-de-faturamento mb-4 text-center">
+                                                    <div class="tipo-de-faturamento-1">Está em dia com o pagamento dos boletos de FDMP e ROY?</div>
+                                                    <br>
+                                                    <div class="tipo-de-faturamento-1">
+                                                        <input type="file" id="file-upload-4" name="pagamento_boletos" style="display: none;">
+                                                        {% if form.instance.pagamento_boletos %}
+                                                            <button type="button" class="file-name btn btn-success btn-round" id="file-name-4" onclick="document.getElementById('file-upload-4').click();">
+                                                                <span class="button-content">
+                                                                    <i class="material-icons">check</i>
+                                                                    {{ form.instance.pagamento_boletos.name }}
+                                                                </span>
+                                                                <div class="ripple-container"></div>
+                                                            </button>
+                                                        {% else %}
+                                                            <button type="button" class="btn btn-danger btn-round" onclick="document.getElementById('file-upload-4').click();" id="btn-upload-4">
+                                                                <span class="button-content">
+                                                                    <i class="material-icons">file_upload</i>
+                                                                    Escolher Arquivo
+                                                                </span>
+                                                            </button>
+                                                            <button class="file-name btn btn-success btn-round" id="file-name-4" style="display: none;">
+                                                                <span class="button-content">
+                                                                    <i class="material-icons">check</i>
+                                                                    Nenhum arquivo escolhido
+                                                                </span>
+                                                                <div class="ripple-container"></div>
+                                                            </button>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+
+                                                <!-- Conta Bancária PJ -->
+                                                <div class="tipo-de-faturamento mb-4 text-center">
+                                                    <div class="tipo-de-faturamento-1">A unidade possui conta bancária como pessoa jurídica?</div>
+                                                    <br>
+                                                    <div class="tipo-de-faturamento-1">
+                                                        <input type="file" id="file-upload-5" name="conta_bancaria_pj" style="display: none;">
+                                                        {% if form.instance.conta_bancaria_pj %}
+                                                            <button type="button" class="file-name btn btn-success btn-round" id="file-name-5" onclick="document.getElementById('file-upload-5').click();">
+                                                                <span class="button-content">
+                                                                    <i class="material-icons">check</i>
+                                                                    {{ form.instance.conta_bancaria_pj.name }}
+                                                                </span>
+                                                                <div class="ripple-container"></div>
+                                                            </button>
+                                                        {% else %}
+                                                            <button type="button" class="btn btn-danger btn-round" onclick="document.getElementById('file-upload-5').click();" id="btn-upload-5">
+                                                                <span class="button-content">
+                                                                    <i class="material-icons">file_upload</i>
+                                                                    Escolher Arquivo
+                                                                </span>
+                                                            </button>
+                                                            <button class="file-name btn btn-success btn-round" id="file-name-5" style="display: none;">
+                                                                <span class="button-content">
+                                                                    <i class="material-icons">check</i>
+                                                                    Nenhum arquivo escolhido
+                                                                </span>
+                                                                <div class="ripple-container"></div>
+                                                            </button>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+
+                                                <!-- Fluxo de Caixa -->
+                                                <div class="tipo-de-faturamento mb-4 text-center">
+                                                    <div class="tipo-de-faturamento-1">Controla e monitora o fluxo de caixa da unidade?</div>
+                                                    <br>
+                                                    <div class="tipo-de-faturamento-1">
+                                                        <input type="file" id="file-upload-6" name="fluxo_caixa" style="display: none;">
+                                                        {% if form.instance.fluxo_caixa %}
+                                                            <button type="button" class="file-name btn btn-success btn-round" id="file-name-6" onclick="document.getElementById('file-upload-6').click();">
+                                                                <span class="button-content">
+                                                                    <i class="material-icons">check</i>
+                                                                    {{ form.instance.fluxo_caixa.name }}
+                                                                </span>
+                                                                <div class="ripple-container"></div>
+                                                            </button>
+                                                        {% else %}
+                                                            <button type="button" class="btn btn-danger btn-round" onclick="document.getElementById('file-upload-6').click();" id="btn-upload-6">
+                                                                <span class="button-content">
+                                                                    <i class="material-icons">file_upload</i>
+                                                                    Escolher Arquivo
+                                                                </span>
+                                                            </button>
+                                                            <button class="file-name btn btn-success btn-round" id="file-name-6" style="display: none;">
+                                                                <span class="button-content">
+                                                                    <i class="material-icons">check</i>
+                                                                    Nenhum arquivo escolhido
+                                                                </span>
+                                                                <div class="ripple-container"></div>
+                                                            </button>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+
+                                                <!-- Inadimplência -->
+                                                <div class="tipo-de-faturamento mb-4 text-center">
+                                                    <div class="tipo-de-faturamento-1">A unidade ficou inadimplente até 2 meses (consecutivos ou não) nos últimos 12 meses?</div>
+                                                    <br>
+                                                    <div class="tipo-de-faturamento-1">
+                                                        <input type="file" id="file-upload-7" name="inadimplencia" style="display: none;">
+                                                        {% if form.instance.inadimplencia %}
+                                                            <button type="button" class="file-name btn btn-success btn-round" id="file-name-7" onclick="document.getElementById('file-upload-7').click();">
+                                                                <span class="button-content">
+                                                                    <i class="material-icons">check</i>
+                                                                    {{ form.instance.inadimplencia.name }}
+                                                                </span>
+                                                                <div class="ripple-container"></div>
+                                                            </button>
+                                                        {% else %}
+                                                            <button type="button" class="btn btn-danger btn-round" onclick="document.getElementById('file-upload-7').click();" id="btn-upload-7">
+                                                                <span class="button-content">
+                                                                    <i class="material-icons">file_upload</i>
+                                                                    Escolher Arquivo
+                                                                </span>
+                                                            </button>
+                                                            <button class="file-name btn btn-success btn-round" id="file-name-7" style="display: none;">
+                                                                <span class="button-content">
+                                                                    <i class="material-icons">check</i>
+                                                                    Nenhum arquivo escolhido
+                                                                </span>
+                                                                <div class="ripple-container"></div>
+                                                            </button>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+
+                                                <!-- Controle de Balanço -->
+                                                <div class="tipo-de-faturamento mb-4 text-center">
+                                                    <div class="tipo-de-faturamento-1">Possui controle de Balanço Patrimonial e Demonstração de Resultado?</div>
+                                                    <br>
+                                                    <div class="tipo-de-faturamento-1">
+                                                        <input type="file" id="file-upload-8" name="controle_balanco" style="display: none;">
+                                                        {% if form.instance.controle_balanco %}
+                                                            <button type="button" class="file-name btn btn-success btn-round" id="file-name-8" onclick="document.getElementById('file-upload-8').click();">
+                                                                <span class="button-content">
+                                                                    <i class="material-icons">check</i>
+                                                                    {{ form.instance.controle_balanco.name }}
+                                                                </span>
+                                                                <div class="ripple-container"></div>
+                                                            </button>
+                                                        {% else %}
+                                                            <button type="button" class="btn btn-danger btn-round" onclick="document.getElementById('file-upload-8').click();" id="btn-upload-8">
+                                                                <span class="button-content">
+                                                                    <i class="material-icons">file_upload</i>
+                                                                    Escolher Arquivo
+                                                                </span>
+                                                            </button>
+                                                            <button class="file-name btn btn-success btn-round" id="file-name-8" style="display: none;">
+                                                                <span class="button-content">
+                                                                    <i class="material-icons">check</i>
+                                                                    Nenhum arquivo escolhido
+                                                                </span>
+                                                                <div class="ripple-container"></div>
+                                                            </button>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+
+                                                <!-- Planejamento de Orçamento -->
+                                                <div class="tipo-de-faturamento mb-4 text-center">
+                                                    <div class="tipo-de-faturamento-1">Faz planejamento de orçamento antes do início do próximo ano letivo?</div>
+                                                    <br>
+                                                    <div class="tipo-de-faturamento-1">
+                                                        <input type="file" id="file-upload-9" name="planejamento_orcamento" style="display: none;">
+                                                        {% if form.instance.planejamento_orcamento %}
+                                                            <button type="button" class="file-name btn btn-success btn-round" id="file-name-9" onclick="document.getElementById('file-upload-9').click();">
+                                                                <span class="button-content">
+                                                                    <i class="material-icons">check</i>
+                                                                    {{ form.instance.planejamento_orcamento.name }}
+                                                                </span>
+                                                                <div class="ripple-container"></div>
+                                                            </button>
+                                                        {% else %}
+                                                            <button type="button" class="btn btn-danger btn-round" onclick="document.getElementById('file-upload-9').click();" id="btn-upload-9">
+                                                                <span class="button-content">
+                                                                    <i class="material-icons">file_upload</i>
+                                                                    Escolher Arquivo
+                                                                </span>
+                                                            </button>
+                                                            <button class="file-name btn btn-success btn-round" id="file-name-9" style="display: none;">
+                                                                <span class="button-content">
+                                                                    <i class="material-icons">check</i>
+                                                                    Nenhum arquivo escolhido
+                                                                </span>
+                                                                <div class="ripple-container"></div>
+                                                            </button>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+
+                                                <!-- Orçamento Compartilhado -->
+                                                <div class="tipo-de-faturamento mb-4 text-center">
+                                                    <div class="tipo-de-faturamento-1">O planejamento de orçamento é compartilhado com as demais áreas operacionais?</div>
+                                                    <br>
+                                                    <div class="tipo-de-faturamento-1">
+                                                        <input type="file" id="file-upload-10" name="orcamento_compartilhado" style="display: none;">
+                                                        {% if form.instance.orcamento_compartilhado %}
+                                                            <button type="button" class="file-name btn btn-success btn-round" id="file-name-10" onclick="document.getElementById('file-upload-10').click();">
+                                                                <span class="button-content">
+                                                                    <i class="material-icons">check</i>
+                                                                    {{ form.instance.orcamento_compartilhado.name }}
+                                                                </span>
+                                                                <div class="ripple-container"></div>
+                                                            </button>
+                                                        {% else %}
+                                                            <button type="button" class="btn btn-danger btn-round" onclick="document.getElementById('file-upload-10').click();" id="btn-upload-10">
+                                                                <span class="button-content">
+                                                                    <i class="material-icons">file_upload</i>
+                                                                    Escolher Arquivo
+                                                                </span>
+                                                            </button>
+                                                            <button class="file-name btn btn-success btn-round" id="file-name-10" style="display: none;">
+                                                                <span class="button-content">
+                                                                    <i class="material-icons">check</i>
+                                                                    Nenhum arquivo escolhido
+                                                                </span>
+                                                                <div class="ripple-container"></div>
+                                                            </button>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+
+                                                <div class="login-button text-center">
+                                                    <button type="submit" class="btn btn-danger btn-round" style="margin-top: 8rem;">Finalizar Formulário</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Go To Top Link -->
+    <a href="#" class="back-to-top">
+        <i class="lni-arrow-up"></i>
+    </a>
+
+    <div id="loader">
+        <div class="spinner">
+            <div class="double-bounce1"></div>
+            <div class="double-bounce2"></div>
+        </div>
+    </div>    
+
+    <!-- jQuery first, then Tether, then Bootstrap JS. -->
+    <script src="{% static 'assets_2/js/jquery-min.js' %}"></script>
+    <script src="{% static 'assets_2/js/popper.min.js' %}"></script>
+    <script src="{% static 'assets_2/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets_2/js/jquery.mixitup.js' %}"></script>
+    <script src="{% static 'assets_2/js/nivo-lightbox.js' %}"></script>
+    <script src="{% static 'assets_2/js/owl.carousel.js' %}"></script>    
+    <script src="{% static 'assets_2/js/jquery.stellar.min.js' %}"></script>    
+    <script src="{% static 'assets_2/js/jquery.nav.js' %}"></script>    
+    <script src="{% static 'assets_2/js/wow.js' %}"></script> 
+    <script src="{% static 'assets_2/js/jquery.counterup.min.js' %}"></script>    
+    <script src="{% static 'assets_2/js/jquery.magnific-popup.min.js' %}"></script>    
+    <script src="{% static 'assets_2/js/main.js' %}"></script>
+    <script>
+        window.STATIC_URL = "{% static '' %}";
+    </script>
+    <script src="{% static 'glex/js/jquery.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'glex/js/perfect-scrollbar.jquery.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'glex/js/chartist.min.js' %}"></script>
+    <script src="{% static 'glex/js/jquery-jvectormap.js' %}"></script>
+    <script src="{% static 'glex/js/material-dashboard.js' %}"></script>
+    <script src="{% static 'glex/js/demo.js' %}"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            // Javascript method's body can be found in assets/js/demos.js
+            demo.initDashboardPageCharts();
+            demo.initVectorMap();
+        });
+    </script>
+    <script>
+        document.getElementById('file-upload-1').onchange = function () {
+            document.getElementById('file-name-1').textContent = this.files[0].name;
+        };
+        document.getElementById('file-upload-2').onchange = function () {
+            document.getElementById('file-name-2').textContent = this.files[0].name;
+        };
+        document.getElementById('file-upload-3').onchange = function () {
+            document.getElementById('file-name-3').textContent = this.files[0].name;
+        };
+        document.getElementById('file-upload-4').onchange = function () {
+            document.getElementById('file-name-4').textContent = this.files[0].name;
+        };
+        document.getElementById('file-upload-5').onchange = function () {
+            document.getElementById('file-name-5').textContent = this.files[0].name;
+        };
+        document.getElementById('file-upload-6').onchange = function () {
+            document.getElementById('file-name-6').textContent = this.files[0].name;
+        };
+        document.getElementById('file-upload-7').onchange = function () {
+            document.getElementById('file-name-7').textContent = this.files[0].name;
+        };
+        document.getElementById('file-upload-8').onchange = function () {
+            document.getElementById('file-name-8').textContent = this.files[0].name;
+        };
+        document.getElementById('file-upload-9').onchange = function () {
+            document.getElementById('file-name-9').textContent = this.files[0].name;
+        };
+        document.getElementById('file-upload-10').onchange = function () {
+            document.getElementById('file-name-10').textContent = this.files[0].name;
+        };
+    </script>
+    <script>
+        document.querySelectorAll('input[type="file"]').forEach(input => {
+            input.onchange = function () {
+                const fileNameSpan = document.getElementById('file-name-' + this.id.split('-').pop());
+                const uploadButton = document.getElementById('btn-upload-' + this.id.split('-').pop());
+
+                if (this.files.length > 0) {
+                    fileNameSpan.textContent = this.files[0].name;
+                    fileNameSpan.style.display = 'inline';
+                    fileNameSpan.style.marginTop = '3rem';
+                    uploadButton.style.display = 'none';
+                } else {
+                    fileNameSpan.style.display = 'none';
+                    fileNameSpan.style.marginTop = '0';
+                    uploadButton.style.display = 'inline';
+                }
+            };
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,249 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="keywords" content="Bootstrap, Landing page, Template, Registration, Landing">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="Grayrids">
+    <title>Maple Bear</title>
+
+
+    <!-- Bootstrap CSS -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'assets_2/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/line-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/owl.carousel.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/owl.theme.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/nivo-lightbox.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/color-switcher.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/menu_sideslide.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/main.css' %}"> 
+    <link rel="stylesheet" href="{% static 'css/formulario.css' %}">    
+    <link rel="stylesheet" href="{% static 'assets_2/css/responsive.css' %}">
+    <link rel="icon" type="image/png" href="{% static 'assets_2/img/maple_bear.svg' %}">
+    <link id="pagestyle" href="{% static 'css/busca.css' %}" rel="stylesheet" />
+    <link id="pagestyle" href="{% static 'css/paginacao.css' %}" rel="stylesheet" />
+  </head>
+  
+  <body>
+    <!-- Header Section Start -->
+    <header id="slider-area">  
+
+
+
+      {% include 'navbar/navbar.html' %}
+
+
+    </header>
+    <!-- Header Section End --> 
+
+
+      
+    <!-- Features Section Start -->
+    <section id="busca" class="section">
+      <div class="container">
+        <div class="section-header">          
+          <h2 class="section-title">BUSCAR ESCOLAS:</h2>
+          <span>MAPLE BEAR</span>
+        </div>
+        <div class="row">
+          <div class="row text-center py-2 mt-3">
+            <div class="col-4 mx-auto">
+                <div class="input-group input-group-dynamic mb-4" >
+                    <span class="input-group-text"><i class="fas fa-search" aria-hidden="true"></i></span>
+                    <form method="GET" action="" class="w-100" >
+                        <input id="search-input" class="form-control custom-input" type="text" name="q" placeholder="Buscar pela Escola">
+                        <input class="form-control" type="submit" placeholder="Buscar" style="display: none;">
+                    </form>
+                </div>
+            </div>
+          </div>
+
+
+
+<!-- Modal -->
+<div class="modal fade"  id="resumoNPSModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog"  role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" style="font-size: 20px" id="exampleModalLabel">Resumo NPS</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" >
+        <textarea id="modalResumoNPS" class="form-control" rows="18"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Tabela -->
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Id da Escola</th>
+      <th scope="col">Nome da Escola</th>
+      <th scope="col">Cluster</th>
+      <th scope="col" class="text-center">Gerar Resumo</th>
+      <th scope="col" class="text-center">Resumo NPS</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    {% for escola in object_list %}
+    <tr>
+      <td><p>{{ escola.id_escola }}</p></td>
+      <td><p>{{ escola.nome_da_escola }}</p></td>
+      <td><p>{{ escola.cluster }}</p></td>
+
+      <td class="text-center">
+        <a href="{% url 'gerar_resumo_nps' escola.id_escola %}">
+          <i class="material-icons" aria-hidden="true">rotate_right</i>
+        </a>
+      </td>
+
+      <td class="text-center white">
+        <a type="button" class="open-modal" style="cursor: pointer;" data-toggle="modal" data-target="#resumoNPSModal" data-resumo="{% if escola.nome_escola_resumo_nps.first %}{{ escola.nome_escola_resumo_nps.first.resumo }}{% else %}Sem resumo disponível{% endif %}">
+          <i class="material-icons" aria-hidden="true">list</i>
+        </a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+    
+        <!-- Início da Paginação -->
+        <div class="row text-center py-2">
+          <div class="col-4 mx-auto">
+              <ul class="pagination pagination-primary m-4">
+                  <!-- Se tem página anterior -->
+                  {% if page_obj.object_list|length > 0 %}
+                  {% if page_obj.has_previous %}
+                      <li class="page-item">
+                          <a class="page-link" href="?page=1&q={{ q }}&order_by={{ order_by }}" aria-label="Previous">
+                              <span aria-hidden="true"><i class="material-icons" aria-hidden="true">keyboard_double_arrow_left</i></span>
+                          </a>
+                      </li>
+                  {% endif %}
+                  <!-- Loop para exibir os números das páginas -->
+                  {% for i in page_range %}
+                      {% if page_obj.number == i %}
+                          <li class="page-item active">
+                              <a class="page-link active-link" href="#">{{ i }}</a>
+                          </li>
+                      {% else %}
+                          <li class="page-item">
+                              <a class="page-link" href="?page={{ i }}&q={{ q }}&order_by={{ order_by }}">{{ i }}</a>
+                          </li>
+                      {% endif %}
+                  {% endfor %}
+                  <!-- Se tem próxima página -->
+                  {% if page_obj.has_next %}
+                      <li class="page-item">
+                          <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}&q={{ q }}&order_by={{ order_by }}" aria-label="Next">
+                              <span aria-hidden="true"><i class="material-icons" aria-hidden="true">keyboard_double_arrow_right</i></span>
+                          </a>
+                      </li>
+                  {% endif %}
+                  {% endif %}
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
+    </div>
+    <!-- Features Section End -->   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+     
+
+    </footer>
+    <!-- Footer Section End --> 
+
+    <!-- Go To Top Link -->
+    <a href="#" class="back-to-top">
+      <i class="lni-arrow-up"></i>
+    </a>
+
+    <div id="loader">
+      <div class="spinner">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+      </div>
+    </div>    
+
+    <!-- jQuery first, then Tether, then Bootstrap JS. -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        $('#resumoNPSModal').on('show.bs.modal', function (event) {
+          var button = $(event.relatedTarget); // Botão que acionou o modal
+          var resumo = button.data('resumo'); // Extrai informação dos atributos data-*
+          var modal = $(this);
+          modal.find('.modal-body textarea').val(resumo); // Preenche o textarea com o resumo
+        });
+      
+        $('#saveResumoNPS').click(function() {
+          // Aqui você pode adicionar código para salvar o resumo via AJAX, se necessário
+          var resumoEditado = $('#modalResumoNPS').val();
+          console.log('Resumo NPS editado:', resumoEditado); // Apenas para teste
+          $('#resumoNPSModal').modal('hide');
+        });
+      });
+      </script>
+    <script src="{% static 'assets_2/js/jquery-min.js' %}"></script>
+    <script src="{% static 'assets_2/js/popper.min.js' %}"></script>
+    <script src="{% static 'assets_2/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets_2/js/classie.js' %}"></script>
+    <script src="{% static 'assets_2/js/color-switcher.js' %}"></script>
+    <script src="{% static 'assets_2/js/jquery.mixitup.js' %}"></script>
+    <script src="{% static 'assets_2/js/nivo-lightbox.js' %}"></script>
+    <script src="{% static 'assets_2/js/owl.carousel.js' %}"></script>    
+    <script src="{% static 'assets_2/js/jquery.stellar.min.js' %}"></script>    
+    <script src="{% static 'assets_2/js/jquery.nav.js' %}"></script>    
+    <script src="{% static 'assets_2/js/scrolling-nav.js' %}"></script>    
+    <script src="{% static 'assets_2/js/jquery.easing.min.js' %}"></script>     
+    <script src="{% static 'assets_2/js/wow.js' %}"></script> 
+    <script src="{% static 'assets_2/js/jquery.vide.js' %}"></script>
+    <script src="{% static 'assets_2/js/jquery.counterup.min.js' %}"></script>    
+    <script src="{% static 'assets_2/js/jquery.magnific-popup.min.js' %}"></script>    
+    <script src="{% static 'assets_2/js/waypoints.min.js' %}"></script>    
+    <script src="{% static 'assets_2/js/form-validator.min.js' %}"></script>
+    <script src="{% static 'assets_2/js/contact-form-script.js' %}"></script>   
+    <script src="{% static 'assets_2/js/main.js' %}"></script>
+    <script>
+      window.STATIC_URL = "{% static '' %}";
+    </script>
+    <script>
+      document.getElementById('search-input').addEventListener('focus', function() {
+          this.style.border = 'none';
+      });
+      document.getElementById('search-input').addEventListener('blur', function() {
+          this.style.border = '';  // Restaure a borda quando o elemento perde o foco
+      });
+      </script>
+  </body>
+</html>

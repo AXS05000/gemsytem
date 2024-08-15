@@ -1,0 +1,443 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="keywords" content="Bootstrap, Landing page, Template, Registration, Landing">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="Grayrids">
+    <title>Maple Bear</title>
+
+    <!-- Bootstrap CSS -->
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'assets_2/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/line-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/main.css' %}">    
+    <link rel="icon" type="image/png" href="{% static 'assets_2/img/maple_bear.svg' %}">
+    <link href="{% static 'glex/css/mat2.css' %}" rel="stylesheet" />
+
+
+
+<style>
+  .img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover; /* Ajusta a imagem para cobrir o card mantendo a proporção */
+  }
+</style>
+
+
+
+
+  </head>
+  
+  <body>
+    <!-- Header Section Start -->
+    <header id="slider-area">  
+      <nav class="navbar navbar-expand-md fixed-top scrolling-navbar bg-white">
+        <div class="container">  
+          <a class="navbar-brand" href="{% url 'index' %}"><img  src="{% static 'assets_2/img/maple_bear.svg' %}" alt="" style="max-height: 40px;">  Maple Bear</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="lni-menu"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto w-100 justify-content-end">
+              <li class="nav-item">
+                <a class="nav-link page-scroll" href="#slider-area">Home</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link page-scroll nav-link-ded dropdown-toggle" id="dropdownContratos" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Glex</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="min-width: 200px;">
+                  <a class="nav-link" href="{% url 'home_glex' %}">Home Glex</a>
+                  <a class="nav-link" href="{% url 'table_forms_glex' %}">Formulários</a>
+                </div>
+              </li>
+                        
+              <li class="nav-item dropdown">
+                <a class="nav-link page-scroll nav-link-ded dropdown-toggle" id="dropdownContratos" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Contratos</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="min-width: 200px;">
+                  <a class="nav-link" href="#">Buscar Candidatos</a>
+                  <a class="nav-link" href="#">Formulário PCF</a>
+                  <a class="nav-link" href="#">Importar Modelo de Contrato</a>
+                </div>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link page-scroll nav-link-ded dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Escolas</a>
+                <div class="dropdown-menu" style="min-width: 200px;">
+                  <a class="nav-link" href="#">Buscar Escolas</a>
+                  <a class="nav-link" href="#">Formulário FDMP</a>
+                </div>
+              </li>
+              {% if user.is_anonymous %}
+              {% else %}
+              <li class="nav-item">
+                <a class="nav-link page-scroll" href="#">Sair</a>
+              </li>
+              {% endif %}  
+
+            </ul>              
+          </div>
+        </div>
+      </nav> 
+
+    </header>
+  <!-- Fim da Nav -->
+
+
+  <section id="services" class="section">
+  <div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-success card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons"></i>
+                        </div>
+                        <h3 class="card-title"> % Global Glex</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="table-responsive table-sales">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div class="flag">
+                                                        <img src="{% static 'glex/img/US.png' %}">
+                                                    </div>
+                                                </td>
+                                                <td>USA</td>
+                                                <td class="text-right">
+                                                    90
+                                                </td>
+                                                <td class="text-right">
+                                                    53.23%
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="flag">
+                                                        <img src="{% static 'glex/img/DE.png' %}">
+                                                    </div>
+                                                </td>
+                                                <td>Germany</td>
+                                                <td class="text-right">
+                                                    58
+                                                </td>
+                                                <td class="text-right">
+                                                    20.43%
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="flag">
+                                                        <img src="{% static 'glex/img/AU.png' %}">
+                                                    </div>
+                                                </td>
+                                                <td>Australia</td>
+                                                <td class="text-right">
+                                                    30
+                                                </td>
+                                                <td class="text-right">
+                                                    10.35%
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="flag">
+                                                        <img src="{% static 'glex/img/GB.png' %}">
+                                                    </div>
+                                                </td>
+                                                <td>United Kingdom</td>
+                                                <td class="text-right">
+                                                    21
+                                                </td>
+                                                <td class="text-right">
+                                                    7.87%
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="flag">
+                                                        <img src="{% static 'glex/img/RO.png' %}">
+                                                    </div>
+                                                </td>
+                                                <td>Romania</td>
+                                                <td class="text-right">
+                                                    14
+                                                </td>
+                                                <td class="text-right">
+                                                    5.94%
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="flag">
+                                                        <img src="{% static 'glex/img/BR.png' %}">
+                                                    </div>
+                                                </td>
+                                                <td>Brasil</td>
+                                                <td class="text-right">
+                                                    9
+                                                </td>
+                                                <td class="text-right">
+                                                    4.20%
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-md-6 ml-auto mr-auto">
+                                <div id="worldMap" style="height: 300px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>  
+
+
+<div class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card card-stats">
+          <div class="card-header card-header-success card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">school</i>
+            </div>
+            <p class="card-category">Total de Escolas</p>
+            <h3 class="card-title">214</h3>
+          </div>
+          <div class="card-footer">
+            <div class="stats">
+              <i class="material-icons">local_offer</i> Total de Escolas no Glex
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card card-stats">
+          <div class="card-header card-header-success card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">check</i>
+            </div>
+            <p class="card-category">Formulários Finalizados</p>
+            <h3 class="card-title">9</h3>
+          </div>
+          <div class="card-footer">
+            <div class="stats">
+              <i class="material-icons">local_offer</i> Total de Formulários 100% preenchidos
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card card-stats">
+          <div class="card-header card-header-success card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">close</i>
+            </div>
+            <p class="card-category">Formulários Pendetes</p>
+            <h3 class="card-title">205</h3>
+          </div>
+          <div class="card-footer">
+            <div class="stats">
+              <i class="material-icons">local_offer</i> Total de Formulários Pendentes
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card card-stats">
+          <div class="card-header card-header-success card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">equalizer</i>
+            </div>
+            <p class="card-category">% Faltante</p>
+            <h3 class="card-title">95,80%</h3>
+          </div>
+          <div class="card-footer">
+            <div class="stats">
+              <i class="material-icons">local_offer</i> Porcentagem de escolas pendentes
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>  
+
+
+
+<div class="content">
+  <div class="container-fluid">
+    <h3>Lista por País</h3>
+    <br>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card card-product">
+          <div class="card-header card-header-image" data-header-animation="true">
+            <a href="#pablo">
+              <img class="img" src="{% static 'glex/img/sp.jpg' %}">
+            </a>
+          </div>
+          <div class="card-body">
+            <div class="card-actions text-center">
+              <button type="button" class="btn btn-danger btn-link fix-broken-card">
+                <i class="material-icons">build</i> Fix Header!
+              </button>
+              <a type="button" class="btn btn-default btn-link" rel="tooltip" data-placement="bottom" title="Lista">
+                <i class="material-icons">assignment</i>
+              </a>
+              <a type="button" class="btn btn-success btn-link" rel="tooltip" data-placement="bottom" title="Baixar Relatório">
+                <i class="material-icons">download</i>
+              </a>
+            </div>
+            <h4 class="card-title">
+              <a href="#">Cozy 5 Stars Apartment</a>
+            </h4>
+          </div>
+          <div class="card-footer">
+            <div class="price">
+              <h4>Brasil</h4>
+            </div>
+            <div class="stats">
+              <p class="card-category"><i class="material-icons">place</i> São Paulo, Brazil</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card card-product">
+          <div class="card-header card-header-image" data-header-animation="true">
+            <a href="#pablo">
+              <img class="img" src="{% static 'glex/img/toronto.jpg' %}">
+            </a>
+          </div>
+          <div class="card-body">
+            <div class="card-actions text-center">
+              <button type="button" class="btn btn-danger btn-link fix-broken-card">
+                <i class="material-icons">build</i> Fix Header!
+              </button>
+              <a type="button" class="btn btn-default btn-link" rel="tooltip" data-placement="bottom" title="Lista">
+                <i class="material-icons">assignment</i>
+              </a>
+              <a type="button" class="btn btn-success btn-link" rel="tooltip" data-placement="bottom" title="Baixar Relatório">
+                <i class="material-icons">download</i>
+              </a>
+            </div>
+            <h4 class="card-title">
+              <a href="#pablo">Office Studio</a>
+            </h4>
+          </div>
+          <div class="card-footer">
+            <div class="price">
+              <h4>Canada</h4>
+            </div>
+            <div class="stats">
+              <p class="card-category"><i class="material-icons">place</i> Toronto, Canada</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card card-product">
+          <div class="card-header card-header-image" data-header-animation="true">
+            <a href="#pablo">
+              <img class="img" src="{% static 'glex/img/miami.jpg' %}">
+            </a>
+          </div>
+          <div class="card-body">
+            <div class="card-actions text-center">
+              <a type="button" class="btn btn-default btn-link" rel="tooltip" data-placement="bottom" title="Lista">
+                <i class="material-icons">assignment</i>
+              </a>
+              <a type="button" class="btn btn-success btn-link" rel="tooltip" data-placement="bottom" title="Baixar Relatório">
+                <i class="material-icons">download</i>
+              </a>
+            </div>
+            <h4 class="card-title">
+              <a href="#pablo">Beautiful Castle</a>
+            </h4>
+          </div>
+          <div class="card-footer">
+            <div class="price">
+              <h4>Estados Unidos</h4>
+            </div>
+            <div class="stats">
+              <p class="card-category"><i class="material-icons">place</i> Miami, USA</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+    <!-- Go To Top Link -->
+    <a href="#" class="back-to-top">
+      <i class="lni-arrow-up"></i>
+    </a>
+
+    <div id="loader">
+      <div class="spinner">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+      </div>
+    </div>    
+
+    <!-- jQuery first, then Tether, then Bootstrap JS. -->
+    <script src="{% static 'assets_2/js/jquery-min.js' %}"></script>
+    <script src="{% static 'assets_2/js/popper.min.js' %}"></script>
+    <script src="{% static 'assets_2/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets_2/js/jquery.mixitup.js' %}"></script>
+    <script src="{% static 'assets_2/js/nivo-lightbox.js' %}"></script>
+    <script src="{% static 'assets_2/js/owl.carousel.js' %}"></script>    
+    <script src="{% static 'assets_2/js/jquery.stellar.min.js' %}"></script>    
+    <script src="{% static 'assets_2/js/jquery.nav.js' %}"></script>    
+    <script src="{% static 'assets_2/js/wow.js' %}"></script> 
+    <script src="{% static 'assets_2/js/jquery.counterup.min.js' %}"></script>    
+    <script src="{% static 'assets_2/js/jquery.magnific-popup.min.js' %}"></script>    
+    <script src="{% static 'assets_2/js/main.js' %}"></script>
+    <script>
+      window.STATIC_URL = "{% static '' %}";
+    </script>
+    <script src="{% static 'glex/js/jquery.min.js' %}" type="text/javascript"></script>
+  <script src="{% static 'glex/js/perfect-scrollbar.jquery.min.js' %}" type="text/javascript"></script>
+  <script src="{% static 'glex/js/chartist.min.js' %}"></script>
+  <script src="{% static 'glex/js/jquery-jvectormap.js' %}"></script>
+  <script src="{% static 'glex/js/material-dashboard.js' %}"></script>
+  <script src="{% static 'glex/js/demo.js' %}"></script>
+  <script type="text/javascript">
+      $(document).ready(function(){
+
+      // Javascript method's body can be found in assets/js/demos.js
+          demo.initDashboardPageCharts();
+
+      demo.initVectorMap();
+      });
+  </script>
+  </body>
+</html>
