@@ -101,7 +101,7 @@ class Atuais_Demandas(models.Model):
     def processar_tarefa(self):
         colaborador = self.colaborador
 
-        # Recuperar conhecimentos, experiências e aprendizados do colaborador
+        # Recuperar conhecimentos, experiências, aprendizados e personalidade do colaborador
         conhecimentos = Conhecimento.objects.filter(
             colaborador=colaborador
         ).values_list("conhecimento_geral", flat=True)
@@ -110,6 +110,11 @@ class Atuais_Demandas(models.Model):
         )
         aprendizados = Aprendizado.objects.filter(colaborador=colaborador).values_list(
             "aprendizado", flat=True
+        )
+        personalidade = (
+            Personalidade.objects.filter(colaborador=colaborador)
+            .values_list("personalidade", flat=True)
+            .first()
         )
 
         # Montar o contexto adicional
@@ -135,12 +140,13 @@ class Atuais_Demandas(models.Model):
                         "Inclua apenas código Python relacionado a models.py, forms.py, views.py, urls.py, admin.py, e utils.py."
                         "Não inclua templates html."
                         "Não inclua introduções, textos paralelos, orientações de importações, resumos, explicações ou notas, apenas o código puro dos arquivos em python."
-                        f"{contexto_adicional}"
+                        f"{contexto_adicional} "
+                        f"Seu estilo de comunicação deve ser: {personalidade}."
                     ),
                 },
                 {"role": "user", "content": self.atuais_demandas},
             ],
-            max_tokens=1000,
+            max_tokens=2500,
         )
 
         resultado = response["choices"][0]["message"]["content"]
@@ -168,7 +174,8 @@ class Atuais_Demandas(models.Model):
                     "content": (
                         "Você é um colaborador da GS especializado em desenvolvimento Django. "
                         "Baseado nos seus conhecimentos, experiências, aprendizados e no código abaixo, forneça sugestões de melhorias."
-                        f"{contexto_adicional}"
+                        f"{contexto_adicional} "
+                        f"Seu estilo de comunicação deve ser: {personalidade}."
                     ),
                 },
                 {
@@ -176,7 +183,7 @@ class Atuais_Demandas(models.Model):
                     "content": f"Analise o seguinte código e forneça sugestões de melhorias:\n{resultado}",
                 },
             ],
-            max_tokens=500,
+            max_tokens=2500,
         )
 
         sugestao = sugestao_response["choices"][0]["message"]["content"]
