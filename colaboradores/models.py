@@ -8,6 +8,7 @@ class Colaboradores(models.Model):
     cargo = models.CharField(
         max_length=100, verbose_name="Cargo do Colaborador", null=True, blank=True
     )
+    api_key = models.CharField("Chave API", max_length=255, blank=True, null=True)
     idade = models.IntegerField(null=True, blank=True)
     aparencia = models.TextField(null=True, blank=True)
     foto = models.ImageField(
