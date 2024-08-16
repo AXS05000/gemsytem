@@ -100,6 +100,7 @@ class Atuais_Demandas(models.Model):
 
     def processar_tarefa(self):
         colaborador = self.colaborador
+        print(f"Iniciando processamento da tarefa para o colaborador: {colaborador}")
 
         # Recuperar conhecimentos, experiências, aprendizados, consulta e personalidade do colaborador
         conhecimentos = Conhecimento.objects.filter(
@@ -120,6 +121,12 @@ class Atuais_Demandas(models.Model):
             .first()
         )
 
+        print(f"Conhecimentos: {conhecimentos}")
+        print(f"Experiências: {experiencias}")
+        print(f"Aprendizados: {aprendizados}")
+        print(f"Consulta de Conhecimentos: {consulta_conhecimento}")
+        print(f"Personalidade: {personalidade}")
+
         # Montar o contexto adicional
         contexto_adicional = ""
 
@@ -139,7 +146,10 @@ class Atuais_Demandas(models.Model):
             contexto_consulta = " ".join(consulta_conhecimento)
             contexto_adicional += f"Para sua referência, aqui estão alguns exemplos de trabalhos já realizados: {contexto_consulta}. "
 
+        print("Contexto adicional montado.")
+
         # Usando a API da OpenAI para processar a tarefa com o modelo gpt-4-turbo
+        print("Enviando tarefa para a API da OpenAI...")
         response = openai.ChatCompletion.create(
             api_key=colaborador.api_key,
             model="gpt-4-turbo",
@@ -162,12 +172,14 @@ class Atuais_Demandas(models.Model):
         )
 
         resultado = response["choices"][0]["message"]["content"]
+        print("Resposta da API recebida.")
 
         # Salvando todo o resultado na coluna 'mesa'
         mesa = Mesa_de_trabalho.objects.create(
             colaborador=colaborador,
             mesa=resultado,
         )
+        print("Resultado salvo na mesa de trabalho.")
 
         # Calcular e registrar o custo em tokens
         tokens_usados = response["usage"]["total_tokens"]
@@ -175,8 +187,10 @@ class Atuais_Demandas(models.Model):
             colaborador=colaborador,
             tokens=tokens_usados,
         )
+        print(f"Custo registrado: {tokens_usados} tokens usados.")
 
         # Gerar sugestões de melhorias baseadas no resultado da tarefa
+        print("Gerando sugestões de melhorias...")
         sugestao_response = openai.ChatCompletion.create(
             api_key=colaborador.api_key,
             model="gpt-4-turbo",
@@ -199,16 +213,19 @@ class Atuais_Demandas(models.Model):
         )
 
         sugestao = sugestao_response["choices"][0]["message"]["content"]
+        print("Sugestões de melhorias geradas.")
 
         # Salvando as sugestões na tabela Sugestoes
         Sugestoes.objects.create(
             colaborador=colaborador,
             sugestoes=sugestao,
         )
+        print("Sugestões de melhorias salvas.")
 
         # Atualiza o status da demanda
         self.status = "F"
         self.save()
+        print(f"Tarefa finalizada para o colaborador: {colaborador}")
 
         return mesa
 
