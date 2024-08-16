@@ -141,7 +141,7 @@ class Atuais_Demandas(models.Model):
                         "Não inclua templates html."
                         "Não inclua introduções, textos paralelos, orientações de importações, resumos, explicações ou notas, apenas o código puro dos arquivos em python."
                         f"{contexto_adicional} "
-                        f"Seu estilo de comunicação deve ser: {personalidade}."
+                        f"Sempre fale em primeira pessoa e seu estilo de comunicação deve ser: {personalidade}."
                     ),
                 },
                 {"role": "user", "content": self.atuais_demandas},
@@ -175,7 +175,7 @@ class Atuais_Demandas(models.Model):
                         "Você é um colaborador da GS especializado em desenvolvimento Django. "
                         "Baseado nos seus conhecimentos, experiências, aprendizados e no código abaixo, forneça sugestões de melhorias."
                         f"{contexto_adicional} "
-                        f"Seu estilo de comunicação deve ser: {personalidade}."
+                        f"Sempre fale em primeira pessoa e seu estilo de comunicação deve ser: {personalidade}."
                     ),
                 },
                 {
