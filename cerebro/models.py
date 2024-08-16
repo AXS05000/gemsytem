@@ -101,7 +101,7 @@ class Atuais_Demandas(models.Model):
     def processar_tarefa(self):
         colaborador = self.colaborador
 
-        # Recuperar conhecimentos, experiências, aprendizados e personalidade do colaborador
+        # Recuperar conhecimentos, experiências, aprendizados, consulta e personalidade do colaborador
         conhecimentos = Conhecimento.objects.filter(
             colaborador=colaborador
         ).values_list("conhecimento_geral", flat=True)
@@ -111,6 +111,9 @@ class Atuais_Demandas(models.Model):
         aprendizados = Aprendizado.objects.filter(colaborador=colaborador).values_list(
             "aprendizado", flat=True
         )
+        consulta_conhecimento = Consulta_De_Conhecimento.objects.filter(
+            colaborador=colaborador
+        ).values_list("consulta_conhecimento", flat=True)
         personalidade = (
             Personalidade.objects.filter(colaborador=colaborador)
             .values_list("personalidade", flat=True)
@@ -118,14 +121,23 @@ class Atuais_Demandas(models.Model):
         )
 
         # Montar o contexto adicional
-        contexto_conhecimento = " ".join(conhecimentos)
-        contexto_experiencia = " ".join(experiencias)
-        contexto_aprendizado = " ".join(aprendizados)
-        contexto_adicional = (
-            f"Além dos seus conhecimentos em Django, você tem esses conhecimentos: {contexto_conhecimento}. "
-            f"Você também possui essa experiência profissional: {contexto_experiencia}. "
-            f"Neste contexto, o seu chefe deu as seguintes observações que devem ser seguidas: {contexto_aprendizado}."
-        )
+        contexto_adicional = ""
+
+        if conhecimentos:
+            contexto_conhecimento = " ".join(conhecimentos)
+            contexto_adicional += f"Além dos seus conhecimentos em Django, você tem esses conhecimentos: {contexto_conhecimento}. "
+
+        if experiencias:
+            contexto_experiencia = " ".join(experiencias)
+            contexto_adicional += f"Você também possui essa experiência profissional: {contexto_experiencia}. "
+
+        if aprendizados:
+            contexto_aprendizado = " ".join(aprendizados)
+            contexto_adicional += f"Neste contexto, o seu chefe deu as seguintes observações que devem ser seguidas: {contexto_aprendizado}. "
+
+        if consulta_conhecimento:
+            contexto_consulta = " ".join(consulta_conhecimento)
+            contexto_adicional += f"Para sua referência, aqui estão alguns exemplos de trabalhos já realizados: {contexto_consulta}. "
 
         # Usando a API da OpenAI para processar a tarefa com o modelo gpt-4-turbo
         response = openai.ChatCompletion.create(
@@ -175,7 +187,7 @@ class Atuais_Demandas(models.Model):
                         "Você é um colaborador da GS especializado em desenvolvimento Django. "
                         "Baseado nos seus conhecimentos, experiências, aprendizados e no código abaixo, forneça sugestões de melhorias."
                         f"{contexto_adicional} "
-                        f"Sempre fale em primeira pessoa e seu estilo de comunicação deve ser: {personalidade}."
+                        f"Sempre fale em primeira pessoa como se você tivesse realizado esse trabalho e seu estilo de comunicação deve ser: {personalidade}."
                     ),
                 },
                 {
