@@ -157,8 +157,8 @@
         <div class="col-md-12">
           <div class="d-md-flex align-items-center mb-3 mx-2">
             <div class="mb-md-0 mb-3">
-              <h3 class="font-weight-bold mb-0">Hello, Noah</h3>
-              <p class="mb-0">Apps you might like!</p>
+              <h3 class="font-weight-bold mb-0">Bem-vindo {{ user.first_name }}!</h3>
+              <p class="mb-0">Veja nossos serviços abaixo:</p>
             </div>
             <button type="button" class="btn btn-sm btn-white btn-icon d-flex align-items-center mb-0 ms-md-auto mb-sm-0 mb-2 me-2">
               <span class="btn-inner--icon">
@@ -187,17 +187,17 @@
               <div class="swiper-slide">
                 <div>
                   <div class="card card-background shadow-none border-radius-xl card-background-after-none align-items-start mb-0">
-                    <div class="full-background bg-cover" style="background-image: url({% static 'assets/img/img-2.jpg' %}"></div>
+                    <div class="full-background bg-cover" style="background-image: url({% static 'assets/img/img-1.jpg' %}"></div>
                     <div class="card-body text-start px-3 py-0 w-100">
                       <div class="row mt-12">
                         <div class="col-sm-3 mt-auto">
-                          <h4 class="text-dark font-weight-bolder">#1</h4>
-                          <p class="text-dark opacity-6 text-xs font-weight-bolder mb-0">Name</p>
-                          <h5 class="text-dark font-weight-bolder">Secured</h5>
+                          <h4 class="text-white font-weight-bolder">#1</h4>
+                          <p class="text-white text-xs font-weight-bolder mb-0">Nome</p>
+                          <h5 class="text-white font-weight-bolder">Citrine Analytics</h5>
                         </div>
                         <div class="col-sm-3 ms-auto mt-auto">
-                          <p class="text-dark opacity-6 text-xs font-weight-bolder mb-0">Category</p>
-                          <h5 class="text-dark font-weight-bolder">Banking</h5>
+                          <p class="text-white text-xs font-weight-bolder mb-0">Categoria</p>
+                          <h5 class="text-white font-weight-bolder">Dashboards/BI</h5>
                         </div>
                       </div>
                     </div>
@@ -206,17 +206,17 @@
               </div>
               <div class="swiper-slide">
                 <div class="card card-background shadow-none border-radius-xl card-background-after-none align-items-start mb-0">
-                  <div class="full-background bg-cover" style="background-image: url({% static 'assets/img/img-1.jpg' %}"></div>
+                  <div class="full-background bg-cover" style="background-image: url({% static 'assets/img/img-2.jpg' %}"></div>
                   <div class="card-body text-start px-3 py-0 w-100">
                     <div class="row mt-12">
                       <div class="col-sm-3 mt-auto">
-                        <h4 class="text-dark font-weight-bolder">#2</h4>
-                        <p class="text-dark opacity-6 text-xs font-weight-bolder mb-0">Name</p>
-                        <h5 class="text-dark font-weight-bolder">Cyber</h5>
+                        <h4 class="text-white font-weight-bolder">#2</h4>
+                        <p class="text-white text-xs font-weight-bolder mb-0">Nome</p>
+                        <h5 class="text-white font-weight-bolder">CristalAI</h5>
                       </div>
                       <div class="col-sm-3 ms-auto mt-auto">
-                        <p class="text-dark opacity-6 text-xs font-weight-bolder mb-0">Category</p>
-                        <h5 class="text-dark font-weight-bolder">Security</h5>
+                        <p class="text-white text-xs font-weight-bolder mb-0">Categoria</p>
+                        <h5 class="text-white font-weight-bolder">IA</h5>
                       </div>
                     </div>
                   </div>
@@ -764,7 +764,6 @@
       </div>
     </div>
   </div>
-  <!--   Core JS Files   -->
   <script src="{% static 'assets/js/core/popper.min.js' %}"></script>
   <script src="{% static 'assets/js/core/bootstrap.min.js' %}"></script>
   <script src="{% static 'assets/js/plugins/perfect-scrollbar.min.js' %}"></script>
