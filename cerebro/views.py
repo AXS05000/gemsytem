@@ -151,6 +151,10 @@ def revisar_tarefa_qa(qa_id, colaborador_id, tarefa_id):
         tarefa_qa.save()
 
         print(f"Tarefa finalizada com sucesso pelo QA: {qa.nome_do_colaborador}")
+
+        # Chama a função do colaborador para gerar as sugestões de melhorias
+        tarefa.processar_tarefa(gerar_sugestoes=True)
+
     else:
         # Se estiver incorreto, deixar a tarefa pendente e adicionar as observações do QA
         tarefa.status = "P"  # Mantém a tarefa do colaborador como pendente

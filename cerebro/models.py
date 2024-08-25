@@ -98,7 +98,7 @@ class Atuais_Demandas(models.Model):
         verbose_name="Status da Tarefa",
     )
 
-    def processar_tarefa(self):
+    def processar_tarefa(self, gerar_sugestoes=False):
         colaborador = self.colaborador
         print(f"Iniciando processamento da tarefa para o colaborador: {colaborador}")
 
@@ -142,86 +142,88 @@ class Atuais_Demandas(models.Model):
 
         print("Contexto adicional montado.")
 
-        # Usando a API da OpenAI para processar a tarefa com o modelo gpt-4-turbo
-        print("Enviando tarefa para a API da OpenAI...")
-        response = openai.ChatCompletion.create(
-            api_key=colaborador.api_key,
-            model="gpt-4-turbo",
-            messages=[
-                {
-                    "role": "system",
-                    "content": (
-                        "Você é um colaborador da GS especializado em desenvolvimento Django."
-                        "Responda exclusivamente com o código necessário para os arquivos do app Django especificados. "
-                        "Inclua apenas código Python relacionado a models.py, forms.py, views.py, urls.py, admin.py, e utils.py."
-                        "Não inclua templates html."
-                        "Não inclua introduções, textos paralelos, orientações de importações, resumos, explicações ou notas, apenas o código puro dos arquivos em python."
-                        f"{contexto_adicional} "
-                        f"Sempre fale em primeira pessoa e seu estilo de comunicação deve ser: {personalidade}."
-                    ),
-                },
-                {"role": "user", "content": self.atuais_demandas},
-            ],
-            max_tokens=2500,
-        )
+        if not gerar_sugestoes:
+            # Usando a API da OpenAI para processar a tarefa com o modelo gpt-4-turbo
+            print("Enviando tarefa para a API da OpenAI...")
+            response = openai.ChatCompletion.create(
+                api_key=colaborador.api_key,
+                model="gpt-4-turbo",
+                messages=[
+                    {
+                        "role": "system",
+                        "content": (
+                            "Você é um colaborador da GS especializado em desenvolvimento Django."
+                            "Responda exclusivamente com o código necessário para os arquivos do app Django especificados. "
+                            "Inclua apenas código Python relacionado a models.py, forms.py, views.py, urls.py, admin.py, e utils.py."
+                            "Não inclua templates html."
+                            "Não inclua introduções, textos paralelos, orientações de importações, resumos, explicações ou notas, apenas o código puro dos arquivos em python."
+                            f"{contexto_adicional} "
+                            f"Sempre fale em primeira pessoa e seu estilo de comunicação deve ser: {personalidade}."
+                        ),
+                    },
+                    {"role": "user", "content": self.atuais_demandas},
+                ],
+                max_tokens=2500,
+            )
 
-        resultado = response["choices"][0]["message"]["content"]
-        print("Resposta da API recebida.")
+            resultado = response["choices"][0]["message"]["content"]
+            print("Resposta da API recebida.")
 
-        # Salvando todo o resultado na coluna 'mesa'
-        mesa = Mesa_de_trabalho.objects.create(
-            colaborador=colaborador,
-            mesa=resultado,
-        )
-        print("Resultado salvo na mesa de trabalho.")
+            # Salvando todo o resultado na coluna 'mesa'
+            mesa = Mesa_de_trabalho.objects.create(
+                colaborador=colaborador,
+                mesa=resultado,
+            )
+            print("Resultado salvo na mesa de trabalho.")
 
-        # Calcular e registrar o custo em tokens
-        tokens_usados = response["usage"]["total_tokens"]
-        Custo.objects.create(
-            colaborador=colaborador,
-            tokens=tokens_usados,
-        )
-        print(f"Custo registrado: {tokens_usados} tokens usados.")
+            # Calcular e registrar o custo em tokens
+            tokens_usados = response["usage"]["total_tokens"]
+            Custo.objects.create(
+                colaborador=colaborador,
+                tokens=tokens_usados,
+            )
+            print(f"Custo registrado: {tokens_usados} tokens usados.")
 
-        # Gerar sugestões de melhorias baseadas no resultado da tarefa
-        print("Gerando sugestões de melhorias...")
-        sugestao_response = openai.ChatCompletion.create(
-            api_key=colaborador.api_key,
-            model="gpt-4-turbo",
-            messages=[
-                {
-                    "role": "system",
-                    "content": (
-                        "Você é um colaborador da GS especializado em desenvolvimento Django. "
-                        "Baseado nos seus conhecimentos, experiências, aprendizados e no código abaixo, forneça sugestões de melhorias."
-                        f"{contexto_adicional} "
-                        f"Sempre fale em primeira pessoa como se você tivesse realizado esse trabalho e seu estilo de comunicação deve ser: {personalidade}."
-                    ),
-                },
-                {
-                    "role": "user",
-                    "content": f"Analise o seguinte código e forneça sugestões de melhorias:\n{resultado}",
-                },
-            ],
-            max_tokens=2500,
-        )
+            # A tarefa não será finalizada aqui. O QA decidirá isso na revisão.
+            print(
+                f"Tarefa processada pelo colaborador {colaborador.nome_do_colaborador}, aguardando revisão do QA."
+            )
+            return mesa
 
-        sugestao = sugestao_response["choices"][0]["message"]["content"]
-        print("Sugestões de melhorias geradas.")
+        else:
+            # Gerar sugestões de melhorias baseadas no resultado da tarefa após aprovação do QA
+            print("Gerando sugestões de melhorias após aprovação do QA...")
+            mesa = Mesa_de_trabalho.objects.filter(colaborador=colaborador).latest("id")
+            sugestao_response = openai.ChatCompletion.create(
+                api_key=colaborador.api_key,
+                model="gpt-4-turbo",
+                messages=[
+                    {
+                        "role": "system",
+                        "content": (
+                            "Você é um colaborador da GS especializado em desenvolvimento Django. "
+                            "Baseado nos seus conhecimentos, experiências, aprendizados e no código abaixo, forneça sugestões de melhorias."
+                            f"{contexto_adicional} "
+                            f"Sempre fale em primeira pessoa como se você tivesse realizado esse trabalho e seu estilo de comunicação deve ser: {personalidade}."
+                        ),
+                    },
+                    {
+                        "role": "user",
+                        "content": f"Analise o seguinte código e forneça sugestões de melhorias:\n{mesa.mesa}",
+                    },
+                ],
+                max_tokens=2500,
+            )
 
-        # Salvando as sugestões na tabela Sugestoes
-        Sugestoes.objects.create(
-            colaborador=colaborador,
-            sugestoes=sugestao,
-        )
-        print("Sugestões de melhorias salvas.")
+            sugestao = sugestao_response["choices"][0]["message"]["content"]
+            print("Sugestões de melhorias geradas.")
 
-        # A tarefa não será finalizada aqui. O QA decidirá isso na revisão.
-        print(
-            f"Tarefa processada pelo colaborador {colaborador.nome_do_colaborador}, aguardando revisão do QA."
-        )
-
-        return mesa
+            # Salvando as sugestões na tabela Sugestoes
+            Sugestoes.objects.create(
+                colaborador=colaborador,
+                sugestoes=sugestao,
+            )
+            print("Sugestões de melhorias salvas.")
 
     def __str__(self):
         return f"{self.colaborador} - {self.get_status_display()}"
