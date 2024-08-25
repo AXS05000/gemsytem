@@ -2,6 +2,12 @@ from django.db import models
 
 
 class Colaboradores(models.Model):
+    STATUS_CHOICES = [
+        ("ativo", "Ativo"),
+        ("contratacao", "Em Contratação"),
+        ("demitido", "Demitido"),
+    ]
+
     nome_do_colaborador = models.CharField(
         max_length=100, verbose_name="Nome do Colaborador", null=True, blank=True
     )
@@ -16,6 +22,9 @@ class Colaboradores(models.Model):
         verbose_name="Foto do Colaborador",
         null=True,
         blank=True,
+    )
+    status = models.CharField(
+        max_length=20, choices=STATUS_CHOICES, default="ativo", verbose_name="Status"
     )
 
     def __str__(self):

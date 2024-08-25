@@ -203,6 +203,11 @@ class SignUpView(TemplateView):
 class TablesView(TemplateView):
     template_name = "pages/tables.html"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["colaboradores"] = Colaboradores.objects.all()
+        return context
+
 
 class WalletView(TemplateView):
     template_name = "pages/wallet.html"
