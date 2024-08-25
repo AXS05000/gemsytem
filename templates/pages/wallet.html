@@ -1,38 +1,25 @@
-<!--
-=========================================================
-* Corporate UI - v1.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/corporate-ui
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://www.creative-tim.com/license)
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
--->
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="{% static 'assets/img/apple-icon.png' %}">
+  <link rel="icon" type="image/png" href="{% static 'assets/img/favicon.png' %}">
   <title>
     Corporate UI by Creative Tim
   </title>
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Noto+Sans:300,400,500,600,700,800|PT+Mono:300,400,500,600,700" rel="stylesheet" />
   <!-- Nucleo Icons -->
-  <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
-  <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+  <link href="{% static 'assets/css/nucleo-icons.css' %}" rel="stylesheet" />
+  <link href="{% static 'assets/css/nucleo-svg.css' %}" rel="stylesheet" />
   <!-- Font Awesome Icons -->
   <script src="https://kit.fontawesome.com/349ee9c857.js" crossorigin="anonymous"></script>
-  <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+  <link href="{% static 'assets/css/nucleo-svg.css' %}" rel="stylesheet" />
   <!-- CSS Files -->
-  <link id="pagestyle" href="../assets/css/corporate-ui-dashboard.css?v=1.0.0" rel="stylesheet" />
+  <link id="pagestyle" href="{% static 'assets/css/corporate-ui-dashboard.css' %}" rel="stylesheet" />
 </head>
 
 <body class="g-sidenav-show bg-gray-100">
@@ -96,7 +83,7 @@
                   <a class="dropdown-item border-radius-md" href="javascript:;">
                     <div class="d-flex py-1">
                       <div class="my-auto">
-                        <img src="../assets/img/team-2.jpg" class="avatar avatar-sm  me-3 " alt="user image">
+                        <img src="{% static 'assets/img/team-2.jpg' %}" class="avatar avatar-sm  me-3 " alt="user image">
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <h6 class="text-sm font-weight-normal mb-1">
@@ -114,7 +101,7 @@
                   <a class="dropdown-item border-radius-md" href="javascript:;">
                     <div class="d-flex py-1">
                       <div class="my-auto">
-                        <img src="../assets/img/small-logos/logo-spotify.svg" class="avatar avatar-sm bg-gradient-dark  me-3 " alt="logo spotify">
+                        <img src="{% static 'assets/img/small-logos/logo-spotify.svg' %}" class="avatar avatar-sm bg-gradient-dark  me-3 " alt="logo spotify">
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <h6 class="text-sm font-weight-normal mb-1">
@@ -164,7 +151,7 @@
               <a href="javascript:;" class="nav-link text-white font-weight-bold px-0">
             <li class="nav-item dropdown pe-2 d-flex align-items-center">
               <div class="avatar avatar-sm position-relative">
-                <img src="../assets/img/team-2.jpg" alt="profile_image" class="w-100 border-radius-md">
+                <img src="{% static 'assets/img/team-2.jpg' %}" alt="profile_image" class="w-100 border-radius-md">
               </div>
             </li>
             </a>
@@ -204,7 +191,7 @@
       </div>
     </nav>
     <!-- End Sidenav Top -->
-    <div class="pt-5 pb-6 bg-cover" style="background-image: url('../assets/img/header-blue-purple.jpg')"></div>
+    <div class="pt-5 pb-6 bg-cover" style="background-image: url({% static 'assets/img/header-blue-purple.jpg' %}"></div>
     <div class="container my-3 py-3">
       <div class="row mt-n6 mb-6">
         <div class="col-lg-3 col-sm-6">
@@ -226,7 +213,7 @@
           <div class="card blur border border-white mb-4 shadow-xs">
             <div class="card-body p-4">
               <div class="icon icon-shape bg-white shadow shadow-xs text-center border-radius-md d-flex align-items-center justify-content-center mb-3">
-                <svg xmlns="http://www.w3.org/2000/svg" height="19" width="19" viewBox="0 0 24 24" fill="currentColor"">
+                <svg xmlns="http://www.w3.org/2000/svg" height="19" width="19" viewBox="0 0 24 24" fill="currentColor">
           <path d=" M19.5 22.5a3 3 0 003-3v-8.174l-6.879 4.022 3.485 1.876a.75.75 0 01-.712 1.321l-5.683-3.06a1.5 1.5 0 00-1.422 0l-5.683 3.06a.75.75 0 01-.712-1.32l3.485-1.877L1.5 11.326V19.5a3 3 0 003 3h15z" />
                 <path d="M1.5 9.589v-.745a3 3 0 011.578-2.641l7.5-4.039a3 3 0 012.844 0l7.5 4.039A3 3 0 0122.5 8.844v.745l-8.426 4.926-.652-.35a3 3 0 00-2.844 0l-.652.35L1.5 9.59z" />
                 </svg>
@@ -603,7 +590,7 @@
               <div class="row">
                 <div class="col-lg-5">
                   <div class="card card-background card-background-after-none align-items-start mb-2">
-                    <div class="full-background" style="background-image: url('../assets/img/curved-images/img-6.jpg')"></div>
+                    <div class="full-background" style="background-image: url({% static 'assets/img/curved-images/img-6.jpg' %}"></div>
                     <div class="card-body text-start ps-3 pe-2 pt-2 pb-2 w-100">
                       <div class="row">
                         <div class="col-8 py-2">
@@ -617,10 +604,10 @@
                         <div class="col-4">
                           <div class="blur d-flex flex-column w-80 h-100 py-2 ms-auto border-radius-lg border border-white">
                             <div class="text-center w-100">
-                              <img src="../assets/img/logos/wifi-white.png" class="w-25 mx-auto" alt="wifi" />
+                              <img src="{% static 'assets/img/logos/wifi-white.png' %}" class="w-25 mx-auto" alt="wifi" />
                             </div>
                             <div class="text-center mt-auto w-100">
-                              <img src="../assets/img/logos/mastercard-white.png" class="w-40 mx-auto mt-2" alt="mastercard" />
+                              <img src="{% static 'assets/img/logos/mastercard-white.png' %}" class="w-40 mx-auto mt-2" alt="mastercard" />
                             </div>
                           </div>
                         </div>
@@ -639,14 +626,14 @@
                 </div>
                 <div class="col-lg-5">
                   <div class="card card-background card-background-after-none align-items-start mb-2">
-                    <div class="full-background" style="background-image: url('../assets/img/curved-images/img-7.jpg')"></div>
+                    <div class="full-background" style="background-image: url({% static 'assets/img/curved-images/img-7.jpg' %}"></div>
                     <div class="card-body text-start p-2 w-100">
                       <div class="row">
                         <div class="col-12">
                           <div class="blur d-flex align-items-center w-100 border-radius-md border border-white mb-4 p-2">
                             <p class="text-white text-sm w-50 mb-0 font-weight-bold">Corporate UI</p>
                             <div class="text-end ms-auto w-100 pe-2">
-                              <img src="../assets/img/logos/wifi-white.png" class="w-10 ms-auto" alt="wifi" />
+                              <img src="{% static 'assets/img/logos/wifi-white.png' %}" class="w-10 ms-auto" alt="wifi" />
                             </div>
                           </div>
                         </div>
@@ -658,7 +645,7 @@
                           <span class="text-sm font-weight-bolder text-pt-mono ms-2">1234&nbsp;&nbsp;6578&nbsp;&nbsp;9000&nbsp;&nbsp;1234</span>
                         </div>
                         <div class="col-4 py-2 text-end mt-auto">
-                          <img src="../assets/img/logos/visa-white.png" class="w-50 ms-auto me-3" alt="visa" />
+                          <img src="{% static 'assets/img/logos/visa-white.png' %}" class="w-50 ms-auto me-3" alt="visa" />
                         </div>
                       </div>
                     </div>
@@ -801,11 +788,11 @@
     </div>
   </main>
   <!--   Core JS Files   -->
-  <script src="../assets/js/core/popper.min.js"></script>
-  <script src="../assets/js/core/bootstrap.min.js"></script>
-  <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
-  <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
-  <script src="../assets/js/plugins/chartjs.min.js"></script>
+  <script src="{% static 'assets/js/core/popper.min.js' %}"></script>
+  <script src="{% static 'assets/js/core/bootstrap.min.js' %}"></script>
+  <script src="{% static 'assets/js/plugins/perfect-scrollbar.min.js' %}"></script>
+  <script src="{% static 'assets/js/plugins/smooth-scrollbar.min.js' %}"></script>
+  <script src="{% static 'assets/js/plugins/chartjs.min.js' %}"></script>
   <script>
     var ctx = document.getElementById("chart-doughnut-info").getContext("2d");
     var ctx2 = document.getElementById("chart-doughnut-dark").getContext("2d");
@@ -938,7 +925,7 @@
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Corporate UI Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="../assets/js/corporate-ui-dashboard.min.js?v=1.0.0"></script>
+  <script src="{% static 'assets/js/corporate-ui-dashboard.min.js' %}"></script>
 </body>
 
 </html>

@@ -4,6 +4,7 @@ from .models import Atuais_Demandas, Mesa_de_trabalho, Colaboradores
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views import View
+from django.views.generic import TemplateView
 from .models import (
     Conhecimento,
     Consulta_De_Conhecimento,
@@ -183,6 +184,25 @@ def atribuir_tarefa_form(request):
     return render(request, "atribuir_tarefa.html", {"colaboradores": colaboradores})
 
 
-def ver_mesas(request):
-    mesas = Mesa_de_trabalho.objects.all()
-    return render(request, "ver_mesas.html", {"mesas": mesas})
+class DashboardView(TemplateView):
+    template_name = "pages/dashboard.html"
+
+
+class ProfileView(TemplateView):
+    template_name = "pages/profile.html"
+
+
+class SignInView(TemplateView):
+    template_name = "pages/sign-in.html"
+
+
+class SignUpView(TemplateView):
+    template_name = "pages/sign-up.html"
+
+
+class TablesView(TemplateView):
+    template_name = "pages/tables.html"
+
+
+class WalletView(TemplateView):
+    template_name = "pages/wallet.html"

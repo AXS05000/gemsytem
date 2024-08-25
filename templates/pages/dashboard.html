@@ -5,21 +5,21 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="{% static 'assets/img/apple-icon.png' %}">
+  <link rel="icon" type="image/png" href="{% static 'assets/img/favicon.png' %}">
   <title>
     Corporate UI by Creative Tim
   </title>
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Noto+Sans:300,400,500,600,700,800|PT+Mono:300,400,500,600,700" rel="stylesheet" />
   <!-- Nucleo Icons -->
-  <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
-  <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+  <link href="{% static 'assets/css/nucleo-icons.css' %}" rel="stylesheet" />
+  <link href="{% static 'assets/css/nucleo-svg.css' %}" rel="stylesheet" />
   <!-- Font Awesome Icons -->
-  <script src="https://kit.fontawesome.com/349ee9c857.js" crossorigin="anonymous"></script>
-  <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+  <script src="https://kit.fontawesome.com/349ee9c857.js' %}" crossorigin="anonymous"></script>
+  <link href="{% static 'assets/css/nucleo-svg.css' %}" rel="stylesheet" />
   <!-- CSS Files -->
-  <link id="pagestyle" href="../assets/css/corporate-ui-dashboard.css" rel="stylesheet" />
+  <link id="pagestyle" href="{% static 'assets/css/corporate-ui-dashboard.css' %}" rel="stylesheet" />
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
@@ -196,7 +196,7 @@
                   <a class="dropdown-item border-radius-md" href="javascript:;">
                     <div class="d-flex py-1">
                       <div class="my-auto">
-                        <img src="../assets/img/team-2.jpg" class="avatar avatar-sm border-radius-sm  me-3 ">
+                        <img src="{% static 'assets/img/team-2.jpg' %}" class="avatar avatar-sm border-radius-sm  me-3 ">
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <h6 class="text-sm font-weight-normal mb-1">
@@ -214,7 +214,7 @@
                   <a class="dropdown-item border-radius-md" href="javascript:;">
                     <div class="d-flex py-1">
                       <div class="my-auto">
-                        <img src="../assets/img/small-logos/logo-google.svg" class="avatar avatar-sm border-radius-sm bg-gradient-dark p-2  me-3 ">
+                        <img src="{% static 'assets/img/small-logos/logo-google.svg' %}" class="avatar avatar-sm border-radius-sm bg-gradient-dark p-2  me-3 ">
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <h6 class="text-sm font-weight-normal mb-1">
@@ -262,7 +262,7 @@
             </li>
             <li class="nav-item ps-2 d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-body p-0">
-                <img src="../assets/img/team-2.jpg" class="avatar avatar-sm" alt="avatar" />
+                <img src="{% static 'assets/img/team-2.jpg' %}" class="avatar avatar-sm" alt="avatar" />
               </a>
             </li>
           </ul>
@@ -305,7 +305,7 @@
               <div class="swiper-slide">
                 <div>
                   <div class="card card-background shadow-none border-radius-xl card-background-after-none align-items-start mb-0">
-                    <div class="full-background bg-cover" style="background-image: url('../assets/img/img-2.jpg')"></div>
+                    <div class="full-background bg-cover" style="background-image: url({% static 'assets/img/img-2.jpg' %}"></div>
                     <div class="card-body text-start px-3 py-0 w-100">
                       <div class="row mt-12">
                         <div class="col-sm-3 mt-auto">
@@ -324,7 +324,7 @@
               </div>
               <div class="swiper-slide">
                 <div class="card card-background shadow-none border-radius-xl card-background-after-none align-items-start mb-0">
-                  <div class="full-background bg-cover" style="background-image: url('../assets/img/img-1.jpg')"></div>
+                  <div class="full-background bg-cover" style="background-image: url({% static 'assets/img/img-1.jpg' %}"></div>
                   <div class="card-body text-start px-3 py-0 w-100">
                     <div class="row mt-12">
                       <div class="col-sm-3 mt-auto">
@@ -342,7 +342,7 @@
               </div>
               <div class="swiper-slide">
                 <div class="card card-background shadow-none border-radius-xl card-background-after-none align-items-start mb-0">
-                  <div class="full-background bg-cover" style="background-image: url('../assets/img/img-3.jpg')"></div>
+                  <div class="full-background bg-cover" style="background-image: url({% static 'assets/img/img-3.jpg' %}"></div>
                   <div class="card-body text-start px-3 py-0 w-100">
                     <div class="row mt-12">
                       <div class="col-sm-3 mt-auto">
@@ -360,7 +360,7 @@
               </div>
               <div class="swiper-slide">
                 <div class="card card-background shadow-none border-radius-xl card-background-after-none align-items-start mb-0">
-                  <div class="full-background bg-cover" style="background-image: url('../assets/img/img-4.jpg')"></div>
+                  <div class="full-background bg-cover" style="background-image: url({% static 'assets/img/img-4.jpg' %}"></div>
                   <div class="card-body text-start px-3 py-0 w-100">
                     <div class="row mt-12">
                       <div class="col-sm-3 mt-auto">
@@ -378,7 +378,7 @@
               </div>
               <div class="swiper-slide">
                 <div class="card card-background shadow-none border-radius-xl card-background-after-none align-items-start mb-0">
-                  <div class="full-background bg-cover" style="background-image: url('../assets/img/img-5.jpg')"></div>
+                  <div class="full-background bg-cover" style="background-image: url({% static 'assets/img/img-5.jpg' %}"></div>
                   <div class="card-body text-start px-3 py-0 w-100">
                     <div class="row mt-12">
                       <div class="col-sm-3 mt-auto">
@@ -396,7 +396,7 @@
               </div>
               <div class="swiper-slide">
                 <div class="card card-background shadow-none border-radius-xl card-background-after-none align-items-start mb-0">
-                  <div class="full-background bg-cover" style="background-image: url('../assets/img/img-1.jpg')"></div>
+                  <div class="full-background bg-cover" style="background-image: url({% static 'assets/img/img-1.jpg' %}"></div>
                   <div class="card-body text-start px-3 py-0 w-100">
                     <div class="row mt-12">
                       <div class="col-sm-3 mt-auto">
@@ -499,7 +499,7 @@
                       <td>
                         <div class="d-flex px-2">
                           <div class="avatar avatar-sm rounded-circle bg-gray-100 me-2 my-2">
-                            <img src="../assets/img/small-logos/logo-spotify.svg" class="w-80" alt="spotify">
+                            <img src="{% static 'assets/img/small-logos/logo-spotify.svg' %}" class="w-80" alt="spotify">
                           </div>
                           <div class="my-auto">
                             <h6 class="mb-0 text-sm">Spotify</h6>
@@ -515,7 +515,7 @@
                       <td class="align-middle">
                         <div class="d-flex">
                           <div class="border px-1 py-1 text-center d-flex align-items-center border-radius-sm my-auto">
-                            <img src="../assets/img/logos/visa.png" class="w-90 mx-auto" alt="visa">
+                            <img src="{% static 'assets/img/logos/visa.png' %}" class="w-90 mx-auto" alt="visa">
                           </div>
                           <div class="ms-2">
                             <p class="text-dark text-sm mb-0">Visa 1234</p>
@@ -535,7 +535,7 @@
                       <td>
                         <div class="d-flex px-2">
                           <div class="avatar avatar-sm rounded-circle bg-gray-100 me-2 my-2">
-                            <img src="../assets/img/small-logos/logo-invision.svg" class="w-80" alt="invision">
+                            <img src="{% static 'assets/img/small-logos/logo-invision.svg' %}" class="w-80" alt="invision">
                           </div>
                           <div class="my-auto">
                             <h6 class="mb-0 text-sm">Invision</h6>
@@ -551,7 +551,7 @@
                       <td class="align-middle">
                         <div class="d-flex">
                           <div class="border px-1 py-1 text-center d-flex align-items-center border-radius-sm my-auto">
-                            <img src="../assets/img/logos/mastercard.png" class="w-90 mx-auto" alt="mastercard">
+                            <img src="{% static 'assets/img/logos/mastercard.png' %}" class="w-90 mx-auto" alt="mastercard">
                           </div>
                           <div class="ms-2">
                             <p class="text-dark text-sm mb-0">Mastercard 1234</p>
@@ -571,7 +571,7 @@
                       <td>
                         <div class="d-flex px-2">
                           <div class="avatar avatar-sm rounded-circle bg-gray-100 me-2 my-2">
-                            <img src="../assets/img/small-logos/logo-jira.svg" class="w-80" alt="jira">
+                            <img src="{% static 'assets/img/small-logos/logo-jira.svg' %}" class="w-80" alt="jira">
                           </div>
                           <div class="my-auto">
                             <h6 class="mb-0 text-sm">Jira</h6>
@@ -587,7 +587,7 @@
                       <td class="align-middle">
                         <div class="d-flex">
                           <div class="border px-1 py-1 text-center d-flex align-items-center border-radius-sm my-auto">
-                            <img src="../assets/img/logos/mastercard.png" class="w-90 mx-auto" alt="mastercard">
+                            <img src="{% static 'assets/img/logos/mastercard.png' %}" class="w-90 mx-auto" alt="mastercard">
                           </div>
                           <div class="ms-2">
                             <p class="text-dark text-sm mb-0">Mastercard 1234</p>
@@ -607,7 +607,7 @@
                       <td>
                         <div class="d-flex px-2">
                           <div class="avatar avatar-sm rounded-circle bg-gray-100 me-2 my-2">
-                            <img src="../assets/img/small-logos/logo-slack.svg" class="w-80" alt="slack">
+                            <img src="{% static 'assets/img/small-logos/logo-slack.svg' %}" class="w-80" alt="slack">
                           </div>
                           <div class="my-auto">
                             <h6 class="mb-0 text-sm">Slack</h6>
@@ -623,7 +623,7 @@
                       <td class="align-middle">
                         <div class="d-flex">
                           <div class="border px-1 py-1 text-center d-flex align-items-center border-radius-sm my-auto">
-                            <img src="../assets/img/logos/visa.png" class="w-90 mx-auto" alt="visa">
+                            <img src="{% static 'assets/img/logos/visa.png' %}" class="w-90 mx-auto" alt="visa">
                           </div>
                           <div class="ms-2">
                             <p class="text-dark text-sm mb-0">Visa 1234</p>
@@ -883,12 +883,12 @@
     </div>
   </div>
   <!--   Core JS Files   -->
-  <script src="../assets/js/core/popper.min.js"></script>
-  <script src="../assets/js/core/bootstrap.min.js"></script>
-  <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
-  <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
-  <script src="../assets/js/plugins/chartjs.min.js"></script>
-  <script src="../assets/js/plugins/swiper-bundle.min.js" type="text/javascript"></script>
+  <script src="{% static 'assets/js/core/popper.min.js' %}"></script>
+  <script src="{% static 'assets/js/core/bootstrap.min.js' %}"></script>
+  <script src="{% static 'assets/js/plugins/perfect-scrollbar.min.js' %}"></script>
+  <script src="{% static 'assets/js/plugins/smooth-scrollbar.min.js' %}"></script>
+  <script src="{% static 'assets/js/plugins/chartjs.min.js' %}"></script>
+  <script src="{% static 'assets/js/plugins/swiper-bundle.min.js' %}" type="text/javascript"></script>
   <script>
     if (document.getElementsByClassName('mySwiper')) {
       var swiper = new Swiper(".mySwiper", {
@@ -1145,9 +1145,9 @@
     }
   </script>
   <!-- Github buttons -->
-  <script async defer src="https://buttons.github.io/buttons.js"></script>
+  <script async defer src="https://buttons.github.io/buttons.js' %}"></script>
   <!-- Control Center for Corporate UI Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="../assets/js/corporate-ui-dashboard.min.js"></script>
+  <script src="{% static 'assets/js/corporate-ui-dashboard.min.js' %}"></script>
 </body>
 
 </html>
