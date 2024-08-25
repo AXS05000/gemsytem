@@ -120,7 +120,7 @@ def revisar_tarefa_qa(qa_id, colaborador_id, tarefa_id):
                     "Responda apenas com a palavra 'correto' ou 'incorreto', seguida de um ponto e vírgula (;), e depois coloque suas observações."
                     f"{contexto_adicional} "
                     f"Sempre fale em primeira pessoa e seu estilo de comunicação deve ser: {personalidade}."
-                    f"Observação importante: O colaborador só realiza trabalhos de back-end, no caso ele só tem autorização de realizar códigos que possam ser escritos no models, views, urls, forms, admin e utils de app django."
+                    f"Observação importante: O colaborador só realiza trabalhos de back-end, no caso ele só tem autorização de realizar códigos que possam ser escritos no models, views, urls, forms, admin e utils de app django. Verique também se não tem alguma parte do codigo faltando, alguma importação de bibilioteca funcionado, um dos seus principais objetivos é deixar o codigo funcional."
                 ),
             },
             {
