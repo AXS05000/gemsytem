@@ -63,7 +63,7 @@ def revisar_tarefa_qa(qa_id, colaborador_id, tarefa_id):
     colaborador = get_object_or_404(Colaboradores, id=colaborador_id)
     tarefa = get_object_or_404(Atuais_Demandas, id=tarefa_id)
 
-    # Recuperar o trabalho realizado na Mesa_de_trabalho
+    # Recuperar o trabalho realizado na Mesa_de_trabalho do colaborador original
     mesa = get_object_or_404(Mesa_de_trabalho, colaborador=colaborador)
 
     # Recuperar conhecimentos, experiências, aprendizados, consulta e personalidade do QA
@@ -120,7 +120,7 @@ def revisar_tarefa_qa(qa_id, colaborador_id, tarefa_id):
                     "Responda apenas com a palavra 'correto' ou 'incorreto', seguida de um ponto e vírgula (;), e depois coloque suas observações."
                     f"{contexto_adicional} "
                     f"Sempre fale em primeira pessoa e seu estilo de comunicação deve ser: {personalidade}."
-                    f"Observação importante: O colaborador só realiza trabalhos de back-end, no caso ele só tem autorização de realizar codigos que possam ser escritos no models, views, urls, forms, admin e utils de app django."
+                    f"Observação importante: O colaborador só realiza trabalhos de back-end, no caso ele só tem autorização de realizar códigos que possam ser escritos no models, views, urls, forms, admin e utils de app django."
                 ),
             },
             {
@@ -171,6 +171,9 @@ def revisar_tarefa_qa(qa_id, colaborador_id, tarefa_id):
         tarefa_qa.save()
 
         print(f"Tarefa revisada pelo QA com correções: {qa.nome_do_colaborador}")
+
+        # Chamar a função revisar_tarefa_com_ajustes para o colaborador realizar os ajustes
+        tarefa.revisar_tarefa_com_ajustes(colaborador=colaborador)
 
 
 def atribuir_tarefa_form(request):

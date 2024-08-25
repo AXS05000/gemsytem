@@ -225,6 +225,110 @@ class Atuais_Demandas(models.Model):
             )
             print("Sugestões de melhorias salvas.")
 
+    def revisar_tarefa_com_ajustes(self, colaborador):
+        print(f"Iniciando revisão da tarefa para o colaborador: {colaborador}")
+
+        # Recuperar conhecimentos, experiências, aprendizados, consulta e personalidade do colaborador
+        conhecimentos = Conhecimento.objects.filter(
+            colaborador=colaborador
+        ).values_list("conhecimento_geral", flat=True)
+        experiencias = Experiencia.objects.filter(colaborador=colaborador).values_list(
+            "experiencia", flat=True
+        )
+        aprendizados = Aprendizado.objects.filter(colaborador=colaborador).values_list(
+            "aprendizado", flat=True
+        )
+        consulta_conhecimento = Consulta_De_Conhecimento.objects.filter(
+            colaborador=colaborador
+        ).values_list("consulta_conhecimento", flat=True)
+        personalidade = (
+            Personalidade.objects.filter(colaborador=colaborador)
+            .values_list("personalidade", flat=True)
+            .first()
+        )
+
+        # Recuperar a mesa de trabalho do colaborador
+        try:
+            mesa = Mesa_de_trabalho.objects.filter(colaborador=colaborador).latest("id")
+        except Mesa_de_trabalho.DoesNotExist:
+            print(
+                f"Nenhuma mesa de trabalho encontrada para o colaborador: {colaborador}"
+            )
+            return
+
+        anotacoes_qa = mesa.anotacoes
+
+        # Montar o contexto adicional incluindo as anotações do QA
+        contexto_adicional = ""
+
+        if conhecimentos:
+            contexto_conhecimento = " ".join(conhecimentos)
+            contexto_adicional += f"Além dos seus conhecimentos em Django, você tem esses conhecimentos: {contexto_conhecimento}. "
+
+        if experiencias:
+            contexto_experiencia = " ".join(experiencias)
+            contexto_adicional += f"Você também possui essa experiência profissional: {contexto_experiencia}. "
+
+        if aprendizados:
+            contexto_aprendizado = " ".join(aprendizados)
+            contexto_adicional += f"Neste contexto, o seu chefe deu as seguintes observações que devem ser seguidas: {contexto_aprendizado}. "
+
+        if consulta_conhecimento:
+            contexto_consulta = " ".join(consulta_conhecimento)
+            contexto_adicional += f"Para sua referência, aqui estão alguns exemplos de trabalhos já realizados: {contexto_consulta}. "
+
+        if anotacoes_qa:
+            contexto_adicional += (
+                f"O QA deixou as seguintes observações para revisão: {anotacoes_qa}. "
+            )
+
+        print("Contexto adicional montado para revisão.")
+
+        # Usando a API da OpenAI para revisar a tarefa com o modelo gpt-4-turbo
+        print("Enviando tarefa revisada para a API da OpenAI...")
+        response = openai.ChatCompletion.create(
+            api_key=colaborador.api_key,
+            model="gpt-4-turbo",
+            messages=[
+                {
+                    "role": "system",
+                    "content": (
+                        "Você é um colaborador da GS especializado em desenvolvimento Django."
+                        "Reveja o código abaixo com base nas observações do QA e faça os ajustes necessários."
+                        "Digite novamente todos os codigos com os ajustes necessários com base nas observações do QA, inclua apenas código Python relacionado a models.py, forms.py, views.py, urls.py, admin.py, e utils.py."
+                        "Não inclua templates html."
+                        "Cuidado para não perder as informações que já estavam certas anteriormente, faça apenas os ajustes solicitados pelo QA."
+                        "Não inclua introduções, textos paralelos, orientações de importações, resumos, explicações ou notas, apenas o código puro dos arquivos em python."
+                        f"{contexto_adicional} "
+                        f"Sempre fale em primeira pessoa e seu estilo de comunicação deve ser: {personalidade}."
+                    ),
+                },
+                {"role": "user", "content": self.atuais_demandas},
+            ],
+            max_tokens=2500,
+        )
+
+        resultado_revisao = response["choices"][0]["message"]["content"]
+        print("Resposta da API para a revisão recebida.")
+
+        # Salvar a versão revisada abaixo do código original na coluna 'mesa'
+        mesa.mesa += f"\n\nVersão 02 Revisada:\n{resultado_revisao}"
+        mesa.save()
+
+        # Calcular e registrar o custo em tokens para a revisão
+        tokens_usados_revisao = response["usage"]["total_tokens"]
+        Custo.objects.create(
+            colaborador=colaborador,
+            tokens=tokens_usados_revisao,
+        )
+        print(
+            f"Custo registrado para a revisão: {tokens_usados_revisao} tokens usados."
+        )
+
+        print(
+            f"Tarefa revisada pelo colaborador {colaborador.nome_do_colaborador} com base nas observações do QA."
+        )
+
     def __str__(self):
         return f"{self.colaborador} - {self.get_status_display()}"
 
