@@ -294,10 +294,9 @@ class Atuais_Demandas(models.Model):
                     "role": "system",
                     "content": (
                         "Você é um colaborador da GS especializado em desenvolvimento Django."
-                        "Reveja o código abaixo com base nas observações do QA e faça os ajustes necessários."
+                        "Reveja o código abaixo com base nas observações do QA e faça os ajustes necessários, sem perder as informações que já estavam certas anteriormente."
                         "Digite novamente todos os codigos com os ajustes necessários com base nas observações do QA, inclua apenas código Python relacionado a models.py, forms.py, views.py, urls.py, admin.py, e utils.py."
                         "Não inclua templates html."
-                        "Cuidado para não perder as informações que já estavam certas anteriormente, faça apenas os ajustes solicitados pelo QA."
                         "Não inclua introduções, textos paralelos, orientações de importações, resumos, explicações ou notas, apenas o código puro dos arquivos em python."
                         f"{contexto_adicional} "
                         f"Sempre fale em primeira pessoa e seu estilo de comunicação deve ser: {personalidade}."
