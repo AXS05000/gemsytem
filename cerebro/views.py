@@ -120,6 +120,7 @@ def revisar_tarefa_qa(qa_id, colaborador_id, tarefa_id):
                     "Responda apenas com a palavra 'correto' ou 'incorreto', seguida de um ponto e vírgula (;), e depois coloque suas observações."
                     f"{contexto_adicional} "
                     f"Sempre fale em primeira pessoa e seu estilo de comunicação deve ser: {personalidade}."
+                    f"Observação importante: O colaborador só realiza trabalhos de back-end, no caso ele só tem autorização de realizar codigos que possam ser escritos no models, views, urls, forms, admin e utils de app django."
                 ),
             },
             {
@@ -142,7 +143,8 @@ def revisar_tarefa_qa(qa_id, colaborador_id, tarefa_id):
         tarefa.status = "F"
         tarefa.save()
 
-        mesa.mesa += f"\n\nObservações do QA: {observacoes_qa.strip()}"
+        # Salvar as observações do QA na coluna 'anotacoes'
+        mesa.anotacoes = f"Observações do QA: {observacoes_qa.strip()}"
         mesa.save()
 
         # Finaliza a tarefa do QA
@@ -156,11 +158,11 @@ def revisar_tarefa_qa(qa_id, colaborador_id, tarefa_id):
         tarefa.processar_tarefa(gerar_sugestoes=True)
 
     else:
-        # Se estiver incorreto, deixar a tarefa pendente e adicionar as observações do QA
+        # Se estiver incorreto, deixar a tarefa pendente e adicionar as observações do QA na coluna 'anotacoes'
         tarefa.status = "P"  # Mantém a tarefa do colaborador como pendente
         tarefa.save()
 
-        mesa.mesa = f"Observações do QA: {observacoes_qa.strip()}\n\n{mesa.mesa}"
+        mesa.anotacoes = f"Observações do QA: {observacoes_qa.strip()}"
         mesa.save()
 
         # Deixar a tarefa do QA como pendente também
