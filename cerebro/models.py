@@ -230,9 +230,7 @@ class Atuais_Demandas(models.Model):
         return mesa
 
     def __str__(self):
-        return (
-            f"{self.colaborador} - {self.atuais_demandas} - {self.get_status_display()}"
-        )
+        return f"{self.colaborador} - {self.get_status_display()}"
 
 
 class Mesa_de_trabalho(models.Model):
