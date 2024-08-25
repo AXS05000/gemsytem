@@ -123,7 +123,7 @@
           <a href="javascript:;" class="nav-link text-white font-weight-bold px-0">
         <li class="nav-item dropdown pe-2 d-flex align-items-center">
           <div class="avatar avatar-sm position-relative">
-            <img src="{% static 'assets/img/team-2.jpg' %}" alt="profile_image" class="w-100 border-radius-md">
+            <img src="{% if user.imagem_perfil %}{{ user.imagem_perfil.url }}{% else %}{% static 'assets/img/team-2.jpg' %}{% endif %}" alt="profile_image" class="w-100 border-radius-md">
           </div>
         </li>
         </a>
