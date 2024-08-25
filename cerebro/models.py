@@ -121,12 +121,6 @@ class Atuais_Demandas(models.Model):
             .first()
         )
 
-        print(f"Conhecimentos: {conhecimentos}")
-        print(f"Experiências: {experiencias}")
-        print(f"Aprendizados: {aprendizados}")
-        print(f"Consulta de Conhecimentos: {consulta_conhecimento}")
-        print(f"Personalidade: {personalidade}")
-
         # Montar o contexto adicional
         contexto_adicional = ""
 
@@ -222,10 +216,10 @@ class Atuais_Demandas(models.Model):
         )
         print("Sugestões de melhorias salvas.")
 
-        # Atualiza o status da demanda
-        self.status = "F"
-        self.save()
-        print(f"Tarefa finalizada para o colaborador: {colaborador}")
+        # A tarefa não será finalizada aqui. O QA decidirá isso na revisão.
+        print(
+            f"Tarefa processada pelo colaborador {colaborador.nome_do_colaborador}, aguardando revisão do QA."
+        )
 
         return mesa
 

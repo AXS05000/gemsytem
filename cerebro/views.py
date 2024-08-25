@@ -138,18 +138,32 @@ def revisar_tarefa_qa(qa_id, colaborador_id, tarefa_id):
     status_qa = status_qa.strip().lower()
 
     if status_qa == "correto":
-        # Se estiver correto, finalizar a tarefa e salvar observações
+        # Se estiver correto, finalizar a tarefa do colaborador e do QA
         tarefa.status = "F"
         tarefa.save()
+
         mesa.mesa += f"\n\nObservações do QA: {observacoes_qa.strip()}"
         mesa.save()
+
+        # Finaliza a tarefa do QA
+        tarefa_qa = Atuais_Demandas.objects.get(id=tarefa_id)
+        tarefa_qa.status = "F"
+        tarefa_qa.save()
+
         print(f"Tarefa finalizada com sucesso pelo QA: {qa.nome_do_colaborador}")
     else:
         # Se estiver incorreto, deixar a tarefa pendente e adicionar as observações do QA
-        tarefa.status = "P"  # Mantém a tarefa como pendente
+        tarefa.status = "P"  # Mantém a tarefa do colaborador como pendente
         tarefa.save()
+
         mesa.mesa = f"Observações do QA: {observacoes_qa.strip()}\n\n{mesa.mesa}"
         mesa.save()
+
+        # Deixar a tarefa do QA como pendente também
+        tarefa_qa = Atuais_Demandas.objects.get(id=tarefa_id)
+        tarefa_qa.status = "P"
+        tarefa_qa.save()
+
         print(f"Tarefa revisada pelo QA com correções: {qa.nome_do_colaborador}")
 
 
