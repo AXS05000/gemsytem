@@ -233,10 +233,26 @@ class Mesa_de_trabalho(models.Model):
     colaborador = models.ForeignKey(
         Colaboradores,
         on_delete=models.CASCADE,
-        related_name="mesas_de_trabalho_colaborador",
-        verbose_name="Mesas de Trabalho do Colaborador",
+        related_name="mesas_de_trabalho_colaborador_criador",
+        verbose_name="Mesas de Trabalho do Colaborador Criador",
     )
     mesa = models.TextField(blank=True, null=True)
+    colaborador_responsavel_tarefa = models.ForeignKey(
+        Colaboradores,
+        on_delete=models.CASCADE,
+        related_name="mesas_de_trabalho_colaborador_responsavel_tarefa",
+        verbose_name="Mesas de Trabalho do Colaborador Responsável Tarefa",
+        blank=True,
+        null=True,
+    )
+    id_tarefa = models.ForeignKey(
+        Atuais_Demandas,
+        on_delete=models.CASCADE,
+        related_name="id_tarefa_relacionada",
+        verbose_name="Id da Tarefa Relacionada",
+        blank=True,
+        null=True,
+    )
 
     # Local onde será entregue seus trabalhos
     def __str__(self):
