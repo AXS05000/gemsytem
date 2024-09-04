@@ -8,6 +8,7 @@ from .views import (
     SignUpView,
     TablesView,
     WalletView,
+    AjustarTarefaView,
 )
 
 urlpatterns = [
@@ -19,4 +20,5 @@ urlpatterns = [
     path("sign-up/", SignUpView.as_view(), name="sign_up"),
     path("tables/", TablesView.as_view(), name="tables"),
     path("wallet/", WalletView.as_view(), name="wallet"),
+    path("ajustar-tarefa/", AjustarTarefaView.as_view(), name="ajustar_tarefa"),
 ]

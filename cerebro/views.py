@@ -1,10 +1,11 @@
 import openai
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Atuais_Demandas, Mesa_de_trabalho, Colaboradores
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views import View
 from django.views.generic import TemplateView
+from .forms import AjustarTarefaForm
 from .models import (
     Conhecimento,
     Consulta_De_Conhecimento,
@@ -182,6 +183,37 @@ def atribuir_tarefa_form(request):
         id__in=[4, 5]
     )  # IDs do Ricardo e Leonardo
     return render(request, "atribuir_tarefa.html", {"colaboradores": colaboradores})
+
+
+class AjustarTarefaView(View):
+    def get(self, request, *args, **kwargs):
+        form = AjustarTarefaForm()
+        return render(request, "ajustar_tarefa.html", {"form": form})
+
+    def post(self, request, *args, **kwargs):
+        form = AjustarTarefaForm(request.POST)
+        if form.is_valid():
+            colaborador = form.cleaned_data["colaborador"]
+            tarefa = form.cleaned_data["tarefa"]
+            ajuste = form.cleaned_data["ajuste"]
+
+            # Salvar os ajustes na mesa de trabalho do colaborador
+            try:
+                mesa = Mesa_de_trabalho.objects.filter(colaborador=colaborador).latest(
+                    "id"
+                )
+            except Mesa_de_trabalho.DoesNotExist:
+                mesa = Mesa_de_trabalho.objects.create(colaborador=colaborador, mesa="")
+
+            mesa.mesa += f"\n\nAjuste Solicitado:\n{ajuste}"
+            mesa.save()
+
+            # Chamar a função para revisar a tarefa com os ajustes
+            tarefa.revisar_tarefa_com_ajustes(colaborador=colaborador)
+
+            return redirect(reverse("ajustar_tarefa"))
+
+        return render(request, "ajustar_tarefa.html", {"form": form})
 
 
 class DashboardView(TemplateView):
