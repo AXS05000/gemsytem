@@ -205,7 +205,11 @@ class AjustarTarefaView(View):
             except Mesa_de_trabalho.DoesNotExist:
                 mesa = Mesa_de_trabalho.objects.create(colaborador=colaborador, mesa="")
 
-            mesa.mesa += f"\n\nAjuste Solicitado:\n{ajuste}"
+            # Alterado para salvar os ajustes na coluna 'anotacoes' em vez de 'mesa'
+            mesa.anotacoes = (
+                (mesa.anotacoes or "")
+                + f"\n\nRealize também o ajustes solicitados pelo usuario, ele tem prioridade casa algum pedido seja conflintante com o do QA:\n{ajuste}"
+            )
             mesa.save()
 
             # Chamar a função para revisar a tarefa com os ajustes
