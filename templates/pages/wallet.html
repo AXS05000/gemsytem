@@ -280,8 +280,8 @@
         <div class="col-12">
           <div class="d-md-flex align-items-center mb-4">
             <div class="mb-md-0 mb-4">
-              <h5 class="font-weight-semibold mb-1">Your cards</h5>
-              <p class="text-sm mb-0">Pick an account plan that fits your workflow.</p>
+              <h5 class="font-weight-semibold mb-1">Gerencie seus Colaboradores</h5>
+              <p class="text-sm mb-0">Clique aqui para editar seus colaboradores.</p>
             </div>
             <button type="button" class="btn btn-sm btn-dark btn-icon d-flex align-items-center mb-0 ms-md-auto">
               <span class="btn-inner--icon">
@@ -289,14 +289,14 @@
                   <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32L19.513 8.2z" />
                 </svg>
               </span>
-              <span class="btn-inner--text">Manage cards</span>
+              <span class="btn-inner--text">Editar Colaboradores</span>
             </button>
           </div>
         </div>
         <hr>
         <div class="col-md-4">
-          <h6 class="text-sm font-weight-semibold mb-1">Card details</h6>
-          <p class="text-sm">We’ll credit your account if you need to <br> downgrade during the billing cycle.</p>
+          <h6 class="text-sm font-weight-semibold mb-1">Cartões:</h6>
+          <p class="text-sm">Acompanhe seus custos em dolares do consumo<br>usado por seus colaboradores.</p>
         </div>
         <div class="col-md-8 mb-4">
           <div class="card border shadow-xs">
@@ -308,13 +308,43 @@
                     <div class="card-body text-start ps-3 pe-2 pt-2 pb-2 w-100">
                       <div class="row">
                         <div class="col-8 py-2">
-                          <p class="text-white text-sm font-weight-bold mb-6">Corporate UI</p>
+                          <p class="text-white text-sm font-weight-bold mb-6">Corporativo SEB</p>
                           <div class="d-flex align-items-center mb-0 mt-auto">
-                            <p class="font-weight-semibold mb-0">Noah Jackes</p>
-                            <span class="ms-auto text-xs font-weight-bolder text-pt-mono">08/28</span>
+                            <p class="font-weight-semibold mb-0">SEB</p>
+                            <span class="ms-auto text-xs font-weight-bolder text-pt-mono">--/--</span>
                           </div>
-                          <span class="ms-auto text-sm font-weight-bolder text-pt-mono">1234&nbsp;&nbsp;6578&nbsp;&nbsp;9000&nbsp;&nbsp;1234</span>
+                          <span class="ms-auto text-sm font-weight-bolder text-pt-mono">----&nbsp;&nbsp;----&nbsp;&nbsp;----&nbsp;&nbsp;----</span>
                         </div>
+                        <div class="col-4 py-2 text-end mt-auto">
+                          <img src="{% static 'assets/img/logos/visa-white.png' %}" class="w-50 ms-auto me-3" alt="visa" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="progress-wrapper w-100 mb-lg-0 mb-5">
+                    <div class="d-flex align-items-center mb-2">
+                      <span class="text-sm font-weight-semibold">Total usado do saldo carregado</span>
+                      <p class="text-dark font-weight-bold ms-auto mb-0">$64,90</p>
+                    </div>
+                    <div class="progress">
+                      <div class="progress-bar progress-bar-lg bg-gradient-dark w-30" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-5">
+                  <div class="card card-background card-background-after-none align-items-start mb-2">
+                    <div class="full-background" style="background-image: url({% static 'assets/img/curved-images/img-7.jpg' %}"></div>
+                    <div class="card-body text-start p-2 w-100">
+                      <div class="row">
+                        <div class="col-8 py-2">
+                          <p class="text-white text-sm font-weight-bold mb-6">Nubank</p>
+                          <div class="d-flex align-items-center mb-0 mt-auto">
+                            <p class="font-weight-semibold mb-0">Alex Sobreira</p>
+                            <span class="ms-auto text-xs font-weight-bolder text-pt-mono">--/--</span>
+                          </div>
+                          <span class="ms-auto text-sm font-weight-bolder text-pt-mono">----&nbsp;&nbsp;----&nbsp;&nbsp;----&nbsp;&nbsp;----</span>
+                        </div>
+
                         <div class="col-4">
                           <div class="blur d-flex flex-column w-80 h-100 py-2 ms-auto border-radius-lg border border-white">
                             <div class="text-center w-100">
@@ -328,49 +358,13 @@
                       </div>
                     </div>
                   </div>
-                  <div class="progress-wrapper w-100 mb-lg-0 mb-5">
-                    <div class="d-flex align-items-center mb-2">
-                      <span class="text-sm font-weight-semibold">This month</span>
-                      <p class="text-dark font-weight-bold ms-auto mb-0">$56,982.20</p>
-                    </div>
-                    <div class="progress">
-                      <div class="progress-bar progress-bar-lg bg-gradient-dark w-60" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-5">
-                  <div class="card card-background card-background-after-none align-items-start mb-2">
-                    <div class="full-background" style="background-image: url({% static 'assets/img/curved-images/img-7.jpg' %}"></div>
-                    <div class="card-body text-start p-2 w-100">
-                      <div class="row">
-                        <div class="col-12">
-                          <div class="blur d-flex align-items-center w-100 border-radius-md border border-white mb-4 p-2">
-                            <p class="text-white text-sm w-50 mb-0 font-weight-bold">Corporate UI</p>
-                            <div class="text-end ms-auto w-100 pe-2">
-                              <img src="{% static 'assets/img/logos/wifi-white.png' %}" class="w-10 ms-auto" alt="wifi" />
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-8 py-2 mt-auto">
-                          <div class="d-flex align-items-center mb-0 mt-auto ms-2">
-                            <p class="font-weight-semibold mb-0 mt-3">Noah Jackes</p>
-                            <span class="ms-auto text-xs font-weight-bolder text-pt-mono">08/28</span>
-                          </div>
-                          <span class="text-sm font-weight-bolder text-pt-mono ms-2">1234&nbsp;&nbsp;6578&nbsp;&nbsp;9000&nbsp;&nbsp;1234</span>
-                        </div>
-                        <div class="col-4 py-2 text-end mt-auto">
-                          <img src="{% static 'assets/img/logos/visa-white.png' %}" class="w-50 ms-auto me-3" alt="visa" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
                   <div class="progress-wrapper w-100">
                     <div class="d-flex align-items-center mb-2">
-                      <span class="text-sm font-weight-semibold">This month</span>
-                      <p class="text-dark font-weight-bold ms-auto mb-0">$16,748.05</p>
+                      <span class="text-sm font-weight-semibold">Total usado do saldo carregado</span>
+                      <p class="text-dark font-weight-bold ms-auto mb-0">$51,44</p>
                     </div>
                     <div class="progress">
-                      <div class="progress-bar progress-bar-lg bg-gradient-dark w-40" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                      <div class="progress-bar progress-bar-lg bg-gradient-dark w-100" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                   </div>
                 </div>
