@@ -261,8 +261,9 @@ class WalletView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        # Calcula o total de tokens de todos os colaboradores
+        # Calcula o total de tokens de todos os colaboradores e formata o número
         total_tokens = Custo.objects.aggregate(total=Sum("tokens"))["total"] or 0
+        formatted_total_tokens = "{:,}".format(total_tokens).replace(",", ".")
 
         # Prepara os dados para o gráfico
         colaboradores = Colaboradores.objects.all()
@@ -277,7 +278,7 @@ class WalletView(TemplateView):
             for colaborador in colaboradores
         ]
 
-        context["total_tokens"] = total_tokens
+        context["total_tokens"] = formatted_total_tokens
         context["labels"] = labels
         context["data"] = data
         context["colaboradores"] = Colaboradores.objects.all()
