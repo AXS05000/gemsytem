@@ -6,9 +6,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="apple-touch-icon" sizes="76x76" href="{% static 'assets/img/apple-icon.png' %}">
-  <link rel="icon" type="image/png" href="{% static 'assets/img/favicon.png' %}">
   <title>
-    Corporate UI by Creative Tim
+   GS - Atribuir Tarefa
   </title>
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Noto+Sans:300,400,500,600,700,800|PT+Mono:300,400,500,600,700" rel="stylesheet" />
@@ -52,7 +51,7 @@
             <div class="card-body p-4">
               <div class="icon icon-shape bg-white shadow shadow-xs text-center border-radius-md d-flex align-items-center justify-content-center mb-3">
                 <svg xmlns="http://www.w3.org/2000/svg" height="19" width="19" viewBox="0 0 24 24" fill="currentColor">
-          <path d=" M19.5 22.5a3 3 0 003-3v-8.174l-6.879 4.022 3.485 1.876a.75.75 0 01-.712 1.321l-5.683-3.06a1.5 1.5 0 00-1.422 0l-5.683 3.06a.75.75 0 01-.712-1.32l3.485-1.877L1.5 11.326V19.5a3 3 0 003 3h15z" />
+                <path d=" M19.5 22.5a3 3 0 003-3v-8.174l-6.879 4.022 3.485 1.876a.75.75 0 01-.712 1.321l-5.683-3.06a1.5 1.5 0 00-1.422 0l-5.683 3.06a.75.75 0 01-.712-1.32l3.485-1.877L1.5 11.326V19.5a3 3 0 003 3h15z" />
                 <path d="M1.5 9.589v-.745a3 3 0 011.578-2.641l7.5-4.039a3 3 0 012.844 0l7.5 4.039A3 3 0 0122.5 8.844v.745l-8.426 4.926-.652-.35a3 3 0 00-2.844 0l-.652.35L1.5 9.59z" />
                 </svg>
               </div>
@@ -96,9 +95,164 @@
               Gerenciamento de Tarefas
             </h3>
           </div>
-          <label>Atribuir Tarefa:</label>
           <div class="mb-3">
             <input type="text" class="form-control" placeholder="Digite a tarefa aqui..." aria-label="Name" aria-describedby="name-addon">
+          </div>
+          <br>
+          <br>
+
+          <div class="row">
+            <div class="col-md-4">
+              <h6 class="text-sm font-weight-semibold mb-1">Escola o colaborador para Tarefa:</h6>
+              <p class="text-sm">Defina o melhor colaborador para executar <br> as tarefas solicitadas.</p>
+            </div>
+            <div class="col-md-8 mb-6">
+              <div class="card shadow-xs border mb-4">
+                <div class="table-responsive p-0">
+                  <table class="table align-items-center mb-0">
+                    <thead>
+                      <tr>
+                        <th class="d-flex align-items-center py-3 px-4 text-sm">
+                          <div class="form-check mb-0">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                          </div>
+                          <span class="text-xs font-weight-semibold opacity-7 ms-1">Nome Colaborador</span>
+                        </th>
+                        <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">Status</th>
+                        <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">Cargo</th>
+                        <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">Empresa</th>
+                        <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">Mesa</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for colaborador in colaboradores %}
+                      <tr>
+                        <td class="d-flex align-items-center py-3 px-4 text-sm">
+                          <div class="form-check mb-0">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                          </div>
+                          <span class="font-weight-semibold text-dark ms-1">{{ colaborador.nome_do_colaborador }}</span>
+                        </td>
+                        <td>
+                          {% if colaborador.status == 'ativo' %}
+                          <span class="badge badge-sm border border-success text-success bg-success">
+                            <svg width="9" height="9" viewBox="0 0 10 9" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" class="me-1">
+                              <path d="M1 4.42857L3.28571 6.71429L9 1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                            Ativo
+                          </span>
+                          {% elif colaborador.status == 'contratacao' %}
+                          <span class="badge badge-sm border border-warning text-warning bg-warning">
+                            <svg width="12" height="12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="me-1ca">
+                              <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 6a.75.75 0 00-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 000-1.5h-3.75V6z" clip-rule="evenodd" />
+                            </svg>
+                            Em Contratação
+                          </span>
+                          {% elif colaborador.status == 'demitido' %}
+                          <span class="badge badge-sm border border-danger text-danger bg-danger">
+                            <svg width="12" height="12" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="me-1">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                            Demitido
+                          </span>
+                          {% endif %}
+                        </td>
+                        <td>
+                          <span class="text-sm">{{ colaborador.cargo }}</span>
+                        </td>
+                        <td>
+                          <span class="text-sm">GS</span>
+                        </td>
+                        <td class="text-sm font-weight-semibold text-dark">
+                          <span class="btn-inner--icon">
+                            <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="d-block me-2">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"></path>
+                            </svg>
+                          </span>
+                        </td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="card shadow-xs border mb-4">
+                    <div class="card-body py-0">
+                      <div class="row">
+                        <div class="col-4 pe-1">
+                          <div class="chart">
+                            <canvas id="chart-doughnut-info" class="chart-canvas" height="150"></canvas>
+                          </div>
+                        </div>
+                        <div class="col-8 my-auto">
+                          <div class="d-flex">
+                            <div>
+                              <h4 class="font-weight-semibold text-lg mb-4">Custo Analistas</h4>
+                              <p class="text-sm mb-1">Total de Tokens</p>
+                              <h3 class="mb-0 font-weight-bold"> {{ total_tokens }}</h3>
+                            </div>
+                            <div class="ms-auto text-end d-flex flex-column">
+                              <div class="dropdown">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="ms-auto cursor-pointer dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                  <path fill-rule="evenodd" d="M10.5 6a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zm0 6a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zm0 6a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" clip-rule="evenodd" />
+                                </svg>
+                                <ul class="dropdown-menu dropdown-menu-end me-n4">
+                                  <li><a class="dropdown-item" href="#">Action</a></li>
+                                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="card shadow-xs border mb-4">
+                    <div class="card-body py-0">
+                      <div class="row">
+                        <div class="col-4 pe-1">
+                          <div class="chart">
+                            <canvas id="chart-doughnut-dark" class="chart-canvas" height="150"></canvas>
+                          </div>
+                        </div>
+                        <div class="col-8 my-auto">
+                          <div class="d-flex">
+                            <div>
+                              <h4 class="font-weight-semibold text-lg mb-4">Custo QA</h4>
+                              <p class="text-sm mb-1">Total de Tokens</p>
+                              <h3 class="mb-0 font-weight-bold">$10,250.60</h3>
+                            </div>
+                            <div class="ms-auto text-end d-flex flex-column">
+                              <div class="dropdown">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="ms-auto cursor-pointer dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                  <path fill-rule="evenodd" d="M10.5 6a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zm0 6a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zm0 6a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" clip-rule="evenodd" />
+                                </svg>
+                                <ul class="dropdown-menu dropdown-menu-end me-n4">
+                                  <li><a class="dropdown-item" href="#">Action</a></li>
+                                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                </ul>
+                              </div>
+                              <span class="badge badge-sm border border-success text-success bg-success border-radius-sm mt-auto mb-2">
+                                <svg width="9" height="9" viewBox="0 0 10 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M0.46967 4.46967C0.176777 4.76256 0.176777 5.23744 0.46967 5.53033C0.762563 5.82322 1.23744 5.82322 1.53033 5.53033L0.46967 4.46967ZM5.53033 1.53033C5.82322 1.23744 5.82322 0.762563 5.53033 0.46967C5.23744 0.176777 4.76256 0.176777 4.46967 0.46967L5.53033 1.53033ZM5.53033 0.46967C5.23744 0.176777 4.76256 0.176777 4.46967 0.46967C4.17678 0.762563 4.17678 1.23744 4.46967 1.53033L5.53033 0.46967ZM8.46967 5.53033C8.76256 5.82322 9.23744 5.82322 9.53033 5.53033C9.82322 5.23744 9.82322 4.76256 9.53033 4.46967L8.46967 5.53033ZM1.53033 5.53033L5.53033 1.53033L4.46967 0.46967L0.46967 4.46967L1.53033 5.53033ZM4.46967 1.53033L8.46967 5.53033L9.53033 4.46967L5.53033 0.46967L4.46967 1.53033Z" fill="#67C23A" />
+                                </svg>
+                                33.8%
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="d-md-flex align-items-center mb-4">
 
@@ -114,159 +268,7 @@
         </div>
       </div>
       <hr class="horizontal mb-4 dark">
-      <div class="row">
-        <div class="col-md-4">
-          <h6 class="text-sm font-weight-semibold mb-1">Escola o colaborador para Tarefa:</h6>
-          <p class="text-sm">Defina o melhor colaborador para executar <br> as tarefas solicitadas.</p>
-        </div>
-        <div class="col-md-8 mb-6">
-          <div class="card shadow-xs border mb-4">
-            <div class="table-responsive p-0">
-              <table class="table align-items-center mb-0">
-                <thead>
-                  <tr>
-                    <th class="d-flex align-items-center py-3 px-4 text-sm">
-                      <div class="form-check mb-0">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                      </div>
-                      <span class="text-xs font-weight-semibold opacity-7 ms-1">Nome Colaborador</span>
-                    </th>
-                    <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">Status</th>
-                    <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">Cargo</th>
-                    <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">Empresa</th>
-                    <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">Mesa</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {% for colaborador in colaboradores %}
-                  <tr>
-                    <td class="d-flex align-items-center py-3 px-4 text-sm">
-                      <div class="form-check mb-0">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                      </div>
-                      <span class="font-weight-semibold text-dark ms-1">{{ colaborador.nome_do_colaborador }}</span>
-                    </td>
-                    <td>
-                      {% if colaborador.status == 'ativo' %}
-                      <span class="badge badge-sm border border-success text-success bg-success">
-                        <svg width="9" height="9" viewBox="0 0 10 9" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" class="me-1">
-                          <path d="M1 4.42857L3.28571 6.71429L9 1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                        Ativo
-                      </span>
-                      {% elif colaborador.status == 'contratacao' %}
-                      <span class="badge badge-sm border border-warning text-warning bg-warning">
-                        <svg width="12" height="12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="me-1ca">
-                          <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 6a.75.75 0 00-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 000-1.5h-3.75V6z" clip-rule="evenodd" />
-                        </svg>
-                        Em Contratação
-                      </span>
-                      {% elif colaborador.status == 'demitido' %}
-                      <span class="badge badge-sm border border-danger text-danger bg-danger">
-                        <svg width="12" height="12" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="me-1">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                        Demitido
-                      </span>
-                      {% endif %}
-                    </td>
-                    <td>
-                      <span class="text-sm">{{ colaborador.cargo }}</span>
-                    </td>
-                    <td>
-                      <span class="text-sm">GS</span>
-                    </td>
-                    <td class="text-sm font-weight-semibold text-dark">
-                      <span class="btn-inner--icon">
-                        <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="d-block me-2">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"></path>
-                        </svg>
-                      </span>
-                    </td>
-                  </tr>
-                  {% endfor %}
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-6">
-              <div class="card shadow-xs border mb-4">
-                <div class="card-body py-0">
-                  <div class="row">
-                    <div class="col-4 pe-1">
-                      <div class="chart">
-                        <canvas id="chart-doughnut-info" class="chart-canvas" height="150"></canvas>
-                      </div>
-                    </div>
-                    <div class="col-8 my-auto">
-                      <div class="d-flex">
-                        <div>
-                          <h4 class="font-weight-semibold text-lg mb-4">Custo Analistas</h4>
-                          <p class="text-sm mb-1">Total de Tokens</p>
-                          <h3 class="mb-0 font-weight-bold"> {{ total_tokens }}</h3>
-                        </div>
-                        <div class="ms-auto text-end d-flex flex-column">
-                          <div class="dropdown">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="ms-auto cursor-pointer dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                              <path fill-rule="evenodd" d="M10.5 6a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zm0 6a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zm0 6a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" clip-rule="evenodd" />
-                            </svg>
-                            <ul class="dropdown-menu dropdown-menu-end me-n4">
-                              <li><a class="dropdown-item" href="#">Action</a></li>
-                              <li><a class="dropdown-item" href="#">Another action</a></li>
-                              <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="card shadow-xs border mb-4">
-                <div class="card-body py-0">
-                  <div class="row">
-                    <div class="col-4 pe-1">
-                      <div class="chart">
-                        <canvas id="chart-doughnut-dark" class="chart-canvas" height="150"></canvas>
-                      </div>
-                    </div>
-                    <div class="col-8 my-auto">
-                      <div class="d-flex">
-                        <div>
-                          <h4 class="font-weight-semibold text-lg mb-4">Custo QA</h4>
-                          <p class="text-sm mb-1">Total de Tokens</p>
-                          <h3 class="mb-0 font-weight-bold">$10,250.60</h3>
-                        </div>
-                        <div class="ms-auto text-end d-flex flex-column">
-                          <div class="dropdown">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="ms-auto cursor-pointer dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                              <path fill-rule="evenodd" d="M10.5 6a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zm0 6a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zm0 6a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" clip-rule="evenodd" />
-                            </svg>
-                            <ul class="dropdown-menu dropdown-menu-end me-n4">
-                              <li><a class="dropdown-item" href="#">Action</a></li>
-                              <li><a class="dropdown-item" href="#">Another action</a></li>
-                              <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
-                          </div>
-                          <span class="badge badge-sm border border-success text-success bg-success border-radius-sm mt-auto mb-2">
-                            <svg width="9" height="9" viewBox="0 0 10 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M0.46967 4.46967C0.176777 4.76256 0.176777 5.23744 0.46967 5.53033C0.762563 5.82322 1.23744 5.82322 1.53033 5.53033L0.46967 4.46967ZM5.53033 1.53033C5.82322 1.23744 5.82322 0.762563 5.53033 0.46967C5.23744 0.176777 4.76256 0.176777 4.46967 0.46967L5.53033 1.53033ZM5.53033 0.46967C5.23744 0.176777 4.76256 0.176777 4.46967 0.46967C4.17678 0.762563 4.17678 1.23744 4.46967 1.53033L5.53033 0.46967ZM8.46967 5.53033C8.76256 5.82322 9.23744 5.82322 9.53033 5.53033C9.82322 5.23744 9.82322 4.76256 9.53033 4.46967L8.46967 5.53033ZM1.53033 5.53033L5.53033 1.53033L4.46967 0.46967L0.46967 4.46967L1.53033 5.53033ZM4.46967 1.53033L8.46967 5.53033L9.53033 4.46967L5.53033 0.46967L4.46967 1.53033Z" fill="#67C23A" />
-                            </svg>
-                            33.8%
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+
       <div class="row">
         <div class="col-12">
           <div class="d-md-flex align-items-center mb-4">
