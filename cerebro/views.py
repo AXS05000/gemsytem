@@ -58,7 +58,7 @@ class AtribuirTarefaView(View):
                 qa_id=1, colaborador_id=colaborador.id, tarefa_id=demanda_qa.id
             )
 
-        return HttpResponseRedirect(reverse("atribuir_tarefa_form"))
+        return HttpResponseRedirect(reverse("wallet"))
 
 
 def revisar_tarefa_qa(qa_id, colaborador_id, tarefa_id):
