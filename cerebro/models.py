@@ -143,11 +143,11 @@ class Atuais_Demandas(models.Model):
         print("Contexto adicional montado.")
 
         if not gerar_sugestoes:
-            # Usando a API da OpenAI para processar a tarefa com o modelo gpt-4-turbo
+            # Usando a API da OpenAI para processar a tarefa com o modelo gpt-4o-2024-08-06
             print("Enviando tarefa para a API da OpenAI...")
             response = openai.ChatCompletion.create(
                 api_key=colaborador.api_key,
-                model="gpt-4-turbo",
+                model="gpt-4o-2024-08-06",
                 messages=[
                     {
                         "role": "system",
@@ -196,7 +196,7 @@ class Atuais_Demandas(models.Model):
             mesa = Mesa_de_trabalho.objects.filter(colaborador=colaborador).latest("id")
             sugestao_response = openai.ChatCompletion.create(
                 api_key=colaborador.api_key,
-                model="gpt-4-turbo",
+                model="gpt-4o-2024-08-06",
                 messages=[
                     {
                         "role": "system",
@@ -284,11 +284,11 @@ class Atuais_Demandas(models.Model):
 
         print("Contexto adicional montado para revisão.")
 
-        # Usando a API da OpenAI para revisar a tarefa com o modelo gpt-4-turbo
+        # Usando a API da OpenAI para revisar a tarefa com o modelo gpt-4o-2024-08-06
         print("Enviando tarefa revisada para a API da OpenAI...")
         response = openai.ChatCompletion.create(
             api_key=colaborador.api_key,
-            model="gpt-4-turbo",
+            model="gpt-4o-2024-08-06",
             messages=[
                 {
                     "role": "system",

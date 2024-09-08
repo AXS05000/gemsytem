@@ -113,7 +113,7 @@ def revisar_tarefa_qa(qa_id, colaborador_id, tarefa_id):
     print("QA analisando a tarefa...")
     response = openai.ChatCompletion.create(
         api_key=qa.api_key,
-        model="gpt-4-turbo",
+        model="gpt-4o-2024-08-06",
         messages=[
             {
                 "role": "system",
