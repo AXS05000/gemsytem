@@ -6,6 +6,7 @@ from django.urls import reverse
 from django.views import View
 from django.views.generic import TemplateView
 from .forms import AjustarTarefaForm
+from django.db.models import Sum
 from .models import (
     Conhecimento,
     Consulta_De_Conhecimento,
@@ -247,3 +248,37 @@ class TablesView(TemplateView):
 
 class WalletView(TemplateView):
     template_name = "pages/wallet.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["colaboradores"] = Colaboradores.objects.all()
+        return context
+
+
+class WalletView(TemplateView):
+    template_name = "pages/wallet.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        # Calcula o total de tokens de todos os colaboradores
+        total_tokens = Custo.objects.aggregate(total=Sum("tokens"))["total"] or 0
+
+        # Prepara os dados para o gráfico
+        colaboradores = Colaboradores.objects.all()
+        labels = [
+            colaborador.nome_do_colaborador.split()[0] for colaborador in colaboradores
+        ]
+        data = [
+            Custo.objects.filter(colaborador=colaborador).aggregate(
+                total=Sum("tokens")
+            )["total"]
+            or 0
+            for colaborador in colaboradores
+        ]
+
+        context["total_tokens"] = total_tokens
+        context["labels"] = labels
+        context["data"] = data
+        context["colaboradores"] = Colaboradores.objects.all()
+        return context

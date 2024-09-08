@@ -93,18 +93,14 @@
         <div class="col-md-12">
           <div class="d-flex align-items-center mb-4">
             <h3 class="mb-1 font-weight-bold">
-              Wallet
+              Gerenciamento de Tarefas
             </h3>
           </div>
-          <label>Name</label>
+          <label>Atribuir Tarefa:</label>
           <div class="mb-3">
-            <input type="text" class="form-control" placeholder="Enter your name" aria-label="Name" aria-describedby="name-addon">
+            <input type="text" class="form-control" placeholder="Digite a tarefa aqui..." aria-label="Name" aria-describedby="name-addon">
           </div>
           <div class="d-md-flex align-items-center mb-4">
-            <div class="mb-md-0 mb-3">
-              <h5 class="font-weight-semibold mb-1">Billing and invoicing</h5>
-              <p class="text-sm mb-0">Pick an account plan that fits your workflow.</p>
-            </div>
 
             <button type="button" class="btn btn-sm btn-dark btn-icon d-flex align-items-center mb-0 ms-md-auto">
               <span class="btn-inner--icon">
@@ -112,7 +108,7 @@
                   <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"></path>
                 </svg>
               </span>
-              <span class="btn-inner--text">Download</span>
+              <span class="btn-inner--text">Enviar Tarefa</span>
             </button>
           </div>
         </div>
@@ -120,8 +116,8 @@
       <hr class="horizontal mb-4 dark">
       <div class="row">
         <div class="col-md-4">
-          <h6 class="text-sm font-weight-semibold mb-1">Billing history</h6>
-          <p class="text-sm">We’ll credit your account if you need to <br> downgrade during the billing cycle.</p>
+          <h6 class="text-sm font-weight-semibold mb-1">Escola o colaborador para Tarefa:</h6>
+          <p class="text-sm">Defina o melhor colaborador para executar <br> as tarefas solicitadas.</p>
         </div>
         <div class="col-md-8 mb-6">
           <div class="card shadow-xs border mb-4">
@@ -133,190 +129,62 @@
                       <div class="form-check mb-0">
                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                       </div>
-                      <span class="text-xs font-weight-semibold opacity-7 ms-1">All invoices</span>
+                      <span class="text-xs font-weight-semibold opacity-7 ms-1">Nome Colaborador</span>
                     </th>
                     <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">Status</th>
-                    <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">Amount</th>
-                    <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">Plan</th>
-                    <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2"></th>
+                    <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">Cargo</th>
+                    <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">Empresa</th>
+                    <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">Mesa</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td class="d-flex align-items-center py-3 px-4 text-sm">
-                      <div class="form-check mb-0">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
-                      </div>
-                      <span class="font-weight-semibold text-dark ms-1">Jan 2022</span>
-                    </td>
-                    <td>
-                      <span class="badge badge-sm border border-success text-success bg-success border-radius-sm">
-                        <svg width="9" height="9" viewBox="0 0 10 9" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" class="me-1">
-                          <path d="M1 4.42857L3.28571 6.71429L9 1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                        Paid
-                      </span>
-                    </td>
-                    <td>
-                      <span class="text-sm">USD $30.00</span>
-                    </td>
-                    <td>
-                      <span class="text-sm">Basic Plan</span>
-                    </td>
-                    <td class="text-sm font-weight-semibold text-dark">
-                      <span class="text-sm">Download</span>
-                    </td>
-                  </tr>
+                  {% for colaborador in colaboradores %}
                   <tr>
                     <td class="d-flex align-items-center py-3 px-4 text-sm">
                       <div class="form-check mb-0">
                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                       </div>
-                      <span class="font-weight-semibold text-dark ms-1">Feb 2022</span>
+                      <span class="font-weight-semibold text-dark ms-1">{{ colaborador.nome_do_colaborador }}</span>
                     </td>
                     <td>
-                      <span class="badge badge-sm border border-success text-success bg-success border-radius-sm">
+                      {% if colaborador.status == 'ativo' %}
+                      <span class="badge badge-sm border border-success text-success bg-success">
                         <svg width="9" height="9" viewBox="0 0 10 9" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" class="me-1">
                           <path d="M1 4.42857L3.28571 6.71429L9 1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
-                        Paid
+                        Ativo
                       </span>
-                    </td>
-                    <td>
-                      <span class="text-sm">USD $30.00</span>
-                    </td>
-                    <td>
-                      <span class="text-sm">Basic Plan</span>
-                    </td>
-                    <td class="text-sm font-weight-semibold text-dark">
-                      <span class="text-sm">Download</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="d-flex align-items-center py-3 px-4 text-sm">
-                      <div class="form-check mb-0">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
-                      </div>
-                      <span class="font-weight-semibold text-dark ms-1">Mar 2022</span>
-                    </td>
-                    <td>
-                      <span class="badge badge-sm border border-success text-success bg-success border-radius-sm">
-                        <svg width="9" height="9" viewBox="0 0 10 9" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" class="me-1">
-                          <path d="M1 4.42857L3.28571 6.71429L9 1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                      {% elif colaborador.status == 'contratacao' %}
+                      <span class="badge badge-sm border border-warning text-warning bg-warning">
+                        <svg width="12" height="12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="me-1ca">
+                          <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 6a.75.75 0 00-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 000-1.5h-3.75V6z" clip-rule="evenodd" />
                         </svg>
-                        Paid
+                        Em Contratação
                       </span>
-                    </td>
-                    <td>
-                      <span class="text-sm">USD $30.00</span>
-                    </td>
-                    <td>
-                      <span class="text-sm">Basic Plan</span>
-                    </td>
-                    <td class="text-sm font-weight-semibold text-dark">
-                      <span class="text-sm">Download</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="d-flex align-items-center py-3 px-4 text-sm">
-                      <div class="form-check mb-0">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                      </div>
-                      <span class="font-weight-semibold text-dark ms-1">Apr 2022</span>
-                    </td>
-                    <td>
-                      <span class="badge badge-sm border border-success text-success bg-success border-radius-sm">
-                        <svg width="9" height="9" viewBox="0 0 10 9" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" class="me-1">
-                          <path d="M1 4.42857L3.28571 6.71429L9 1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                      {% elif colaborador.status == 'demitido' %}
+                      <span class="badge badge-sm border border-danger text-danger bg-danger">
+                        <svg width="12" height="12" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="me-1">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                         </svg>
-                        Paid
+                        Demitido
                       </span>
+                      {% endif %}
                     </td>
                     <td>
-                      <span class="text-sm">USD $30.00</span>
+                      <span class="text-sm">{{ colaborador.cargo }}</span>
                     </td>
                     <td>
-                      <span class="text-sm">Basic Plan</span>
+                      <span class="text-sm">GS</span>
                     </td>
                     <td class="text-sm font-weight-semibold text-dark">
-                      <span class="text-sm">Download</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="d-flex align-items-center py-3 px-4 text-sm">
-                      <div class="form-check mb-0">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                      </div>
-                      <span class="font-weight-semibold text-dark ms-1">May 2022</span>
-                    </td>
-                    <td>
-                      <span class="badge badge-sm border border-success text-success bg-success border-radius-sm">
-                        <svg width="9" height="9" viewBox="0 0 10 9" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" class="me-1">
-                          <path d="M1 4.42857L3.28571 6.71429L9 1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                      <span class="btn-inner--icon">
+                        <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="d-block me-2">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"></path>
                         </svg>
-                        Paid
                       </span>
                     </td>
-                    <td>
-                      <span class="text-sm">USD $30.00</span>
-                    </td>
-                    <td>
-                      <span class="text-sm">Basic Plan</span>
-                    </td>
-                    <td class="text-sm font-weight-semibold text-dark">
-                      <span class="text-sm">Download</span>
-                    </td>
                   </tr>
-                  <tr>
-                    <td class="d-flex align-items-center py-3 px-4 text-sm">
-                      <div class="form-check mb-0">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                      </div>
-                      <span class="font-weight-semibold text-dark ms-1">Jun 2022</span>
-                    </td>
-                    <td>
-                      <span class="badge badge-sm border border-success text-success bg-success border-radius-sm">
-                        <svg width="9" height="9" viewBox="0 0 10 9" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" class="me-1">
-                          <path d="M1 4.42857L3.28571 6.71429L9 1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                        Paid
-                      </span>
-                    </td>
-                    <td>
-                      <span class="text-sm">USD $30.00</span>
-                    </td>
-                    <td>
-                      <span class="text-sm">Basic Plan</span>
-                    </td>
-                    <td class="text-sm font-weight-semibold text-dark">
-                      <span class="text-sm">Download</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="d-flex align-items-center py-3 px-4 text-sm">
-                      <div class="form-check mb-0">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                      </div>
-                      <span class="font-weight-semibold text-dark ms-1">Jul 2022</span>
-                    </td>
-                    <td>
-                      <span class="badge badge-sm border border-success text-success bg-success border-radius-sm">
-                        <svg width="9" height="9" viewBox="0 0 10 9" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" class="me-1">
-                          <path d="M1 4.42857L3.28571 6.71429L9 1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                        Paid
-                      </span>
-                    </td>
-                    <td>
-                      <span class="text-sm">USD $30.00</span>
-                    </td>
-                    <td>
-                      <span class="text-sm">Basic Plan</span>
-                    </td>
-                    <td class="text-sm font-weight-semibold text-dark">
-                      <span class="text-sm">Download</span>
-                    </td>
-                  </tr>
+                  {% endfor %}
                 </tbody>
               </table>
             </div>
@@ -334,9 +202,9 @@
                     <div class="col-8 my-auto">
                       <div class="d-flex">
                         <div>
-                          <h4 class="font-weight-semibold text-lg mb-4">Primary Wallet</h4>
-                          <p class="text-sm mb-1">Current Balance</p>
-                          <h3 class="mb-0 font-weight-bold">$20,450.80</h3>
+                          <h4 class="font-weight-semibold text-lg mb-4">Custo Analistas</h4>
+                          <p class="text-sm mb-1">Total de Tokens</p>
+                          <h3 class="mb-0 font-weight-bold">$ {{ total_tokens }}</h3>
                         </div>
                         <div class="ms-auto text-end d-flex flex-column">
                           <div class="dropdown">
@@ -374,8 +242,8 @@
                     <div class="col-8 my-auto">
                       <div class="d-flex">
                         <div>
-                          <h4 class="font-weight-semibold text-lg mb-4">Secondary Wallet</h4>
-                          <p class="text-sm mb-1">Current Balance</p>
+                          <h4 class="font-weight-semibold text-lg mb-4">Custo QA</h4>
+                          <p class="text-sm mb-1">Total de Tokens</p>
                           <h3 class="mb-0 font-weight-bold">$10,250.60</h3>
                         </div>
                         <div class="ms-auto text-end d-flex flex-column">
