@@ -193,8 +193,9 @@
                                 <span class="text-sm">GS</span>
                               </td>
                               <td class="text-sm font-weight-semibold text-dark">
-                                <span class="btn-inner--icon">
-                                  <a type="button" class="open-modal" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#resumoNPSModal" data-mesa="{{ mesas|default_if_none:'' }}">                             
+                                <a type="button" class="open-modal" style="cursor: pointer;" data-bs-toggle="modal" 
+                                data-bs-target="#resumoNPSModal" 
+                                data-mesa="{{ colaborador.mesas_de_trabalho_colaborador_criador.first.mesa|default:'Sem mesa de trabalho disponível' }}">                    
                                     <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="10.177mm" height="10.3582mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
                                       viewBox="0 0 4039.55 4053.58"
                                       xmlns:xlink="http://www.w3.org/1999/xlink"
