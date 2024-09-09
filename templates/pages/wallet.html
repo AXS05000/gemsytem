@@ -25,7 +25,25 @@
   <main class="main-content max-height-vh-100 h-100">
     <!-- Sidenav Top -->
     {% include 'navbar/nav-gemsytem2.html' %}
-
+    
+    <!-- Modal -->
+    <div class="modal fade" id="resumoNPSModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="exampleModalLabel">Resumo da Mesa de Trabalho</h4>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <!-- Exibe o conteúdo da mesa -->
+            <textarea id="modalResumoNPS" class="form-control" rows="18" readonly></textarea>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- End Sidenav Top -->
     <div class="pt-5 pb-6 bg-cover" style="background-image: url({% static 'assets/img/header-blue-purple.jpg' %}"></div>
@@ -97,139 +115,175 @@
           </div>
           <form method="POST" action="{% url 'atribuir_tarefa' %}">
             {% csrf_token %}
-            <div class="mb-3">
-              <label for="tarefa" class="form-label">Tarefa:</label>
-              <textarea id="tarefa" name="tarefa" class="form-control" placeholder="Digite a tarefa aqui..." rows="4"></textarea>
-            </div>
-          <br>
-          <br>
+                  <div class="mb-3">
+                    <label for="tarefa" class="form-label">Tarefa:</label>
+                    <textarea id="tarefa" name="tarefa" class="form-control" placeholder="Digite a tarefa aqui..." rows="4"></textarea>
+                  </div>
+                <br>
+                <br>
 
-          <div class="row">
-            <div class="col-md-4">
-              <h6 class="text-sm font-weight-semibold mb-1">Escola o colaborador para Tarefa:</h6>
-              <p class="text-sm">Defina o melhor colaborador para executar <br> as tarefas solicitadas.</p>
-            </div>
-            <div class="col-md-8 mb-6">
-              <div class="card shadow-xs border mb-4">
-                <div class="table-responsive p-0">
-                  <table class="table align-items-center mb-0">
-                    <thead>
-                      <tr>
-                        <th class="d-flex align-items-center py-3 px-4 text-sm">
-                          <div class="form-check mb-0">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                          </div>
-                          <span class="text-xs font-weight-semibold opacity-7 ms-1">Nome Colaborador</span>
-                        </th>
-                        <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">Status</th>
-                        <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">Cargo</th>
-                        <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">Empresa</th>
-                        <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">Mesa</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {% for colaborador in colaboradores %}
-                      <tr>
-                        <td class="d-flex align-items-center py-3 px-4 text-sm">
-                          <div class="form-check mb-0">
-                            <input class="form-check-input" type="checkbox" name="colaboradores" value="{{ colaborador.id }}">
-                          </div>
-                          <span class="font-weight-semibold text-dark ms-1">{{ colaborador.nome_do_colaborador }}</span>
-                        </td>
-                        <td>
-                          {% if colaborador.status == 'ativo' %}
-                          <span class="badge badge-sm border border-success text-success bg-success">
-                            <svg width="9" height="9" viewBox="0 0 10 9" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" class="me-1">
-                              <path d="M1 4.42857L3.28571 6.71429L9 1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                            Ativo
-                          </span>
-                          {% elif colaborador.status == 'contratacao' %}
-                          <span class="badge badge-sm border border-warning text-warning bg-warning">
-                            <svg width="12" height="12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="me-1ca">
-                              <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 6a.75.75 0 00-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 000-1.5h-3.75V6z" clip-rule="evenodd" />
-                            </svg>
-                            Em Contratação
-                          </span>
-                          {% elif colaborador.status == 'demitido' %}
-                          <span class="badge badge-sm border border-danger text-danger bg-danger">
-                            <svg width="12" height="12" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="me-1">
-                              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                            Demitido
-                          </span>
-                          {% endif %}
-                        </td>
-                        <td>
-                          <span class="text-sm">{{ colaborador.cargo }}</span>
-                        </td>
-                        <td>
-                          <span class="text-sm">GS</span>
-                        </td>
-                        <td class="text-sm font-weight-semibold text-dark">
-                          <span class="btn-inner--icon">
-                            <a href="#">
-                            <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="10.177mm" height="10.3582mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
-                                  viewBox="0 0 4039.55 4053.58"
-                                  xmlns:xlink="http://www.w3.org/1999/xlink"
-                                  xmlns:xodm="http://www.corel.com/coreldraw/odm/2003">
-                                  <defs>
-                                    <style type="text/css">
-                                    <![CDATA[
-                                      .fil0 {fill:#283238}
-                                      .fil1 {fill:#293339}
-                                    ]]>
-                                    </style>
-                                  </defs>
-                                  <g id="Camada_x0020_1">
-                                    <metadata id="CorelCorpID_0Corel-Layer"/>
-                                    <path class="fil0" d="M1586.45 1625.86l939.98 1.03 -217.71 668.92 -939.97 -0.28 217.7 -669.67zm-1127.08 642.46c-92.41,-232.12 56.45,-343.59 170.82,-581.95 159.27,-331.96 115.33,-331.09 543.82,-331.09 180.95,0 565.59,39.61 645.32,0.16 -26.58,-129.43 -86.13,-129.47 -239.51,-135.31 -997.26,-37.86 -853.01,12.95 -1152.19,567.14 -84.47,156.48 -208.53,300.34 -109.93,494.56 -181.35,36.19 -248.89,-38.06 -317.69,82.67 52.68,94.51 24.75,67.02 194.82,70.48l2930.01 -3.34c364.05,-0.24 433.58,52.96 501.19,-67.14 -57.01,-101.85 -99.6,-70.95 -263.87,-69l-911.53 0.76c46.52,-197.44 262.31,-628.6 210.35,-779.52 -113.61,-50.18 -951.77,-27.21 -1163.52,-25.23l-265.3 796.61c-196.33,20.14 -610.84,22.65 -772.8,-19.79z"/>
-                                    <path class="fil0" d="M770.38 2566.47c-164.9,-0.12 -695.54,-64.16 -770.38,67.14 55.34,98.6 62.53,70.12 229.38,69.8l2996.48 -2.7 -0.6 1210.99 -2454.88 0.2c-163.24,-0.12 -695.82,-63.69 -770.38,67.09 55.34,98.64 62.53,70.16 229.38,69.8l2626.38 -2.7c607.55,-0.32 503.9,145.96 504.65,-840.7 0.33,-442.52 69.37,-623.36 -130.26,-642.78l-2459.76 3.86z"/>
-                                    <path class="fil0" d="M2552.57 649.1c0,-607.14 -102.14,-505.01 505,-505.01 999.01,1.32 841.38,-107.5 841.38,538.66 0,504.57 136.07,396.24 -714.05,407.2 -81.55,106.31 -116.91,155.41 -221.59,262 -23,-293.03 55.22,-256 -243.93,-263.99 -238.83,-6.39 -166.81,-66.06 -166.81,-438.86zm690.85 571.66c156.37,0 549.57,28.68 670.03,-19.78 166.89,-67.22 120.25,-333.22 119.69,-518.2 -2.11,-707.61 80.45,-673.52 -639.2,-672.85 -788.77,0.75 -976.4,-101.58 -977.24,334.46 -1.51,822.27 -83.07,876.37 405.61,876.37 -3.38,513.95 -1.59,579.26 421.1,0z"/>
-                                    <path class="fil1" d="M1181.99 441.57c303.2,-145.01 516.69,346.29 199.03,484.46 -288.73,125.61 -567.09,-308.4 -199.03,-484.46zm-28.96 -133.33c-189.58,70.51 -350.67,224.1 -254.89,515.14 58.2,176.78 254.05,323.3 517.12,235.9 477.4,-158.6 243.73,-939.22 -262.23,-751.04z"/>
-                                    <path class="fil1" d="M766.45 2027.02c143.81,-337.72 247.74,-335.73 61.18,-397.95 -27.73,34.68 -251.39,418.21 -244.44,467.59 13.59,96.42 485.06,121.6 553.99,-1.23 -59.03,-106.35 23.16,-63.84 -370.73,-68.41z"/>
-                                    <path class="fil0" d="M2735.51 786.47c128.99,4.85 417.41,11.4 561.14,7.39 0,0 -6.08,-61.53 -4.93,-88.79 0,0 -453.44,1.07 -558.67,4.53 0,0 2.46,76.87 2.46,76.87z"/>
-                                    <path class="fil0" d="M3229.31 441.01l0 80.76c153.03,-5.76 389.01,-5.76 530.87,-0.56l0.08 -80.56c-148.5,-3.3 -404.14,-3.3 -530.95,0.36z"/>
-                                    <path class="fil0" d="M2689.38 433.14l1.79 88.19c127.44,1.23 238.88,1.23 396.31,-0.12l0.04 -80.56 -398.14 -7.51z"/>
-                                  </g>
-                            </svg>
-                            </a>
-
-                          </span>
-                        </td>
-                      </tr>
-                      {% endfor %}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-lg-6">
-                  <div class="card shadow-xs border mb-4">
-                    <div class="card-body py-0">
-                      <div class="row">
-                        <div class="col-4 pe-1">
-                          <div class="chart">
-                            <canvas id="chart-doughnut-info" class="chart-canvas" height="150"></canvas>
+                <div class="row">
+                  <div class="col-md-4">
+                    <h6 class="text-sm font-weight-semibold mb-1">Escola o colaborador para Tarefa:</h6>
+                    <p class="text-sm">Defina o melhor colaborador para executar <br> as tarefas solicitadas.</p>
+                  </div>
+                  <div class="col-md-8 mb-6">
+                    <div class="card shadow-xs border mb-4">
+                      <div class="table-responsive p-0">
+                        <table class="table align-items-center mb-0">
+                          <thead>
+                            <tr>
+                              <th class="d-flex align-items-center py-3 px-4 text-sm">
+                                <div class="form-check mb-0">
+                                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                </div>
+                                <span class="text-xs font-weight-semibold opacity-7 ms-1">Nome Colaborador</span>
+                              </th>
+                              <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">Status</th>
+                              <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">Cargo</th>
+                              <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">Empresa</th>
+                              <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">Mesa</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {% for colaborador in colaboradores %}
+                            <tr>
+                              <td class="d-flex align-items-center py-3 px-4 text-sm">
+                                <div class="form-check mb-0">
+                                  <input class="form-check-input" type="checkbox" name="colaboradores" value="{{ colaborador.id }}">
+                                </div>
+                                <span class="font-weight-semibold text-dark ms-1">{{ colaborador.nome_do_colaborador }}</span>
+                              </td>
+                              <td>
+                                {% if colaborador.status == 'ativo' %}
+                                <span class="badge badge-sm border border-success text-success bg-success">
+                                  <svg width="9" height="9" viewBox="0 0 10 9" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" class="me-1">
+                                    <path d="M1 4.42857L3.28571 6.71429L9 1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                  </svg>
+                                  Ativo
+                                </span>
+                                {% elif colaborador.status == 'contratacao' %}
+                                <span class="badge badge-sm border border-warning text-warning bg-warning">
+                                  <svg width="12" height="12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="me-1ca">
+                                    <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 6a.75.75 0 00-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 000-1.5h-3.75V6z" clip-rule="evenodd" />
+                                  </svg>
+                                  Em Contratação
+                                </span>
+                                {% elif colaborador.status == 'demitido' %}
+                                <span class="badge badge-sm border border-danger text-danger bg-danger">
+                                  <svg width="12" height="12" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="me-1">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                  </svg>
+                                  Demitido
+                                </span>
+                                {% endif %}
+                              </td>
+                              <td>
+                                <span class="text-sm">{{ colaborador.cargo }}</span>
+                              </td>
+                              <td>
+                                <span class="text-sm">GS</span>
+                              </td>
+                              <td class="text-sm font-weight-semibold text-dark">
+                                <span class="btn-inner--icon">
+                                  <a type="button" class="open-modal" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#resumoNPSModal" data-mesa="{{ mesas|default_if_none:'' }}">                             
+                                    <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="10.177mm" height="10.3582mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+                                      viewBox="0 0 4039.55 4053.58"
+                                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                                      xmlns:xodm="http://www.corel.com/coreldraw/odm/2003">
+                                      <defs>
+                                        <style type="text/css">
+                                          <![CDATA[
+                                            .fil0 {fill:#283238}
+                                            .fil1 {fill:#293339}
+                                          ]]>
+                                        </style>
+                                      </defs>
+                                      <g id="Camada_x0020_1">
+                                        <metadata id="CorelCorpID_0Corel-Layer"/>
+                                        <path class="fil0" d="M1586.45 1625.86l939.98 1.03 -217.71 668.92 -939.97 -0.28 217.7 -669.67zm-1127.08 642.46c-92.41,-232.12 56.45,-343.59 170.82,-581.95 159.27,-331.96 115.33,-331.09 543.82,-331.09 180.95,0 565.59,39.61 645.32,0.16 -26.58,-129.43 -86.13,-129.47 -239.51,-135.31 -997.26,-37.86 -853.01,12.95 -1152.19,567.14 -84.47,156.48 -208.53,300.34 -109.93,494.56 -181.35,36.19 -248.89,-38.06 -317.69,82.67 52.68,94.51 24.75,67.02 194.82,70.48l2930.01 -3.34c364.05,-0.24 433.58,52.96 501.19,-67.14 -57.01,-101.85 -99.6,-70.95 -263.87,-69l-911.53 0.76c46.52,-197.44 262.31,-628.6 210.35,-779.52 -113.61,-50.18 -951.77,-27.21 -1163.52,-25.23l-265.3 796.61c-196.33,20.14 -610.84,22.65 -772.8,-19.79z"/>
+                                        <path class="fil0" d="M770.38 2566.47c-164.9,-0.12 -695.54,-64.16 -770.38,67.14 55.34,98.6 62.53,70.12 229.38,69.8l2996.48 -2.7 -0.6 1210.99 -2454.88 0.2c-163.24,-0.12 -695.82,-63.69 -770.38,67.09 55.34,98.64 62.53,70.16 229.38,69.8l2626.38 -2.7c607.55,-0.32 503.9,145.96 504.65,-840.7 0.33,-442.52 69.37,-623.36 -130.26,-642.78l-2459.76 3.86z"/>
+                                        <path class="fil0" d="M2552.57 649.1c0,-607.14 -102.14,-505.01 505,-505.01 999.01,1.32 841.38,-107.5 841.38,538.66 0,504.57 136.07,396.24 -714.05,407.2 -81.55,106.31 -116.91,155.41 -221.59,262 -23,-293.03 55.22,-256 -243.93,-263.99 -238.83,-6.39 -166.81,-66.06 -166.81,-438.86zm690.85 571.66c156.37,0 549.57,28.68 670.03,-19.78 166.89,-67.22 120.25,-333.22 119.69,-518.2 -2.11,-707.61 80.45,-673.52 -639.2,-672.85 -788.77,0.75 -976.4,-101.58 -977.24,334.46 -1.51,822.27 -83.07,876.37 405.61,876.37 -3.38,513.95 -1.59,579.26 421.1,0z"/>
+                                        <path class="fil1" d="M1181.99 441.57c303.2,-145.01 516.69,346.29 199.03,484.46 -288.73,125.61 -567.09,-308.4 -199.03,-484.46zm-28.96 -133.33c-189.58,70.51 -350.67,224.1 -254.89,515.14 58.2,176.78 254.05,323.3 517.12,235.9 477.4,-158.6 243.73,-939.22 -262.23,-751.04z"/>
+                                        <path class="fil1" d="M766.45 2027.02c143.81,-337.72 247.74,-335.73 61.18,-397.95 -27.73,34.68 -251.39,418.21 -244.44,467.59 13.59,96.42 485.06,121.6 553.99,-1.23 -59.03,-106.35 23.16,-63.84 -370.73,-68.41z"/>
+                                        <path class="fil0" d="M2735.51 786.47c128.99,4.85 417.41,11.4 561.14,7.39 0,0 -6.08,-61.53 -4.93,-88.79 0,0 -453.44,1.07 -558.67,4.53 0,0 2.46,76.87 2.46,76.87z"/>
+                                        <path class="fil0" d="M3229.31 441.01l0 80.76c153.03,-5.76 389.01,-5.76 530.87,-0.56l0.08 -80.56c-148.5,-3.3 -404.14,-3.3 -530.95,0.36z"/>
+                                        <path class="fil0" d="M2689.38 433.14l1.79 88.19c127.44,1.23 238.88,1.23 396.31,-0.12l0.04 -80.56 -398.14 -7.51z"/>
+                                      </g>
+                                    </svg>
+                                  </a>
+                                </span>
+                              </td>
+                            </tr>
+                            {% endfor %}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-6">
+                        <div class="card shadow-xs border mb-4">
+                          <div class="card-body py-0">
+                            <div class="row">
+                              <div class="col-4 pe-1">
+                                <div class="chart">
+                                  <canvas id="chart-doughnut-info" class="chart-canvas" height="150"></canvas>
+                                </div>
+                              </div>
+                              <div class="col-8 my-auto">
+                                <div class="d-flex">
+                                  <div>
+                                    <h4 class="font-weight-semibold text-lg mb-4">Custo Analistas</h4>
+                                    <p class="text-sm mb-1">Total de Tokens</p>
+                                    <h3 class="mb-0 font-weight-bold"> {{ total_tokens }}</h3>
+                                  </div>
+                                  <div class="ms-auto text-end d-flex flex-column">
+                                    <div class="dropdown">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="ms-auto cursor-pointer dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <path fill-rule="evenodd" d="M10.5 6a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zm0 6a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zm0 6a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" clip-rule="evenodd" />
+                                      </svg>
+                                      <ul class="dropdown-menu dropdown-menu-end me-n4">
+                                        <li><a class="dropdown-item" href="#">Action</a></li>
+                                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                      </ul>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
                           </div>
                         </div>
-                        <div class="col-8 my-auto">
-                          <div class="d-flex">
-                            <div>
-                              <h4 class="font-weight-semibold text-lg mb-4">Custo Analistas</h4>
-                              <p class="text-sm mb-1">Total de Tokens</p>
-                              <h3 class="mb-0 font-weight-bold"> {{ total_tokens }}</h3>
-                            </div>
-                            <div class="ms-auto text-end d-flex flex-column">
-                              <div class="dropdown">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="ms-auto cursor-pointer dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                  <path fill-rule="evenodd" d="M10.5 6a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zm0 6a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zm0 6a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" clip-rule="evenodd" />
-                                </svg>
-                                <ul class="dropdown-menu dropdown-menu-end me-n4">
-                                  <li><a class="dropdown-item" href="#">Action</a></li>
-                                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                                  <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                </ul>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="card shadow-xs border mb-4">
+                          <div class="card-body py-0">
+                            <div class="row">
+                              <div class="col-4 pe-1">
+                                <div class="chart">
+                                  <canvas id="chart-doughnut-dark" class="chart-canvas" height="150"></canvas>
+                                </div>
+                              </div>
+                              <div class="col-8 my-auto">
+                                <div class="d-flex">
+                                  <div>
+                                    <h4 class="font-weight-semibold text-lg mb-4">Custo QA</h4>
+                                    <p class="text-sm mb-1">Total de Tokens</p>
+                                    <h3 class="mb-0 font-weight-bold">$0,00</h3>
+                                  </div>
+                                  <div class="ms-auto text-end d-flex flex-column">
+                                    <div class="dropdown">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="ms-auto cursor-pointer dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <path fill-rule="evenodd" d="M10.5 6a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zm0 6a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zm0 6a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" clip-rule="evenodd" />
+                                      </svg>
+                                      <ul class="dropdown-menu dropdown-menu-end me-n4">
+                                        <li><a class="dropdown-item" href="#">Action</a></li>
+                                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                      </ul>
+                                    </div>
+                                  </div>
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -238,54 +292,17 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-lg-6">
-                  <div class="card shadow-xs border mb-4">
-                    <div class="card-body py-0">
-                      <div class="row">
-                        <div class="col-4 pe-1">
-                          <div class="chart">
-                            <canvas id="chart-doughnut-dark" class="chart-canvas" height="150"></canvas>
-                          </div>
-                        </div>
-                        <div class="col-8 my-auto">
-                          <div class="d-flex">
-                            <div>
-                              <h4 class="font-weight-semibold text-lg mb-4">Custo QA</h4>
-                              <p class="text-sm mb-1">Total de Tokens</p>
-                              <h3 class="mb-0 font-weight-bold">$0,00</h3>
-                            </div>
-                            <div class="ms-auto text-end d-flex flex-column">
-                              <div class="dropdown">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="ms-auto cursor-pointer dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                  <path fill-rule="evenodd" d="M10.5 6a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zm0 6a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zm0 6a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" clip-rule="evenodd" />
-                                </svg>
-                                <ul class="dropdown-menu dropdown-menu-end me-n4">
-                                  <li><a class="dropdown-item" href="#">Action</a></li>
-                                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                                  <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                </ul>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="d-md-flex align-items-center mb-4">
+                <div class="d-md-flex align-items-center mb-4">
 
-            <button type="submit" class="btn btn-sm btn-dark btn-icon d-flex align-items-center mb-0 ms-md-auto">
-              <span class="btn-inner--icon" style="padding-right: 0.3rem">
-                <svg xmlns="http://www.w3.org/2000/svg" height="19" width="19" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M4.5 6.375a4.125 4.125 0 118.25 0 4.125 4.125 0 01-8.25 0zM14.25 8.625a3.375 3.375 0 116.75 0 3.375 3.375 0 01-6.75 0zM1.5 19.125a7.125 7.125 0 0114.25 0v.003l-.001.119a.75.75 0 01-.363.63 13.067 13.067 0 01-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 01-.364-.63l-.001-.122zM17.25 19.128l-.001.144a2.25 2.25 0 01-.233.96 10.088 10.088 0 005.06-1.01.75.75 0 00.42-.643 4.875 4.875 0 00-6.957-4.611 8.586 8.586 0 011.71 5.157v.003z" />
-                </svg>
-              </span>
-              <span class="btn-inner--text">Enviar Tarefa</span>
-            </button>
-          </div>
+                  <button type="submit" class="btn btn-sm btn-dark btn-icon d-flex align-items-center mb-0 ms-md-auto">
+                    <span class="btn-inner--icon" style="padding-right: 0.3rem">
+                      <svg xmlns="http://www.w3.org/2000/svg" height="19" width="19" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M4.5 6.375a4.125 4.125 0 118.25 0 4.125 4.125 0 01-8.25 0zM14.25 8.625a3.375 3.375 0 116.75 0 3.375 3.375 0 01-6.75 0zM1.5 19.125a7.125 7.125 0 0114.25 0v.003l-.001.119a.75.75 0 01-.363.63 13.067 13.067 0 01-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 01-.364-.63l-.001-.122zM17.25 19.128l-.001.144a2.25 2.25 0 01-.233.96 10.088 10.088 0 005.06-1.01.75.75 0 00.42-.643 4.875 4.875 0 00-6.957-4.611 8.586 8.586 0 011.71 5.157v.003z" />
+                      </svg>
+                    </span>
+                    <span class="btn-inner--text">Enviar Tarefa</span>
+                  </button>
+                </div>
           </form>
         </div>
       </div>
@@ -483,6 +500,17 @@
     </div>
   </main>
   <!--   Core JS Files   -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var modal = document.getElementById('resumoNPSModal');
+      modal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget;
+        var mesa = button.getAttribute('data-mesa');
+        var modalTextarea = modal.querySelector('#modalResumoNPS');
+        modalTextarea.value = mesa || 'Sem mesa de trabalho disponível';
+      });
+    });
+  </script>
   <script src="{% static 'assets/js/core/popper.min.js' %}"></script>
   <script src="{% static 'assets/js/core/bootstrap.min.js' %}"></script>
   <script src="{% static 'assets/js/plugins/chartjs.min.js' %}"></script>

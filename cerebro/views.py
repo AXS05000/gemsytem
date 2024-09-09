@@ -278,8 +278,14 @@ class WalletView(TemplateView):
             for colaborador in colaboradores
         ]
 
+        # Coleta a mesa de trabalho de cada colaborador
+        mesas = {
+            mesa.colaborador.id: mesa.mesa for mesa in Mesa_de_trabalho.objects.all()
+        }
+
         context["total_tokens"] = formatted_total_tokens
         context["labels"] = labels
         context["data"] = data
-        context["colaboradores"] = Colaboradores.objects.all()
+        context["colaboradores"] = colaboradores
+        context["mesas"] = mesas  # Adiciona as mesas ao contexto
         return context
