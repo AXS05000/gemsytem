@@ -19,6 +19,14 @@
   <link href="{% static 'assets/css/nucleo-svg.css' %}" rel="stylesheet" />
   <!-- CSS Files -->
   <link id="pagestyle" href="{% static 'assets/css/corporate-ui-dashboard.css' %}" rel="stylesheet" />
+  <style>
+    #modalMesa {
+      white-space: pre-wrap; /* Preserva espaços e quebras de linha */
+      word-wrap: break-word; /* Quebra as linhas longas para se ajustar ao contêiner */
+      overflow-x: auto; /* Adiciona barra de rolagem horizontal se necessário */
+      max-height: 500px; /* Define um tamanho máximo para o modal */
+    }
+  </style>
 </head>
 
 <body class="g-sidenav-show bg-gray-100">
@@ -31,12 +39,12 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h4 class="modal-title" id="exampleModalLabel">Resumo da Mesa de Trabalho</h4>
+            <h4 class="modal-title" id="exampleModalLabel">Mesa de Trabalho</h4>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <!-- Exibe o conteúdo da mesa -->
-            <textarea id="modalResumoNPS" class="form-control" rows="18" readonly></textarea>
+            <!-- Use <pre> para preservar formatação -->
+            <pre id="modalMesa" class="form-control"></pre>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
@@ -506,8 +514,15 @@
       modal.addEventListener('show.bs.modal', function (event) {
         var button = event.relatedTarget;
         var mesa = button.getAttribute('data-mesa');
-        var modalTextarea = modal.querySelector('#modalResumoNPS');
-        modalTextarea.value = mesa || 'Sem mesa de trabalho disponível';
+        var modalContent = modal.querySelector('#modalMesa');
+  
+        if (mesa) {
+          // Substitui as quebras de linha "\n" por quebras reais de linha
+          var formattedMesa = mesa.replace(/\\n/g, '\n').replace(/\\t/g, '\t');
+          modalContent.textContent = formattedMesa.trim();
+        } else {
+          modalContent.textContent = 'Sem mesa de trabalho disponível';
+        }
       });
     });
   </script>
