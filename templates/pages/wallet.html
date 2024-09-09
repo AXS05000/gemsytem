@@ -43,8 +43,12 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <!-- Use <pre> para preservar formatação -->
+            <!-- Exibe a mesa de trabalho -->
             <pre id="modalMesa" class="form-control"></pre>
+            <!-- Exibe as anotações -->
+            <hr>
+            <h5>Anotações</h5>
+            <pre id="modalAnotacoes" class="form-control"></pre>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
@@ -193,9 +197,11 @@
                                 <span class="text-sm">GS</span>
                               </td>
                               <td class="text-sm font-weight-semibold text-dark">
-                                <a type="button" class="open-modal" style="cursor: pointer;" data-bs-toggle="modal" 
-                                data-bs-target="#resumoNPSModal" 
-                                data-mesa="{{ colaborador.mesas_de_trabalho_colaborador_criador.first.mesa|default:'Sem mesa de trabalho disponível' }}">                    
+                                <a type="button" class="open-modal" style="cursor: pointer;" 
+                                data-bs-toggle="modal" data-bs-target="#resumoNPSModal" 
+                                data-mesa="{{ colaborador.mesas_de_trabalho_colaborador_criador.first.mesa|default:'Sem mesa de trabalho disponível' }}" 
+                                data-anotacoes="{{ colaborador.mesas_de_trabalho_colaborador_criador.first.anotacoes|default:'Sem anotações disponíveis' }}">
+                                                
                                     <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="10.177mm" height="10.3582mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
                                       viewBox="0 0 4039.55 4053.58"
                                       xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -515,15 +521,15 @@
       modal.addEventListener('show.bs.modal', function (event) {
         var button = event.relatedTarget;
         var mesa = button.getAttribute('data-mesa');
-        var modalContent = modal.querySelector('#modalMesa');
+        var anotacoes = button.getAttribute('data-anotacoes');
+        var modalContentMesa = modal.querySelector('#modalMesa');
+        var modalContentAnotacoes = modal.querySelector('#modalAnotacoes');
   
-        if (mesa) {
-          // Substitui as quebras de linha "\n" por quebras reais de linha
-          var formattedMesa = mesa.replace(/\\n/g, '\n').replace(/\\t/g, '\t');
-          modalContent.textContent = formattedMesa.trim();
-        } else {
-          modalContent.textContent = 'Sem mesa de trabalho disponível';
-        }
+        // Exibe a mesa de trabalho
+        modalContentMesa.textContent = mesa ? mesa.replace(/\\n/g, '\n').replace(/\\t/g, '\t').trim() : 'Sem mesa de trabalho disponível';
+  
+        // Exibe as anotações
+        modalContentAnotacoes.textContent = anotacoes ? anotacoes.replace(/\\n/g, '\n').replace(/\\t/g, '\t').trim() : 'Sem anotações disponíveis';
       });
     });
   </script>
