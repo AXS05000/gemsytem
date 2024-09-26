@@ -12,4 +12,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("usuarios.urls")),
     path("", include("cerebro.urls")),
+    path("", include("github_app.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
