@@ -24,24 +24,39 @@ class AtribuirTarefaView(View):
     def post(self, request, *args, **kwargs):
         tarefa = request.POST.get("tarefa")
         colaboradores_ids = request.POST.getlist("colaboradores")
+        incluir_github_files = (
+            request.POST.get("incluir_github_files") == "on"
+        )  # Captura a escolha do checkbox
 
         for colaborador_id in colaboradores_ids:
             colaborador = get_object_or_404(Colaboradores, id=colaborador_id)
 
-            # Adicionando o contexto ao prompt
-            prompt_contexto = (
-                f"Você está trabalhando em um projeto Django. Sua tarefa é criar "
-                f"os arquivos necessários apenas para a parte de aplicativos (apps) "
-                f"de acordo com a descrição a seguir: {tarefa}. "
-                f"Por favor, gere os arquivos necessários e distribua corretamente entre "
-                f"models, views, urls, forms, admin e utils. "
-                f"Salve o código correspondente em cada campo apropriado."
-            )
+            # Ajustar o contexto dependendo se o checkbox foi selecionado ou não
+            if incluir_github_files:
+                # Se incluir os arquivos do GitHub, o contexto informa que é um projeto em andamento
+                prompt_contexto = (
+                    f"Você está trabalhando em um projeto Django que já está em andamento. "
+                    f"Os arquivos atuais do sistema estão disponíveis para sua consulta. Sua tarefa é realizar a seguinte tarefa: {tarefa}. "
+                    f"Certifique-se de considerar os arquivos existentes e realizar as modificações necessárias. "
+                    f"Distribua as alterações corretamente entre models, views, urls, forms, admin e utils, conforme necessário. "
+                    f"Salve o código correspondente em cada campo apropriado."
+                )
+            else:
+                # Caso contrário, o contexto é para criar novos arquivos
+                prompt_contexto = (
+                    f"Você está trabalhando em um projeto Django. Sua tarefa é criar "
+                    f"os arquivos necessários apenas para a parte de aplicativos (apps) "
+                    f"de acordo com a descrição a seguir: {tarefa}. "
+                    f"Por favor, gere os arquivos necessários e distribua corretamente entre "
+                    f"models, views, urls, forms, admin e utils. "
+                    f"Salve o código correspondente em cada campo apropriado."
+                )
 
             # Criar a demanda para o colaborador
             demanda = Atuais_Demandas.objects.create(
                 colaborador=colaborador,
                 atuais_demandas=prompt_contexto,
+                incluir_github_files=incluir_github_files,  # Salva a opção do checkbox
             )
 
             # Processar a tarefa

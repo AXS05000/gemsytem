@@ -1,5 +1,6 @@
 from django.db import models
 from colaboradores.models import Colaboradores
+from github_app.models import GitHubFiles
 import openai
 
 #############################CONHECIMENTO###################################
@@ -91,6 +92,9 @@ class Atuais_Demandas(models.Model):
         verbose_name="Atuais Demandas do Colaborador",
     )
     atuais_demandas = models.TextField(blank=True, null=True)
+    incluir_github_files = models.BooleanField(
+        default=False
+    )  # Novo campo para indicar se vai incluir os arquivos GitHub
     status = models.CharField(
         max_length=1,
         choices=[("P", "Pendente"), ("F", "Finalizada")],
@@ -139,6 +143,21 @@ class Atuais_Demandas(models.Model):
         if consulta_conhecimento:
             contexto_consulta = " ".join(consulta_conhecimento)
             contexto_adicional += f"Para sua referência, aqui estão alguns exemplos de trabalhos já realizados: {contexto_consulta}. "
+
+        # Se a opção incluir_github_files estiver marcada, incluir os arquivos do GitHub no contexto
+        if self.incluir_github_files:
+            github_files = GitHubFiles.objects.latest(
+                "created_at"
+            )  # Busca os arquivos mais recentes do GitHub
+            contexto_adicional += (
+                f"Aqui estão os arquivos do projeto django em andamento:\n\n"
+                f"models.py:\n{github_files.models_file}\n\n"
+                f"views.py:\n{github_files.views_file}\n\n"
+                f"urls.py:\n{github_files.urls_file}\n\n"
+                f"forms.py:\n{github_files.forms_file}\n\n"
+                f"utils.py:\n{github_files.utils_file}\n\n"
+                f"admin.py:\n{github_files.admin_file}\n\n"
+            )
 
         print("Contexto adicional montado.")
 
