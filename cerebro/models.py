@@ -92,15 +92,27 @@ class Atuais_Demandas(models.Model):
         verbose_name="Atuais Demandas do Colaborador",
     )
     atuais_demandas = models.TextField(blank=True, null=True)
-    incluir_github_files = models.BooleanField(
-        default=False
-    )  # Novo campo para indicar se vai incluir os arquivos GitHub
+    incluir_github_files = models.BooleanField(default=False)
     status = models.CharField(
         max_length=1,
         choices=[("P", "Pendente"), ("F", "Finalizada")],
         default="P",
         verbose_name="Status da Tarefa",
     )
+    resumo_tarefa = models.CharField(max_length=255, blank=True, null=True)
+
+    def analisar_e_resumir_tarefa(self):
+        print("Iniciando análise e resumo da tarefa...")
+        response = openai.Completion.create(
+            api_key=self.colaborador.api_key,
+            model="gpt-4o-2024-08-06",
+            prompt=f"Resuma a seguinte tarefa em poucas palavras: {self.atuais_demandas}",
+            max_tokens=5000,
+        )
+        resumo = response.choices[0].text.strip()
+        self.resumo_tarefa = resumo
+        self.save()
+        print("Análise e resumo da tarefa concluídos.")
 
     def processar_tarefa(self, gerar_sugestoes=False):
         colaborador = self.colaborador
@@ -379,7 +391,9 @@ class Atuais_Demandas(models.Model):
         )
 
     def __str__(self):
-        return f"{self.colaborador} - {self.get_status_display()}"
+        return (
+            f"{self.colaborador} - {self.get_status_display()} - {self.resumo_tarefa}"
+        )
 
 
 class Mesa_de_trabalho(models.Model):
