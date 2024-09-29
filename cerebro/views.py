@@ -27,16 +27,15 @@ class AtribuirTarefaView(View):
         print("Arquivos do GitHub Atualizados.")
         tarefa = request.POST.get("tarefa")
         colaboradores_ids = request.POST.getlist("colaboradores")
-        incluir_github_files = (
-            request.POST.get("incluir_github_files") == "on"
-        )  # Captura a escolha do checkbox
+        incluir_github_files = request.POST.get("incluir_github_files") == "on"
 
         for colaborador_id in colaboradores_ids:
             colaborador = get_object_or_404(Colaboradores, id=colaborador_id)
 
-            # Ajustar o contexto dependendo se o checkbox foi selecionado ou não
+            # Verifica se já existe uma mesa de trabalho para aquele colaborador e exclui a existente
+            Mesa_de_trabalho.objects.filter(colaborador=colaborador).delete()
+
             if incluir_github_files:
-                # Se incluir os arquivos do GitHub, o contexto informa que é um projeto em andamento
                 prompt_contexto = (
                     f"Você está trabalhando em um projeto Django que já está em andamento. "
                     f"Os arquivos atuais do sistema estão disponíveis para sua consulta. Sua tarefa é realizar a seguinte tarefa: {tarefa}. "
@@ -45,7 +44,6 @@ class AtribuirTarefaView(View):
                     f"Salve o código correspondente em cada campo apropriado."
                 )
             else:
-                # Caso contrário, o contexto é para criar novos arquivos
                 prompt_contexto = (
                     f"Você está trabalhando em um projeto Django. Sua tarefa é criar "
                     f"os arquivos necessários apenas para a parte de aplicativos (apps) "
@@ -55,23 +53,19 @@ class AtribuirTarefaView(View):
                     f"Salve o código correspondente em cada campo apropriado."
                 )
 
-            # Criar a demanda para o colaborador
             demanda = Atuais_Demandas.objects.create(
                 colaborador=colaborador,
                 atuais_demandas=prompt_contexto,
-                incluir_github_files=incluir_github_files,  # Salva a opção do checkbox
+                incluir_github_files=incluir_github_files,
             )
 
-            # Processar a tarefa
             demanda.processar_tarefa()
 
-            # Criar uma demanda para o QA para revisar a tarefa
             demanda_qa = Atuais_Demandas.objects.create(
-                colaborador_id=1,  # ID fixo para o André Gonçalves (QA)
+                colaborador_id=1,
                 atuais_demandas=f"Avaliar tarefa '{tarefa}' do colaborador {colaborador.nome_do_colaborador}",
             )
 
-            # Revisar a tarefa automaticamente após a execução do colaborador
             revisar_tarefa_qa(
                 qa_id=1, colaborador_id=colaborador.id, tarefa_id=demanda_qa.id
             )
