@@ -1,5 +1,5 @@
 from github import Github
-from .models import GitHubFiles
+from .models import GitHubFiles, GitHubToken
 
 
 def fetch_github_files(repo_name, token):
@@ -29,3 +29,13 @@ def fetch_github_files(repo_name, token):
 
     # Salva o objeto no banco de dados
     github_files.save()
+
+
+def atualizar_arquivos_github():
+    # Buscando o token mais recente no banco de dados
+    github_token = GitHubToken.objects.latest("created_at")
+    token = github_token.token  # Token obtido do banco de dados
+    repo_name = "AXS05000/gemsytem"
+
+    # Chama a função para importar os arquivos
+    fetch_github_files(repo_name, token)

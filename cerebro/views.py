@@ -158,22 +158,25 @@ def revisar_tarefa_qa(qa_id, colaborador_id, tarefa_id):
 
     if status_qa == "correto":
         # Se estiver correto, finalizar a tarefa do colaborador e do QA
-        tarefa.status = "F"
-        tarefa.save()
+        tarefa_qa = Atuais_Demandas.objects.get(id=tarefa_id)
+        tarefa_qa.status = "F"
+        tarefa_qa.save()
+
+        # Atualiza também o status da tarefa do colaborador
+        tarefa_colaborador = Atuais_Demandas.objects.filter(
+            colaborador=colaborador
+        ).latest("id")
+        tarefa_colaborador.status = "F"
+        tarefa_colaborador.save()
 
         # Salvar as observações do QA na coluna 'anotacoes'
         mesa.anotacoes = f"Observações do QA: {observacoes_qa.strip()}"
         mesa.save()
 
-        # Finaliza a tarefa do QA
-        tarefa_qa = Atuais_Demandas.objects.get(id=tarefa_id)
-        tarefa_qa.status = "F"
-        tarefa_qa.save()
-
         print(f"Tarefa finalizada com sucesso pelo QA: {qa.nome_do_colaborador}")
 
         # Chama a função do colaborador para gerar as sugestões de melhorias
-        tarefa.processar_tarefa(gerar_sugestoes=True)
+        # tarefa.processar_tarefa(gerar_sugestoes=True)
 
     else:
         # Se estiver incorreto, deixar a tarefa pendente e adicionar as observações do QA na coluna 'anotacoes'
@@ -192,6 +195,10 @@ def revisar_tarefa_qa(qa_id, colaborador_id, tarefa_id):
 
         # Chamar a função revisar_tarefa_com_ajustes para o colaborador realizar os ajustes
         tarefa.revisar_tarefa_com_ajustes(colaborador=colaborador)
+
+        # Adicionar lógica para pedir uma nova revisão do QA
+        print("Solicitando nova revisão do QA após ajustes...")
+        revisar_tarefa_qa(qa_id, colaborador_id, tarefa_id)
 
 
 def atribuir_tarefa_form(request):
