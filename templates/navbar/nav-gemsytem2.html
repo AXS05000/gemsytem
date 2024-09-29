@@ -22,7 +22,7 @@
       </li>
       <li class="nav-item px-3 py-3 border-radius-sm  d-flex align-items-center {% if request.resolver_match.url_name == 'wallet' %}bg-slate-800{% endif %}">
         <a href="{% url 'wallet' %}" class="nav-link text-white p-0">
-          Wallet
+          Task
         </a>
       </li>
     </ul>
@@ -136,17 +136,17 @@
     <ul class="navbar-nav d-none d-lg-flex">
       <li class="nav-item border-radius-sm px-3 py-3 me-2  d-flex align-items-center {% if request.resolver_match.url_name == 'profile' %}bg-slate-800{% endif %}">
         <a href="{% url 'profile' %}" class="nav-link text-white p-0">
-          Profile
+          Perfil
         </a>
       </li>
       <li class="nav-item border-radius-sm px-3 py-3 me-2  d-flex align-items-center">
         <a href="{% url 'sign_in' %}" class="nav-link text-white p-0">
-          Sign In
+          Login
         </a>
       </li>
       <li class="nav-item border-radius-sm px-3 py-3 me-2  d-flex align-items-center">
         <a href="{% url 'sign_up' %}" class="nav-link text-white p-0">
-          Sign Up
+          Cadastro
         </a>
       </li>
     </ul>
