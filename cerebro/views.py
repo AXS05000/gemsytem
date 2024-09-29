@@ -78,10 +78,12 @@ def revisar_tarefa_qa(qa_id, colaborador_id, tarefa_id):
     colaborador = get_object_or_404(Colaboradores, id=colaborador_id)
     tarefa = get_object_or_404(Atuais_Demandas, id=tarefa_id)
 
-    # Recuperar o trabalho realizado na Mesa_de_trabalho do colaborador original
-    mesa = get_object_or_404(Mesa_de_trabalho, colaborador=colaborador)
+    try:
+        mesa = Mesa_de_trabalho.objects.filter(colaborador=colaborador).latest("id")
+    except Mesa_de_trabalho.DoesNotExist:
+        print(f"Nenhuma mesa de trabalho encontrada para o colaborador: {colaborador}")
+        return
 
-    # Recuperar conhecimentos, experiências, aprendizados, consulta e personalidade do QA
     conhecimentos = Conhecimento.objects.filter(colaborador=qa).values_list(
         "conhecimento_geral", flat=True
     )
@@ -100,7 +102,6 @@ def revisar_tarefa_qa(qa_id, colaborador_id, tarefa_id):
         .first()
     )
 
-    # Montar o contexto adicional para o QA
     contexto_adicional = ""
 
     if conhecimentos:
@@ -120,9 +121,8 @@ def revisar_tarefa_qa(qa_id, colaborador_id, tarefa_id):
         contexto_adicional += f"Para sua referência, aqui estão alguns exemplos de trabalhos já realizados: {contexto_consulta}. "
 
     print("Contexto adicional montado para o QA.")
-
-    # Analisar o trabalho do colaborador usando a API da OpenAI
     print("QA analisando a tarefa...")
+
     response = openai.ChatCompletion.create(
         api_key=qa.api_key,
         model="gpt-4o-2024-08-06",
@@ -135,7 +135,7 @@ def revisar_tarefa_qa(qa_id, colaborador_id, tarefa_id):
                     "Responda apenas com a palavra 'correto' ou 'incorreto', seguida de um ponto e vírgula (;), e depois coloque suas observações."
                     f"{contexto_adicional} "
                     f"Sempre fale em primeira pessoa e seu estilo de comunicação deve ser: {personalidade}."
-                    f"Observação importante: O colaborador só realiza trabalhos de back-end, no caso ele só tem autorização de realizar códigos que possam ser escritos no models, views, urls, forms, admin e utils de app django. Verique também se não tem alguma parte do codigo faltando, alguma importação de bibilioteca funcionado, um dos seus principais objetivos é deixar o codigo funcional."
+                    f"Observação importante: O colaborador só realiza trabalhos de back-end, no caso ele só tem autorização de realizar códigos que possam ser escritos no models, views, urls, forms, admin e utils de app django. Verifique também se não tem alguma parte do código faltando, alguma importação de biblioteca funcionando, um dos seus principais objetivos é deixar o código funcional."
                 ),
             },
             {
@@ -149,51 +149,57 @@ def revisar_tarefa_qa(qa_id, colaborador_id, tarefa_id):
     resultado = response["choices"][0]["message"]["content"]
     print("Revisão da tarefa pelo QA concluída.")
 
-    # Separar a primeira palavra (correto/incorreto) das observações
     status_qa, observacoes_qa = resultado.split(";", 1)
     status_qa = status_qa.strip().lower()
 
+    versao_atual = mesa.mesa.count("Versão")
+
     if status_qa == "correto":
-        # Se estiver correto, finalizar a tarefa do colaborador e do QA
         tarefa_qa = Atuais_Demandas.objects.get(id=tarefa_id)
         tarefa_qa.status = "F"
         tarefa_qa.save()
 
-        # Atualiza também o status da tarefa do colaborador
         tarefa_colaborador = Atuais_Demandas.objects.filter(
             colaborador=colaborador
         ).latest("id")
         tarefa_colaborador.status = "F"
         tarefa_colaborador.save()
 
-        # Salvar as observações do QA na coluna 'anotacoes'
         mesa.anotacoes = f"Observações do QA: {observacoes_qa.strip()}"
         mesa.save()
 
         print(f"Tarefa finalizada com sucesso pelo QA: {qa.nome_do_colaborador}")
 
-        # Chama a função do colaborador para gerar as sugestões de melhorias
-        # tarefa.processar_tarefa(gerar_sugestoes=True)
+    elif versao_atual > 7 and status_qa == "incorreto":
+        print("Atingido o limite de revisões, oitava vez. Finalizando tarefa.")
+        tarefa_qa = Atuais_Demandas.objects.get(id=tarefa_id)
+        tarefa_qa.status = "F"
+        tarefa_qa.save()
+
+        tarefa_colaborador = Atuais_Demandas.objects.filter(
+            colaborador=colaborador
+        ).latest("id")
+        tarefa_colaborador.status = "F"
+        tarefa_colaborador.save()
+
+        mesa.anotacoes = f"Finalizado: {observacoes_qa.strip()} - A tarefa foi finalizada devido ao colaborador não atingir o objetivo em 8 revisões."
+        mesa.save()
+
+        print("Tarefa finalizada após a oitava revisão sem sucesso.")
 
     else:
-        # Se estiver incorreto, deixar a tarefa pendente e adicionar as observações do QA na coluna 'anotacoes'
-        tarefa.status = "P"  # Mantém a tarefa do colaborador como pendente
+        tarefa.status = "P"
         tarefa.save()
 
         mesa.anotacoes = f"Observações do QA: {observacoes_qa.strip()}"
         mesa.save()
 
-        # Deixar a tarefa do QA como pendente também
         tarefa_qa = Atuais_Demandas.objects.get(id=tarefa_id)
         tarefa_qa.status = "P"
         tarefa_qa.save()
 
         print(f"Tarefa revisada pelo QA com correções: {qa.nome_do_colaborador}")
-
-        # Chamar a função revisar_tarefa_com_ajustes para o colaborador realizar os ajustes
         tarefa.revisar_tarefa_com_ajustes(colaborador=colaborador)
-
-        # Adicionar lógica para pedir uma nova revisão do QA
         print("Solicitando nova revisão do QA após ajustes...")
         revisar_tarefa_qa(qa_id, colaborador_id, tarefa_id)
 
