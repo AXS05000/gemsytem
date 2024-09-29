@@ -65,6 +65,7 @@ class AtribuirTarefaView(View):
                 colaborador_id=1,
                 atuais_demandas=f"Avaliar tarefa '{tarefa}' do colaborador {colaborador.nome_do_colaborador}",
             )
+            demanda_qa.analisar_e_resumir_tarefa()  # Chama a análise para a tarefa de QA
 
             revisar_tarefa_qa(
                 qa_id=1, colaborador_id=colaborador.id, tarefa_id=demanda_qa.id
