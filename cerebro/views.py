@@ -170,7 +170,7 @@ def revisar_tarefa_qa(qa_id, colaborador_id, tarefa_id):
 
         print(f"Tarefa finalizada com sucesso pelo QA: {qa.nome_do_colaborador}")
 
-    elif versao_atual > 7 and status_qa == "incorreto":
+    elif versao_atual > 5 and status_qa == "incorreto":
         print("Atingido o limite de revisões, oitava vez. Finalizando tarefa.")
         tarefa_qa = Atuais_Demandas.objects.get(id=tarefa_id)
         tarefa_qa.status = "F"
@@ -182,7 +182,7 @@ def revisar_tarefa_qa(qa_id, colaborador_id, tarefa_id):
         tarefa_colaborador.status = "F"
         tarefa_colaborador.save()
 
-        mesa.anotacoes = f"Finalizado: {observacoes_qa.strip()} - A tarefa foi finalizada devido ao colaborador não atingir o objetivo em 8 revisões."
+        mesa.anotacoes = f"Finalizado: {observacoes_qa.strip()} - A tarefa foi finalizada devido ao colaborador não atingir o objetivo em 5 revisões."
         mesa.save()
 
         print("Tarefa finalizada após a oitava revisão sem sucesso.")

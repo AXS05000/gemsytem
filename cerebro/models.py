@@ -405,8 +405,12 @@ class Mesa_de_trabalho(models.Model):
     )
     mesa = models.TextField(blank=True, null=True)
     anotacoes = models.TextField(blank=True, null=True)
+    versao_revisada = models.IntegerField(default=1)  # Nova coluna
 
-    # Local onde será entregue seus trabalhos
+    def incrementar_versao(self):
+        self.versao_revisada += 1
+        self.save()
+
     def __str__(self):
         return f"{self.colaborador}"
 
