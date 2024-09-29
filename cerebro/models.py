@@ -356,6 +356,10 @@ class Atuais_Demandas(models.Model):
         resultado_revisao = response["choices"][0]["message"]["content"]
         print("Resposta da API para a revisão recebida.")
 
+        # Adicionar as anotações do QA na 'mesa'
+        if anotacoes_qa:
+            mesa.mesa += f"\n\nAnotações do QA:\n{anotacoes_qa}"
+
         # Adicionar a nova versão revisada na coluna 'mesa' com número sequencial
         mesa.mesa += f"\n\nVersão {proxima_versao} Revisada:\n{resultado_revisao}"
         mesa.save()

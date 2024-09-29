@@ -24,7 +24,7 @@ from .models import (
 class AtribuirTarefaView(View):
     def post(self, request, *args, **kwargs):
         atualizar_arquivos_github()
-        print("Puxando arquivos atualizados do github.")
+        print("Arquivos do GitHub Atualizados.")
         tarefa = request.POST.get("tarefa")
         colaboradores_ids = request.POST.getlist("colaboradores")
         incluir_github_files = (
