@@ -1,6 +1,7 @@
 import openai
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Atuais_Demandas, Mesa_de_trabalho, Colaboradores
+from github_app.utils import atualizar_arquivos_github
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views import View
@@ -22,6 +23,8 @@ from .models import (
 
 class AtribuirTarefaView(View):
     def post(self, request, *args, **kwargs):
+        atualizar_arquivos_github()
+        print("Puxando arquivos atualizados do github.")
         tarefa = request.POST.get("tarefa")
         colaboradores_ids = request.POST.getlist("colaboradores")
         incluir_github_files = (
