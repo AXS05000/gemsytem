@@ -288,13 +288,6 @@ class Atuais_Demandas(models.Model):
             )
             return
 
-        # Contar quantas vezes já existe a palavra 'Versão' na mesa para incrementar o número da versão
-        if mesa.mesa:
-            versao_atual = mesa.mesa.count("Versão")
-            proxima_versao = versao_atual + 2  # Começa da versão 02 e incrementa
-        else:
-            proxima_versao = 2  # Se não existir nada na mesa ainda, começa da versão 02
-
         # Recuperar as anotações do QA
         anotacoes_qa = mesa.anotacoes
 
@@ -373,7 +366,7 @@ class Atuais_Demandas(models.Model):
             mesa.mesa += f"\n\nAnotações do QA:\n{anotacoes_qa}"
 
         # Adicionar a nova versão revisada na coluna 'mesa' com número sequencial
-        mesa.mesa += f"\n\nVersão {proxima_versao} Revisada:\n{resultado_revisao}"
+        mesa.mesa += f"\n\nVersão {mesa.versao_revisada} Revisada:\n{resultado_revisao}"
         mesa.save()
 
         # Calcular e registrar o custo em tokens para a revisão

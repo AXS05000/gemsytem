@@ -152,8 +152,6 @@ def revisar_tarefa_qa(qa_id, colaborador_id, tarefa_id):
     status_qa, observacoes_qa = resultado.split(";", 1)
     status_qa = status_qa.strip().lower()
 
-    versao_atual = mesa.mesa.count("Versão")
-
     if status_qa == "correto":
         tarefa_qa = Atuais_Demandas.objects.get(id=tarefa_id)
         tarefa_qa.status = "F"
@@ -170,8 +168,8 @@ def revisar_tarefa_qa(qa_id, colaborador_id, tarefa_id):
 
         print(f"Tarefa finalizada com sucesso pelo QA: {qa.nome_do_colaborador}")
 
-    elif versao_atual > 5 and status_qa == "incorreto":
-        print("Atingido o limite de revisões, oitava vez. Finalizando tarefa.")
+    elif mesa.versao_revisada > 5 and status_qa == "incorreto":
+        print("Atingido o limite de revisões, quinta vez. Finalizando tarefa.")
         tarefa_qa = Atuais_Demandas.objects.get(id=tarefa_id)
         tarefa_qa.status = "F"
         tarefa_qa.save()
@@ -197,6 +195,8 @@ def revisar_tarefa_qa(qa_id, colaborador_id, tarefa_id):
         tarefa_qa = Atuais_Demandas.objects.get(id=tarefa_id)
         tarefa_qa.status = "P"
         tarefa_qa.save()
+
+        mesa.incrementar_versao()  # New line
 
         print(f"Tarefa revisada pelo QA com correções: {qa.nome_do_colaborador}")
         tarefa.revisar_tarefa_com_ajustes(colaborador=colaborador)
