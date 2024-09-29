@@ -146,7 +146,7 @@ def revisar_tarefa_qa(qa_id, colaborador_id, tarefa_id):
                 "content": f"Tarefa: {tarefa.atuais_demandas}\n\nCódigo:\n{mesa.mesa}",
             },
         ],
-        max_tokens=2500,
+        max_tokens=10500,
     )
 
     resultado = response["choices"][0]["message"]["content"]

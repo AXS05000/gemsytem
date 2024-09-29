@@ -178,6 +178,7 @@ class Atuais_Demandas(models.Model):
                             "Não inclua introduções, textos paralelos, orientações de importações, resumos, explicações ou notas, apenas o código puro dos arquivos em python."
                             f"{contexto_adicional} "
                             f"Sempre fale em primeira pessoa e seu estilo de comunicação deve ser: {personalidade}."
+                            "Nas respostas sempre mostre os codigos completos, não abrevie nada. Mostre sempre as funções completas que foram ajustadas."
                         ),
                     },
                     {"role": "user", "content": self.atuais_demandas},
@@ -231,7 +232,7 @@ class Atuais_Demandas(models.Model):
                         "content": f"Analise o seguinte código e forneça sugestões de melhorias:\n{mesa.mesa}",
                     },
                 ],
-                max_tokens=2500,
+                max_tokens=10500,
             )
 
             sugestao = sugestao_response["choices"][0]["message"]["content"]
@@ -275,9 +276,10 @@ class Atuais_Demandas(models.Model):
             )
             return
 
+        # Recuperar as anotações do QA
         anotacoes_qa = mesa.anotacoes
 
-        # Montar o contexto adicional incluindo as anotações do QA
+        # Montar o contexto adicional incluindo as anotações do QA e o trabalho já realizado
         contexto_adicional = ""
 
         if conhecimentos:
@@ -301,6 +303,24 @@ class Atuais_Demandas(models.Model):
                 f"O QA deixou as seguintes observações para revisão: {anotacoes_qa}. "
             )
 
+        # Incluir o código já feito pelo colaborador
+        contexto_adicional += (
+            f"\nAqui está o que você já realizou até agora:\n{mesa.mesa}"
+        )
+
+        # Se a tarefa incluiu arquivos do GitHub, incluir os arquivos originais do GitHub no contexto
+        if self.incluir_github_files:
+            github_files = GitHubFiles.objects.latest("created_at")
+            contexto_adicional += (
+                f"\n\nAqui estão os arquivos originais do projeto Django que você está melhorando:\n\n"
+                f"models.py:\n{github_files.models_file}\n\n"
+                f"views.py:\n{github_files.views_file}\n\n"
+                f"urls.py:\n{github_files.urls_file}\n\n"
+                f"forms.py:\n{github_files.forms_file}\n\n"
+                f"utils.py:\n{github_files.utils_file}\n\n"
+                f"admin.py:\n{github_files.admin_file}\n\n"
+            )
+
         print("Contexto adicional montado para revisão.")
 
         # Usando a API da OpenAI para revisar a tarefa com o modelo gpt-4o-2024-08-06
@@ -314,7 +334,7 @@ class Atuais_Demandas(models.Model):
                     "content": (
                         "Você é um colaborador da GS especializado em desenvolvimento Django."
                         "Reveja o código abaixo com base nas observações do QA e faça os ajustes necessários, sem perder as informações que já estavam certas anteriormente."
-                        "Digite novamente todos os codigos com os ajustes necessários com base nas observações do QA, inclua apenas código Python relacionado a models.py, forms.py, views.py, urls.py, admin.py, e utils.py."
+                        "Digite novamente todos os códigos com os ajustes necessários com base nas observações do QA, inclua apenas código Python relacionado a models.py, forms.py, views.py, urls.py, admin.py, e utils.py."
                         "Não inclua templates html."
                         "Não inclua introduções, textos paralelos, orientações de importações, resumos, explicações ou notas, apenas o código puro dos arquivos em python."
                         f"{contexto_adicional} "
@@ -323,7 +343,7 @@ class Atuais_Demandas(models.Model):
                 },
                 {"role": "user", "content": self.atuais_demandas},
             ],
-            max_tokens=2500,
+            max_tokens=10500,
         )
 
         resultado_revisao = response["choices"][0]["message"]["content"]
