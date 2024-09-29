@@ -99,19 +99,35 @@ class Atuais_Demandas(models.Model):
         default="P",
         verbose_name="Status da Tarefa",
     )
-    resumo_tarefa = models.CharField(max_length=255, blank=True, null=True)
+    resumo_tarefa = models.TextField(blank=True, null=True)
 
     def analisar_e_resumir_tarefa(self):
         print("Iniciando análise e resumo da tarefa...")
-        response = openai.Completion.create(
+
+        response = openai.ChatCompletion.create(
             api_key=self.colaborador.api_key,
             model="gpt-4o-2024-08-06",
-            prompt=f"Resuma a seguinte tarefa em poucas palavras: {self.atuais_demandas}",
+            messages=[
+                {
+                    "role": "system",
+                    "content": "Você é um assistente que resume tarefas de desenvolvimento.",
+                },
+                {
+                    "role": "user",
+                    "content": (
+                        f"Resuma a seguinte tarefa em poucas palavras, no maximo em 10 palavras: {self.atuais_demandas}"
+                        "Desconsidere esse texto caso tenha 'Você está trabalhando em um projeto Django. Sua tarefa é criar os arquivos necessários apenas para a parte de aplicativos (apps) de acordo com a descrição a seguir:'"
+                        "Por favor, gere os arquivos necessários e distribua corretamente entre models, views, urls, forms, admin e utils. Salve o código correspondente em cada campo apropriado.'"
+                    ),
+                },
+            ],
             max_tokens=5000,
         )
-        resumo = response.choices[0].text.strip()
+
+        resumo = response["choices"][0]["message"]["content"].strip()
         self.resumo_tarefa = resumo
         self.save()
+
         print("Análise e resumo da tarefa concluídos.")
 
     def processar_tarefa(self, gerar_sugestoes=False):

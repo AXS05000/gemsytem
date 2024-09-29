@@ -58,7 +58,7 @@ class AtribuirTarefaView(View):
                 atuais_demandas=prompt_contexto,
                 incluir_github_files=incluir_github_files,
             )
-
+            demanda.analisar_e_resumir_tarefa()
             demanda.processar_tarefa()
 
             demanda_qa = Atuais_Demandas.objects.create(
