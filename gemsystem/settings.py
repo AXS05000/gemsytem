@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "cerebro",
     "colaboradores",
     "github_app",
+    "tasks",
 ]
 
 MIDDLEWARE = [
@@ -144,3 +145,7 @@ AUTH_USER_MODEL = "usuarios.CustomUsuario"
 LOGIN_REDIRECT_URL = "index"
 LOGOUT_REDIRECT_URL = "login"
 LOGIN_URL = "login"
+
+
+CLICKUP_API_TOKEN = "pk_82056397_6DUZ7O9CV0MC9QV2EZ3UTDLVNQWWR6B5"
+CLICKUP_LIST_ID = "901303439336"

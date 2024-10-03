@@ -13,4 +13,5 @@ urlpatterns = [
     path("", include("usuarios.urls")),
     path("", include("cerebro.urls")),
     path("", include("github_app.urls")),
+    path("", include("tasks.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
