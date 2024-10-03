@@ -1,21 +1,27 @@
+from django.utils.timezone import make_aware
+from .models import TarefaClickUp
 import requests
 from django.conf import settings
-from .models import TarefaClickUp
 from datetime import datetime
-from django.utils.timezone import make_aware
+from usuarios.models import CustomUsuario  # Importando o modelo do app usuarios
 
 
-CLICKUP_BASE_URL = "https://api.clickup.com/api/v2"
+def buscar_tarefas_pendentes(usuario):
+    # Pegue o token de API e o list_id do ClickUp para o usuário logado
+    clickup_token = usuario.clickup_api_token
+    clickup_list_id = usuario.clickup_list_id
 
+    if not clickup_token or not clickup_list_id:
+        raise ValueError(
+            "Usuário não possui token de API ou List ID do ClickUp configurados."
+        )
 
-def buscar_tarefas_pendentes():
-    url = f"{CLICKUP_BASE_URL}/list/{settings.CLICKUP_LIST_ID}/task"
+    url = f"https://api.clickup.com/api/v2/list/{clickup_list_id}/task"
 
     headers = {
-        "Authorization": settings.CLICKUP_API_TOKEN,
+        "Authorization": clickup_token,  # Usa o token do usuário
     }
 
-    # Pegando apenas tarefas pendentes
     params = {
         "status": "open",  # Filtro para pegar apenas tarefas pendentes
     }
@@ -25,7 +31,6 @@ def buscar_tarefas_pendentes():
     if response.status_code == 200:
         tarefas_pendentes = response.json()["tasks"]
 
-        # Pegando os IDs das tarefas pendentes no ClickUp
         ids_pendentes = [tarefa["id"] for tarefa in tarefas_pendentes]
 
         # Atualizando ou criando as tarefas pendentes no banco de dados
@@ -52,17 +57,15 @@ def buscar_tarefas_pendentes():
                     "nome": nome,
                     "data_inicial": data_inicial,
                     "data_vencimento": data_vencimento,
-                    "status": "open",  # Se está na lista, é pendente (aberta)
+                    "status": "open",
                 },
             )
 
-        # Agora, verificar quais tarefas no banco não estão mais pendentes (concluídas)
+        # Verificar e excluir as tarefas concluídas
         tarefas_no_banco = TarefaClickUp.objects.all()
 
         for tarefa in tarefas_no_banco:
             if tarefa.tarefa_id not in ids_pendentes:
-                # Se o ID da tarefa não está mais na lista de pendentes, excluir do banco de dados
                 tarefa.delete()
-
     else:
         print(f"Erro ao buscar tarefas: {response.status_code} - {response.text}")

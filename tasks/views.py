@@ -1,7 +1,10 @@
 from django.http import JsonResponse
 from .services import buscar_tarefas_pendentes
+from django.contrib.auth.decorators import login_required
 
 
+@login_required
 def atualizar_tarefas(request):
-    buscar_tarefas_pendentes()  # Chama a função que busca as tarefas no ClickUp
+    usuario = request.user  # Pega o usuário logado
+    buscar_tarefas_pendentes(usuario)
     return JsonResponse({"status": "Tarefas atualizadas com sucesso!"})
