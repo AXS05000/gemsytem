@@ -165,8 +165,12 @@
               <ul class="list-group">
                 {% for tarefa in tarefas %}
                   <li class="list-group-item border-0 ps-0 text-dark font-weight-semibold pb-1 text-sm">
-                    <span class="text-secondary">{{ tarefa.nome }}:</span> 
-                    &nbsp; Início: {{ tarefa.data_inicial|date:"d/m/Y" }} | Vencimento: {{ tarefa.data_vencimento|date:"d/m/Y" }}
+                    <span class="mb-0 text-sm font-weight-semibold">{{ tarefa.nome }}:</span> 
+                    &nbsp; 
+                    <div class="text-xs text-secondary mb-0">
+                      <br>Início: {{ tarefa.data_inicial|date:"d/m/Y" }} | Vencimento: {{ tarefa.data_vencimento|date:"d/m/Y" }}
+                    </div>
+
                   </li>
                 {% empty %}
                   <li class="list-group-item border-0 ps-0 text-dark font-weight-semibold pb-1 text-sm">

@@ -18,6 +18,8 @@ class Profile_TasksView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         usuario = self.request.user
-        # Filtrando as tarefas do ClickUp pelo usuário logado
-        context["tarefas"] = TarefaClickUp.objects.filter(usuario=usuario)
+        # Filtrando as tarefas do ClickUp pelo usuário logado e que tenham data_inicial preenchida
+        context["tarefas"] = TarefaClickUp.objects.filter(usuario=usuario).exclude(
+            data_inicial__isnull=True
+        )
         return context
