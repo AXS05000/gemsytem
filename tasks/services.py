@@ -61,8 +61,8 @@ def buscar_tarefas_pendentes():
 
         for tarefa in tarefas_no_banco:
             if tarefa.tarefa_id not in ids_pendentes:
-                # Se o ID da tarefa não está mais na lista de pendentes, marque como concluída
-                tarefa.status = "complete"
-                tarefa.save()
+                # Se o ID da tarefa não está mais na lista de pendentes, excluir do banco de dados
+                tarefa.delete()
+
     else:
         print(f"Erro ao buscar tarefas: {response.status_code} - {response.text}")
