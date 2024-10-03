@@ -3,11 +3,10 @@ from .models import TarefaClickUp
 import requests
 from django.conf import settings
 from datetime import datetime
-from usuarios.models import CustomUsuario  # Importando o modelo do app usuarios
+from usuarios.models import CustomUsuario
 
 
 def buscar_tarefas_pendentes(usuario):
-    # Pegue o token de API e o list_id do ClickUp para o usuário logado
     clickup_token = usuario.clickup_api_token
     clickup_list_id = usuario.clickup_list_id
 
@@ -19,11 +18,11 @@ def buscar_tarefas_pendentes(usuario):
     url = f"https://api.clickup.com/api/v2/list/{clickup_list_id}/task"
 
     headers = {
-        "Authorization": clickup_token,  # Usa o token do usuário
+        "Authorization": clickup_token,
     }
 
     params = {
-        "status": "open",  # Filtro para pegar apenas tarefas pendentes
+        "status": "open",
     }
 
     response = requests.get(url, headers=headers, params=params)
@@ -33,7 +32,7 @@ def buscar_tarefas_pendentes(usuario):
 
         ids_pendentes = [tarefa["id"] for tarefa in tarefas_pendentes]
 
-        # Atualizando ou criando as tarefas pendentes no banco de dados
+        # Atualizando ou criando as tarefas pendentes no banco de dados e vinculando ao usuário
         for tarefa in tarefas_pendentes:
             nome = tarefa["name"]
             data_inicial = tarefa.get("start_date")
@@ -50,7 +49,6 @@ def buscar_tarefas_pendentes(usuario):
 
             tarefa_id = tarefa["id"]
 
-            # Criando ou atualizando as tarefas no banco de dados
             TarefaClickUp.objects.update_or_create(
                 tarefa_id=tarefa_id,
                 defaults={
@@ -58,11 +56,14 @@ def buscar_tarefas_pendentes(usuario):
                     "data_inicial": data_inicial,
                     "data_vencimento": data_vencimento,
                     "status": "open",
+                    "usuario": usuario,  # Vinculando ao usuário logado
                 },
             )
 
         # Verificar e excluir as tarefas concluídas
-        tarefas_no_banco = TarefaClickUp.objects.all()
+        tarefas_no_banco = TarefaClickUp.objects.filter(
+            usuario=usuario
+        )  # Filtrar por usuário
 
         for tarefa in tarefas_no_banco:
             if tarefa.tarefa_id not in ids_pendentes:
