@@ -30,10 +30,12 @@ class Profile_TasksView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         usuario = self.request.user
-        # Filtrando as tarefas do ClickUp pelo usuário logado e que tenham data_inicial preenchida
-        context["tarefas"] = TarefaClickUp.objects.filter(usuario=usuario).exclude(
-            data_inicial__isnull=True
-        )
+        # Filtrando as tarefas do ClickUp pelo usuário logado, que tenham data_inicial preenchida, e ordenando por data_inicial
+        context["tarefas"] = (
+            TarefaClickUp.objects.filter(usuario=usuario)
+            .exclude(data_inicial__isnull=True)
+            .order_by("data_inicial")
+        )  # Ordena pela data inicial em ordem crescente
         return context
 
 
