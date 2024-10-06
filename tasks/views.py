@@ -113,11 +113,11 @@ class CompromissoCreateView(CreateView):
     model = Compromisso
     fields = ["nome", "data_inicio", "hora_inicio", "data_final", "hora_final", "local"]
     template_name = "pages/compromisso_form.html"
-    success_url = reverse_lazy("compromisso_list")
+    success_url = reverse_lazy("profile_tasks")
 
 
 class CompromissoUpdateView(UpdateView):
     model = Compromisso
     fields = ["nome", "data_inicio", "hora_inicio", "data_final", "hora_final", "local"]
     template_name = "pages/compromisso_form.html"
-    success_url = reverse_lazy("compromisso_list")
+    success_url = reverse_lazy("profile_tasks")

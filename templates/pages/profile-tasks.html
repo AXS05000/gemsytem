@@ -117,7 +117,7 @@
                 </div>
                 <div class="col-md-4 col-3 text-end">
                   <a href="{% url 'compromisso_create' %}" class="btn btn-white btn-icon px-2 py-2">
-                    <i class="ri-add-circle-line"></i>
+                    <i class=" ri-add-fill"></i>
                   </a>
                 </div>
               </div>
@@ -127,12 +127,24 @@
                 {% for compromisso in compromissos %}
                   <li class="list-group-item border-0 d-flex align-items-center px-0 mb-1">
                     <div class="d-flex align-items-start flex-column justify-content-center">
-                      <h6 class="mb-0 text-sm font-weight-semibold">{{ compromisso.nome|slice:":35" }}...</h6>
-                      <p class="mb-0 text-sm text-secondary">Início: {{ compromisso.data_inicio|date:"d/m/Y" }} {% if compromisso.hora_inicio %} às {{ compromisso.hora_inicio }}{% endif %} | Fim: {% if compromisso.data_final %}{{ compromisso.data_final|date:"d/m/Y" }} {% if compromisso.hora_final %} às {{ compromisso.hora_final }}{% endif %} {% else %}--{% endif %}</p>
+                      <h6 class="mb-0 text-sm font-weight-semibold">{{ compromisso.nome|slice:":35" }}</h6>
+                      <p class="mb-0 text-sm text-secondary">
+                        Início: {{ compromisso.data_inicio|date:"d/m" }} 
+                        {% if compromisso.hora_inicio %} às {{ compromisso.hora_inicio }}{% endif %}
+                        | Fim: 
+                        {% if compromisso.data_final %}
+                          {{ compromisso.data_final|date:"d/m" }} 
+                          {% if compromisso.hora_final %} às {{ compromisso.hora_final }}{% endif %}
+                        {% else %}
+                          --
+                        {% endif %}
+                      </p>
                       <p class="mb-0 text-sm text-secondary">Local: {{ compromisso.local|default:"Não informado" }}</p>
                     </div>
                     <a href="{% url 'compromisso_edit' compromisso.id %}" class="btn btn-white btn-icon px-2 py-2 ms-auto">
-                      <i class="ri-edit-line"></i>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32L19.513 8.2z" />
+                      </svg>
                     </a>
                   </li>
                 {% empty %}
