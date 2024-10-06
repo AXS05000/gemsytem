@@ -35,6 +35,23 @@ class Profile_TasksView(TemplateView):
         usuario = self.request.user
         hoje = timezone.now().date()
 
+        # Verificar o parâmetro 'dias' na URL para determinar o intervalo
+        mostrar_proximos_30 = self.request.GET.get("dias", "7") == "30"
+
+        if mostrar_proximos_30:
+            # Mostra compromissos dos próximos 30 dias, após os 7 dias já exibidos
+            inicio_intervalo = hoje + timezone.timedelta(days=7)
+            fim_intervalo = inicio_intervalo + timezone.timedelta(days=30)
+            context["compromissos"] = Compromisso.objects.filter(
+                usuario=usuario, data_inicio__range=[inicio_intervalo, fim_intervalo]
+            ).order_by("data_inicio")
+        else:
+            # Padrão: Mostrar compromissos dos próximos 7 dias
+            fim_intervalo = hoje + timezone.timedelta(days=7)
+            context["compromissos"] = Compromisso.objects.filter(
+                usuario=usuario, data_inicio__range=[hoje, fim_intervalo]
+            ).order_by("data_inicio")
+
         # Filtrar tarefas do ClickUp com data inicial até hoje
         context["tarefas"] = (
             TarefaClickUp.objects.filter(
@@ -45,15 +62,13 @@ class Profile_TasksView(TemplateView):
             .order_by("data_inicial")
         )
 
-        # Filtrar compromissos com data até hoje
-        context["compromissos"] = Compromisso.objects.filter(usuario=usuario).order_by(
-            "data_inicio"
-        )
-
         # Filtrar tarefas normais
         context["tarefas_normais"] = TarefaNormal.objects.filter(
             usuario=usuario,
         ).order_by("data_inicial")
+
+        # Passar o valor atual de 'dias' para o contexto para controle no template
+        context["dias_filtro"] = 30 if mostrar_proximos_30 else 7
 
         return context
 
