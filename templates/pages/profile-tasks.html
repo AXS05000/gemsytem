@@ -9,7 +9,7 @@
   <link rel="apple-touch-icon" sizes="76x76" href="{% static 'assets/img/apple-icon.png' %}">
   <link rel="icon" type="image/png" href="{% static 'assets/img/favicon.png' %}">
   <title>
-    Corporate UI by Creative Tim
+    PDP | GM
   </title>
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Noto+Sans:300,400,500,600,700,800|PT+Mono:300,400,500,600,700" rel="stylesheet" />
@@ -191,7 +191,7 @@
                           --
                         {% endif %}
                       </p>
-                      <p class="mb-0 text-sm text-secondary">Local: {{ compromisso.local|default:"Não informado" }}</p>
+                      <p class="mb-0 text-sm text-secondary">{% if compromisso.local %} Local: {{ compromisso.local }} {% endif%}</p>
                     </div>
                     <a href="{% url 'compromisso_edit' compromisso.id %}" class="btn btn-white btn-icon px-2 py-2 ms-auto">
                       <i class="ri-edit-line"></i>
