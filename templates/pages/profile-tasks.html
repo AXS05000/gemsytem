@@ -130,8 +130,8 @@
                     <div class="d-flex align-items-start flex-column justify-content-center">
                       <h6 class="mb-0 text-sm font-weight-semibold">{{ tarefa.nome|slice:":35" }}</h6>
                       <p class="mb-0 text-sm text-secondary">
-                        Início: {{ tarefa.data_inicial|date:"d/m" }} 
-                        | Vencimento: {{ tarefa.data_vencimento|date:"d/m" }}
+                        Início: {{ tarefa.data_inicial|date:"d/m/Y" }} 
+                        | Vencimento: {{ tarefa.data_vencimento|date:"d/m/Y" }}
                       </p>
                     </div>
                     <a href="{% url 'tarefa_normal_edit' tarefa.id %}" class="btn btn-white btn-icon px-2 py-2 ms-auto">

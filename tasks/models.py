@@ -36,6 +36,9 @@ class Compromisso(models.Model):
     data_final = models.DateField(null=True, blank=True)  # Data final, opcional
     hora_final = models.TimeField(null=True, blank=True)  # Hora final, opcional
     local = models.CharField(max_length=255, null=True, blank=True)  # Local, opcional
+    usuario = models.ForeignKey(
+        CustomUsuario, on_delete=models.CASCADE, null=True, blank=True
+    )
 
     def __str__(self):
         return self.nome

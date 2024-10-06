@@ -46,9 +46,9 @@ class Profile_TasksView(TemplateView):
         )
 
         # Filtrar compromissos com data até hoje
-        context["compromissos"] = Compromisso.objects.filter(
-            data_inicio__lte=hoje
-        ).order_by("data_inicio")
+        context["compromissos"] = Compromisso.objects.filter(usuario=usuario).order_by(
+            "data_inicio"
+        )
 
         # Filtrar tarefas normais
         context["tarefas_normais"] = TarefaNormal.objects.filter(
@@ -132,6 +132,10 @@ class TarefaNormalUpdateView(UpdateView):
     fields = ["nome", "data_inicial", "data_vencimento", "status"]
     success_url = reverse_lazy("profile_tasks")
 
+    def form_valid(self, form):
+        form.instance.usuario = self.request.user
+        return super().form_valid(form)
+
 
 class CompromissoCreateView(CreateView):
     model = Compromisso
@@ -139,9 +143,17 @@ class CompromissoCreateView(CreateView):
     template_name = "pages/compromisso_form.html"
     success_url = reverse_lazy("profile_tasks")
 
+    def form_valid(self, form):
+        form.instance.usuario = self.request.user
+        return super().form_valid(form)
+
 
 class CompromissoUpdateView(UpdateView):
     model = Compromisso
     fields = ["nome", "data_inicio", "hora_inicio", "data_final", "hora_final", "local"]
     template_name = "pages/compromisso_form.html"
     success_url = reverse_lazy("profile_tasks")
+
+    def form_valid(self, form):
+        form.instance.usuario = self.request.user
+        return super().form_valid(form)
