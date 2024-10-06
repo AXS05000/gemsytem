@@ -1,12 +1,13 @@
 from django.http import JsonResponse
 from .services import buscar_tarefas_pendentes
 from django.contrib.auth.decorators import login_required
-from django.views.generic import TemplateView
-from .models import TarefaClickUp
+from django.views.generic import TemplateView, ListView, CreateView, UpdateView
+from .models import TarefaClickUp, Compromisso
 import requests
 from django.shortcuts import redirect
 from django.views.decorators.http import require_POST
 from django.utils import timezone
+from django.urls import reverse_lazy
 
 
 @login_required
@@ -31,18 +32,23 @@ class Profile_TasksView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         usuario = self.request.user
-        # Obtendo a data atual
         hoje = timezone.now().date()
 
         # Filtrar tarefas com data inicial até hoje
         context["tarefas"] = (
             TarefaClickUp.objects.filter(
                 usuario=usuario,
-                data_inicial__lte=hoje,  # Mostra tarefas com data inicial até hoje
+                data_inicial__lte=hoje,
             )
             .exclude(data_inicial__isnull=True)
             .order_by("data_inicial")
         )
+
+        # Filtrar compromissos
+        context["compromissos"] = Compromisso.objects.filter(
+            data_inicio__lte=hoje
+        ).order_by("data_inicio")
+
         return context
 
 
@@ -101,3 +107,17 @@ def concluir_tarefa_clickup(tarefa_id, clickup_token):
         print(
             f"Erro ao concluir tarefa {tarefa_id}: {response.status_code} - {response.text}"
         )
+
+
+class CompromissoCreateView(CreateView):
+    model = Compromisso
+    fields = ["nome", "data_inicio", "hora_inicio", "data_final", "hora_final", "local"]
+    template_name = "pages/compromisso_form.html"
+    success_url = reverse_lazy("compromisso_list")
+
+
+class CompromissoUpdateView(UpdateView):
+    model = Compromisso
+    fields = ["nome", "data_inicio", "hora_inicio", "data_final", "hora_final", "local"]
+    template_name = "pages/compromisso_form.html"
+    success_url = reverse_lazy("compromisso_list")

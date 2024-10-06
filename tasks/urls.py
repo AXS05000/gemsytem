@@ -5,6 +5,8 @@ from .views import (
     concluir_tarefas_clickup,
     atualizar_tarefas_clickup,
     TarefasFuturasView,
+    CompromissoCreateView,
+    CompromissoUpdateView,
 )
 
 urlpatterns = [
@@ -23,5 +25,13 @@ urlpatterns = [
         "atualizar-tarefas-clickup/",
         atualizar_tarefas_clickup,
         name="atualizar_tarefas_clickup",
+    ),
+    path(
+        "compromissos/novo/", CompromissoCreateView.as_view(), name="compromisso_create"
+    ),
+    path(
+        "compromissos/editar/<int:pk>/",
+        CompromissoUpdateView.as_view(),
+        name="compromisso_edit",
     ),
 ]
