@@ -4,11 +4,18 @@ from .views import (
     Profile_TasksView,
     concluir_tarefas_clickup,
     atualizar_tarefas_clickup,
+    TarefasFuturasView,
 )
 
 urlpatterns = [
     path("atualizar-tarefas/", atualizar_tarefas, name="atualizar_tarefas"),
     path("profile-tasks/", Profile_TasksView.as_view(), name="profile_tasks"),
+    path("tarefas-futuras/", TarefasFuturasView.as_view(), name="tarefas_futuras"),
+    path(
+        "concluir-tarefas-clickup/",
+        concluir_tarefas_clickup,
+        name="concluir_tarefas_clickup",
+    ),
     path(
         "concluir-tarefas/", concluir_tarefas_clickup, name="concluir_tarefas_clickup"
     ),

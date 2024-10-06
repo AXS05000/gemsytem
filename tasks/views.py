@@ -6,6 +6,7 @@ from .models import TarefaClickUp
 import requests
 from django.shortcuts import redirect
 from django.views.decorators.http import require_POST
+from django.utils import timezone
 
 
 @login_required
@@ -30,12 +31,39 @@ class Profile_TasksView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         usuario = self.request.user
-        # Filtrando as tarefas do ClickUp pelo usuário logado, que tenham data_inicial preenchida, e ordenando por data_inicial
+        # Obtendo a data atual
+        hoje = timezone.now().date()
+
+        # Filtrar tarefas com data inicial até hoje
         context["tarefas"] = (
-            TarefaClickUp.objects.filter(usuario=usuario)
+            TarefaClickUp.objects.filter(
+                usuario=usuario,
+                data_inicial__lte=hoje,  # Mostra tarefas com data inicial até hoje
+            )
             .exclude(data_inicial__isnull=True)
             .order_by("data_inicial")
-        )  # Ordena pela data inicial em ordem crescente
+        )
+        return context
+
+
+class TarefasFuturasView(TemplateView):
+    template_name = "pages/profile-tasks.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        usuario = self.request.user
+        # Obtendo a data de amanhã
+        amanha = timezone.now().date() + timezone.timedelta(days=1)
+
+        # Filtrar tarefas com data inicial a partir de amanhã
+        context["tarefas"] = (
+            TarefaClickUp.objects.filter(
+                usuario=usuario,
+                data_inicial__gte=amanha,  # Mostra tarefas com data inicial a partir de amanhã
+            )
+            .exclude(data_inicial__isnull=True)
+            .order_by("data_inicial")
+        )
         return context
 
 
