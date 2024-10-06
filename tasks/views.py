@@ -35,11 +35,13 @@ class Profile_TasksView(TemplateView):
         usuario = self.request.user
         hoje = timezone.now().date()
 
-        # Verificar o parâmetro 'dias' na URL para determinar o intervalo
+        # Verificar o parâmetro 'dias' na URL para compromissos e tarefas
         mostrar_proximos_30 = self.request.GET.get("dias", "7") == "30"
+        mostrar_tarefas_futuras = self.request.GET.get("tarefas", "atuais") == "futuras"
 
+        # Gerenciamento de compromissos
         if mostrar_proximos_30:
-            # Mostra compromissos dos próximos 30 dias, após os 7 dias já exibidos
+            # Mostrar compromissos dos próximos 30 dias após os 7 dias
             inicio_intervalo = hoje + timezone.timedelta(days=7)
             fim_intervalo = inicio_intervalo + timezone.timedelta(days=30)
             context["compromissos"] = Compromisso.objects.filter(
@@ -52,45 +54,38 @@ class Profile_TasksView(TemplateView):
                 usuario=usuario, data_inicio__range=[hoje, fim_intervalo]
             ).order_by("data_inicio")
 
-        # Filtrar tarefas do ClickUp com data inicial até hoje
-        context["tarefas"] = (
-            TarefaClickUp.objects.filter(
-                usuario=usuario,
-                data_inicial__lte=hoje,
+        # Gerenciamento de tarefas MB
+        if mostrar_tarefas_futuras:
+            # Mostrar tarefas futuras com data inicial a partir de amanhã
+            amanha = hoje + timezone.timedelta(days=1)
+            context["tarefas"] = (
+                TarefaClickUp.objects.filter(
+                    usuario=usuario,
+                    data_inicial__gte=amanha,
+                )
+                .exclude(data_inicial__isnull=True)
+                .order_by("data_inicial")
             )
-            .exclude(data_inicial__isnull=True)
-            .order_by("data_inicial")
-        )
+        else:
+            # Padrão: Mostrar tarefas com data inicial até hoje
+            context["tarefas"] = (
+                TarefaClickUp.objects.filter(
+                    usuario=usuario,
+                    data_inicial__lte=hoje,
+                )
+                .exclude(data_inicial__isnull=True)
+                .order_by("data_inicial")
+            )
 
         # Filtrar tarefas normais
         context["tarefas_normais"] = TarefaNormal.objects.filter(
             usuario=usuario,
         ).order_by("data_inicial")
 
-        # Passar o valor atual de 'dias' para o contexto para controle no template
+        # Passar o valor atual de 'dias' e 'tarefas' para o contexto
         context["dias_filtro"] = 30 if mostrar_proximos_30 else 7
+        context["tarefas_futuras"] = mostrar_tarefas_futuras
 
-        return context
-
-
-class TarefasFuturasView(TemplateView):
-    template_name = "pages/profile-tasks.html"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        usuario = self.request.user
-        # Obtendo a data de amanhã
-        amanha = timezone.now().date() + timezone.timedelta(days=1)
-
-        # Filtrar tarefas com data inicial a partir de amanhã
-        context["tarefas"] = (
-            TarefaClickUp.objects.filter(
-                usuario=usuario,
-                data_inicial__gte=amanha,  # Mostra tarefas com data inicial a partir de amanhã
-            )
-            .exclude(data_inicial__isnull=True)
-            .order_by("data_inicial")
-        )
         return context
 
 

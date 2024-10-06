@@ -4,7 +4,6 @@ from .views import (
     Profile_TasksView,
     concluir_tarefas_clickup,
     atualizar_tarefas_clickup,
-    TarefasFuturasView,
     CompromissoCreateView,
     CompromissoUpdateView,
     TarefaNormalCreateView,
@@ -13,8 +12,9 @@ from .views import (
 
 urlpatterns = [
     path("atualizar-tarefas/", atualizar_tarefas, name="atualizar_tarefas"),
-    path("profile-tasks/", Profile_TasksView.as_view(), name="profile_tasks"),
-    path("tarefas-futuras/", TarefasFuturasView.as_view(), name="tarefas_futuras"),
+    path(
+        "partitura-do-planejamento/", Profile_TasksView.as_view(), name="profile_tasks"
+    ),
     path(
         "tarefas/nova/", TarefaNormalCreateView.as_view(), name="tarefa_normal_create"
     ),

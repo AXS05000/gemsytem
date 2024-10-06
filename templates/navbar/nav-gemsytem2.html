@@ -134,6 +134,11 @@
   <hr class="horizontal w-100 my-0 dark">
   <div class="container pb-3 pt-3">
     <ul class="navbar-nav d-none d-lg-flex">
+      <li class="nav-item border-radius-sm px-3 py-3 me-2  d-flex align-items-center">
+        <a href="{% url 'profile_tasks' %}" class="nav-link text-white p-0">
+          PdP
+        </a>
+      </li>
       <li class="nav-item border-radius-sm px-3 py-3 me-2  d-flex align-items-center {% if request.resolver_match.url_name == 'profile' %}bg-slate-800{% endif %}">
         <a href="{% url 'profile' %}" class="nav-link text-white p-0">
           Perfil
@@ -149,6 +154,7 @@
           Cadastro
         </a>
       </li>
+
     </ul>
     <div class="ms-md-auto p-0 d-flex align-items-center w-sm-20">
       <div class="input-group border-dark">
