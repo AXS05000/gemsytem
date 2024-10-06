@@ -26,3 +26,15 @@ class Compromisso(models.Model):
 
     def __str__(self):
         return self.nome
+
+
+class CursoUdemy(models.Model):
+    nome = models.CharField(max_length=255)
+    progresso = models.DecimalField(
+        max_digits=5, decimal_places=2
+    )  # Percentual de conclusão (ex: 75.50%)
+    data_inicio = models.DateField(null=True, blank=True)
+    data_conclusao = models.DateField(null=True, blank=True)
+
+    def __str__(self):
+        return self.nome

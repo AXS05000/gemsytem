@@ -37,6 +37,15 @@ class CustomUsuario(AbstractUser):
     is_staff = models.BooleanField("Membro da equipe", default=True)
     login_attempts = models.IntegerField(default=0)
     lockout_until = models.DateTimeField(null=True, blank=True)
+    udemy_access_token = models.CharField(
+        "Token API Udemy", max_length=255, blank=True, null=True
+    )  # Novo campo para o token da Udemy
+    udemy_client_id = models.CharField(
+        "Udemy Client ID", max_length=255, blank=True, null=True
+    )
+    udemy_client_secret = models.CharField(
+        "Udemy Client Secret", max_length=255, blank=True, null=True
+    )
     api_key = models.CharField(
         "Chave API OpenAI", max_length=255, blank=True, null=True
     )

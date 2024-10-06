@@ -7,9 +7,11 @@ from .views import (
     TarefasFuturasView,
     CompromissoCreateView,
     CompromissoUpdateView,
+    udemy_auth,
 )
 
 urlpatterns = [
+    path("udemy-auth/", udemy_auth, name="udemy_auth"),
     path("atualizar-tarefas/", atualizar_tarefas, name="atualizar_tarefas"),
     path("profile-tasks/", Profile_TasksView.as_view(), name="profile_tasks"),
     path("tarefas-futuras/", TarefasFuturasView.as_view(), name="tarefas_futuras"),

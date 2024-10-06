@@ -58,6 +58,9 @@ class CustomUsuarioAdmin(UserAdmin):
                     "api_key",
                     "clickup_api_token",
                     "clickup_list_id",
+                    "udemy_access_token",
+                    "udemy_client_id",
+                    "udemy_client_secret",
                 )
             },
         ),

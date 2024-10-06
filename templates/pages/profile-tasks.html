@@ -156,7 +156,34 @@
             </div>
           </div>
         </div>
-        
+
+        <div class="col-12 col-xl-4 mb-4">
+          <div class="card border shadow-xs h-100">
+            <div class="card-header pb-0 p-3">
+              <div class="row">
+                <div class="col-md-8 col-9">
+                  <h6 class="mb-0 font-weight-semibold text-lg">Cursos da Udemy</h6>
+                </div>
+              </div>
+            </div>
+            <div class="card-body p-3">
+              <ul class="list-group">
+                {% for curso in cursos_udemy %}
+                  <li class="list-group-item border-0 d-flex align-items-center px-0 mb-1">
+                    <div class="d-flex align-items-start flex-column justify-content-center">
+                      <h6 class="mb-0 text-sm font-weight-semibold">{{ curso.nome }}</h6>
+                      <p class="mb-0 text-sm text-secondary">Progresso: {{ curso.progresso }}%</p>
+                    </div>
+                  </li>
+                {% empty %}
+                  <li class="list-group-item border-0 ps-0 text-dark font-weight-semibold pb-1 text-sm">
+                    <span class="text-secondary">Nenhum curso encontrado</span>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        </div>
         
         <div class="col-12 col-xl-4 mb-4">
           <div class="card border shadow-xs h-100">
