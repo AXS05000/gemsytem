@@ -2,7 +2,7 @@ from django.http import JsonResponse
 from .services import buscar_tarefas_pendentes
 from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView, ListView, CreateView, UpdateView
-from .models import TarefaClickUp, Compromisso
+from .models import TarefaClickUp, Compromisso, TarefaNormal
 import requests
 from django.views.decorators.http import require_POST
 from django.utils import timezone
@@ -35,7 +35,7 @@ class Profile_TasksView(TemplateView):
         usuario = self.request.user
         hoje = timezone.now().date()
 
-        # Filtrar tarefas com data inicial até hoje
+        # Filtrar tarefas do ClickUp com data inicial até hoje
         context["tarefas"] = (
             TarefaClickUp.objects.filter(
                 usuario=usuario,
@@ -50,8 +50,10 @@ class Profile_TasksView(TemplateView):
             data_inicio__lte=hoje
         ).order_by("data_inicio")
 
-        # # Obter cursos da Udemy do banco de dados
-        # context["cursos_udemy"] = CursoUdemy.objects.all()
+        # Filtrar tarefas normais
+        context["tarefas_normais"] = TarefaNormal.objects.filter(
+            usuario=usuario,
+        ).order_by("data_inicial")
 
         return context
 
@@ -111,6 +113,24 @@ def concluir_tarefa_clickup(tarefa_id, clickup_token):
         print(
             f"Erro ao concluir tarefa {tarefa_id}: {response.status_code} - {response.text}"
         )
+
+
+class TarefaNormalCreateView(CreateView):
+    model = TarefaNormal
+    template_name = "pages/tarefa_form.html"
+    fields = ["nome", "data_inicial", "data_vencimento", "status"]
+    success_url = reverse_lazy("profile_tasks")
+
+    def form_valid(self, form):
+        form.instance.usuario = self.request.user
+        return super().form_valid(form)
+
+
+class TarefaNormalUpdateView(UpdateView):
+    model = TarefaNormal
+    template_name = "pages/tarefa_form.html"
+    fields = ["nome", "data_inicial", "data_vencimento", "status"]
+    success_url = reverse_lazy("profile_tasks")
 
 
 class CompromissoCreateView(CreateView):

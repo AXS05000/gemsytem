@@ -16,6 +16,19 @@ class TarefaClickUp(models.Model):
         return self.nome
 
 
+class TarefaNormal(models.Model):
+    nome = models.CharField(max_length=255)
+    data_inicial = models.DateTimeField(null=True, blank=True)
+    data_vencimento = models.DateTimeField(null=True, blank=True)
+    status = models.CharField(max_length=50, null=True, blank=True)
+    usuario = models.ForeignKey(
+        CustomUsuario, on_delete=models.CASCADE
+    )  # Relacionando com o usuário
+
+    def __str__(self):
+        return self.nome
+
+
 class Compromisso(models.Model):
     nome = models.CharField(max_length=255)  # Nome do compromisso, obrigatório
     data_inicio = models.DateField()  # Data de início, obrigatório

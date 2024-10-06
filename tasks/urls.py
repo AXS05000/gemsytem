@@ -7,12 +7,22 @@ from .views import (
     TarefasFuturasView,
     CompromissoCreateView,
     CompromissoUpdateView,
+    TarefaNormalCreateView,
+    TarefaNormalUpdateView,
 )
 
 urlpatterns = [
     path("atualizar-tarefas/", atualizar_tarefas, name="atualizar_tarefas"),
     path("profile-tasks/", Profile_TasksView.as_view(), name="profile_tasks"),
     path("tarefas-futuras/", TarefasFuturasView.as_view(), name="tarefas_futuras"),
+    path(
+        "tarefas/nova/", TarefaNormalCreateView.as_view(), name="tarefa_normal_create"
+    ),
+    path(
+        "tarefas/editar/<int:pk>/",
+        TarefaNormalUpdateView.as_view(),
+        name="tarefa_normal_edit",
+    ),
     path(
         "concluir-tarefas-clickup/",
         concluir_tarefas_clickup,
