@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
-
+CSRF_TRUSTED_ORIGINS = ["https://sinfonysystem.azurewebsites.net"]
 # Application definition
 
 INSTALLED_APPS = [
