@@ -83,10 +83,10 @@ WSGI_APPLICATION = "gemsystem.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "app-sistema-sinfony-database",
-        "USER": "tvqehvvbgk",
-        "PASSWORD": "Tka@224133##",
-        "HOST": "app-sistema-sinfony-server.postgres.database.azure.com",
+        "NAME": "sinfonysystem-database",
+        "USER": "dqamkvusdl",
+        "PASSWORD": "pOjwfexIK$a2jK0J",
+        "HOST": "sinfonysystem-server.postgres.database.azure.com",
         "PORT": "5432",
     }
 }
