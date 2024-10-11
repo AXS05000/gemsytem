@@ -66,4 +66,4 @@ jobs:
         with:
           app-name: 'sinfonysystem'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_6D8E3D1B3C8A4675953AD5DC24E765CC }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_AE1D4A149DDC4E32AF8D1FA137ED4F21 }}
